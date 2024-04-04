@@ -24,7 +24,7 @@ function Sidebar() {
 
     const renderSubNavItems = (navItem) => (
         <ul id={`${navItem.id}`} className="nav-content collapse " data-bs-parent="#sidebar-nav">
-            {navItem.child.map(item => renderSubNavItem(item))}
+            {navItem.child && navItem.child.map(item => renderSubNavItem(item))}
         </ul>
     )
 
@@ -44,7 +44,7 @@ function Sidebar() {
         <aside id="sidebar" className="sidebar">
 
             <ul className="sidebar-nav" id="sidebar-nav">
-                {navItems.map(item => (renderNavItem(item)))}
+                {navItems && navItems.map(item => (renderNavItem(item)))}
 
 
                 <li className="nav-heading">Pages</li>
