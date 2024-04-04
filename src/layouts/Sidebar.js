@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import { fetchAllNavItem } from "../services/NavItemService";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 
 function Sidebar() {
     const [navItems, setNavItems] = useState([])
+    const location = useLocation()
+
 
     useEffect(() => {
         getNavItems();
@@ -24,14 +26,23 @@ function Sidebar() {
 
 
     const renderSubNavItems = (navItem) => (
-        <ul id={`${navItem.id}`} className="nav-content collapse " data-bs-parent="#sidebar-nav">
+        <ul
+            id={`${navItem.id}`}
+            className={`nav-content collapse ${location.pathname.indexOf(navItem.url) != -1 && 'show'}`}
+            data-bs-parent="#sidebar-nav"
+        >
             {navItem.child && navItem.child.map(item => renderSubNavItem(item))}
         </ul>
     )
 
     const renderNavItem = (navItem) => (
         <li className="nav-item">
-            <NavLink className="nav-link collapsed" to={navItem.url} data-bs-target={navItem.child && `#${navItem.id}`} data-bs-toggle={navItem.child && "collapse"}>
+            <NavLink
+                className={`nav-link ${location.pathname.indexOf(navItem.url) == -1 && 'collapsed'}`}
+                to={navItem.url}
+                data-bs-target={navItem.child && `#${navItem.id}`}
+                data-bs-toggle={navItem.child && "collapse"}
+            >
                 <i className={navItem.icon}></i>
                 <span>{navItem.title}</span>
                 {navItem.child && <i className="bi bi-chevron-down ms-auto"></i>}
@@ -46,59 +57,6 @@ function Sidebar() {
 
             <ul className="sidebar-nav" id="sidebar-nav">
                 {navItems && navItems.map(item => (renderNavItem(item)))}
-
-
-                <li className="nav-heading">Pages</li>
-
-                <li className="nav-item">
-                    <a className="nav-link collapsed" href="users-profile.html">
-                        <i className="bi bi-person"></i>
-                        <span>Profile</span>
-                    </a>
-                </li>
-
-                <li className="nav-item">
-                    <a className="nav-link collapsed" href="pages-faq.html">
-                        <i className="bi bi-question-circle"></i>
-                        <span>F.A.Q</span>
-                    </a>
-                </li>
-
-                <li className="nav-item">
-                    <a className="nav-link collapsed" href="pages-contact.html">
-                        <i className="bi bi-envelope"></i>
-                        <span>Contact</span>
-                    </a>
-                </li>
-
-                <li className="nav-item">
-                    <a className="nav-link collapsed" href="pages-register.html">
-                        <i className="bi bi-card-list"></i>
-                        <span>Register</span>
-                    </a>
-                </li>
-
-                <li className="nav-item">
-                    <a className="nav-link collapsed" href="pages-login.html">
-                        <i className="bi bi-box-arrow-in-right"></i>
-                        <span>Login</span>
-                    </a>
-                </li>
-
-                <li className="nav-item">
-                    <a className="nav-link collapsed" href="pages-error-404.html">
-                        <i className="bi bi-dash-circle"></i>
-                        <span>Error 404</span>
-                    </a>
-                </li>
-
-                <li className="nav-item">
-                    <a className="nav-link " href="pages-blank.html">
-                        <i className="bi bi-file-earmark"></i>
-                        <span>Blank</span>
-                    </a>
-                </li>
-
             </ul>
 
         </aside>
