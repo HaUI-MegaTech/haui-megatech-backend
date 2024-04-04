@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 import Header from './layouts/Header';
 import Sidebar from './layouts/Sidebar';
@@ -19,6 +18,7 @@ function App() {
       <Routes>
         <Route path='/home' element={<Home />}></Route>
         <Route path='/' element={<Navigate to='/home' />}></Route>
+        <Route path='*' element={<Navigate to='/home' />} />
         <Route path='/users/active' element={<ActiveUsers />}></Route>
         <Route path='/users/deleted' element={<DeletedUsers />}></Route>
         <Route path='/users/statistic' element={<UsersStatistic />}></Route>
