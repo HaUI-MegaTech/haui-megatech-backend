@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { fetchAllNavItem } from "../services/NavItemService";
+import { NavLink } from "react-router-dom";
 
 function Sidebar() {
     const [navItems, setNavItems] = useState([])
@@ -15,9 +16,9 @@ function Sidebar() {
 
     const renderSubNavItem = (item) => (
         <li>
-            <a href={item.url}>
+            <NavLink to={item.url}>
                 <i className="bi bi-circle"></i><span>{item.title}</span>
-            </a>
+            </NavLink>
         </li>
     )
 
@@ -30,11 +31,11 @@ function Sidebar() {
 
     const renderNavItem = (navItem) => (
         <li className="nav-item">
-            <a className="nav-link collapsed" href="#" data-bs-target={`#${navItem.id}`} data-bs-toggle="collapse">
+            <NavLink className="nav-link collapsed" to={navItem.url} data-bs-target={navItem.child && `#${navItem.id}`} data-bs-toggle={navItem.child && "collapse"}>
                 <i className={navItem.icon}></i>
                 <span>{navItem.title}</span>
                 {navItem.child && <i className="bi bi-chevron-down ms-auto"></i>}
-            </a>
+            </NavLink>
             {navItem.child && renderSubNavItems(navItem)}
         </li>
     )
