@@ -1,8 +1,18 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 
 
 function Header() {
+    const [showSidebar, setShowSidebar] = useState(true)
+
+    useEffect(() => {
+        document.body.classList.toggle('toggle-sidebar')
+    }, [showSidebar])
+
+    const handleToggleShowSidebar = () => {
+        setShowSidebar(!showSidebar)
+    }
+
     return (
         <header id="header" className="header fixed-top d-flex align-items-center">
 
@@ -11,7 +21,7 @@ function Header() {
                     <img src="assets/img/logo.png" alt="" />
                     <span className="d-none d-lg-block">NiceAdmin</span>
                 </a>
-                <i className="bi bi-list toggle-sidebar-btn"></i>
+                <i className="bi bi-list toggle-sidebar-btn" onClick={handleToggleShowSidebar}></i>
             </div>
 
             <div className="search-bar">
