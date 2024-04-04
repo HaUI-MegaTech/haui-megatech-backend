@@ -6,7 +6,7 @@ function Header() {
     const [showSidebar, setShowSidebar] = useState(true)
 
     useEffect(() => {
-        document.body.classList.toggle('toggle-sidebar')
+        showSidebar ? document.body.classList.remove('toggle-sidebar') : document.body.classList.add('toggle-sidebar')
     }, [showSidebar])
 
     const handleToggleShowSidebar = () => {
