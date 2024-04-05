@@ -4,6 +4,7 @@ import { NavLink } from 'react-router-dom';
 
 function Header() {
     const [showSidebar, setShowSidebar] = useState(true)
+    const [showSearchBar, setShowSearchBar] = useState(false)
 
     useEffect(() => {
         showSidebar ? document.body.classList.remove('toggle-sidebar') : document.body.classList.add('toggle-sidebar')
@@ -11,6 +12,10 @@ function Header() {
 
     const handleToggleShowSidebar = () => {
         setShowSidebar(!showSidebar)
+    }
+
+    const handleToggleShowSearchBar = () => {
+        setShowSearchBar(!showSearchBar)
     }
 
     return (
@@ -24,7 +29,7 @@ function Header() {
                 <i className="bi bi-list toggle-sidebar-btn" onClick={handleToggleShowSidebar}></i>
             </div>
 
-            <div className="search-bar">
+            <div className={`search-bar ${showSearchBar && 'search-bar-show'}`}>
                 <form className="search-form d-flex align-items-center" method="POST" action="#">
                     <input type="text" name="query" placeholder="Search" title="Enter search keyword" />
                     <button type="submit" title="Search"><i className="bi bi-search"></i></button>
@@ -35,7 +40,7 @@ function Header() {
                 <ul className="d-flex align-items-center">
 
                     <li className="nav-item d-block d-lg-none">
-                        <a className="nav-link nav-icon search-bar-toggle " href="#">
+                        <a className="nav-link nav-icon search-bar-toggle " href="#" onClick={handleToggleShowSearchBar}>
                             <i className="bi bi-search"></i>
                         </a>
                     </li>
@@ -181,11 +186,49 @@ function Header() {
 
                     </li>
 
+                    <li className="nav-item dropdown">
+
+                        <a className="nav-link nav-icon" href="#" >
+                            <i className="bi bi-moon-stars"></i>
+                        </a>
+                    </li>
+
+                    <li className="nav-item dropdown">
+
+                        <a className="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
+                            <i className="bi bi-globe"></i>
+                        </a>
+
+                        <ul className="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages py-0">
+                            <li className="message-item">
+                                <a href="#">
+                                    <img src="https://images.freeimages.com/images/large-previews/fb0/uk-flag-1444045.jpg" alt="" className="rounded-circle" style={{ aspectRatio: 1 / 1 }} />
+                                    <div>
+                                        <h6>English</h6>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <hr className="dropdown-divider" />
+                            </li>
+
+                            <li className="message-item">
+                                <a href="#">
+                                    <img src="https://th.bing.com/th/id/OIP.rfrIkx7yaRBTzCxaIKq1uAHaE9?rs=1&pid=ImgDetMain" alt="" className="rounded-circle" style={{ aspectRatio: 1 / 1 }} />
+                                    <div>
+                                        <h6>Tiếng Việt</h6>
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
+
+                    </li>
+
                     <li className="nav-item dropdown pe-3">
 
                         <a className="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-                            <img src="assets/img/profile-img.jpg" alt="Profile" className="rounded-circle" />
-                            <span className="d-none d-md-block dropdown-toggle ps-2">K. Anderson</span>
+                            <img src="https://th.bing.com/th/id/R.90501fda39777948c197990afcffa993?rik=LKE2uMmp8vvz6g&pid=ImgRaw&r=0" alt="" className="rounded-circle" />
+                            <span className="d-none d-md-block dropdown-toggle ps-2">Nguyễn Việt Hoàng</span>
                         </a>
 
                         <ul className="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
