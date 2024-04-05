@@ -5,15 +5,13 @@ import { NavLink } from "react-router-dom";
 function Header() {
     const [showSidebar, setShowSidebar] = useState(true);
     const [showSearchBar, setShowSearchBar] = useState(false);
-    const [menuItems, setmenuItems] = useState([]);
+    const [menuItems, setmenuItems] = useState(fetchAllProfileMenus());
 
     useEffect(() => {
-        getProfileMenuItems();
-
         showSidebar
             ? document.body.classList.remove("toggle-sidebar")
             : document.body.classList.add("toggle-sidebar");
-    }, [showSidebar, menuItems]);
+    }, [showSidebar]);
 
     const getProfileMenuItems = () => {
         const data = fetchAllProfileMenus();

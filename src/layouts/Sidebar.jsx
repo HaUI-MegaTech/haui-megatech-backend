@@ -3,21 +3,31 @@ import { fetchAllNavItem } from "../services/NavItemService";
 import { NavLink, useLocation } from "react-router-dom";
 
 function Sidebar() {
-    const [navItems, setNavItems] = useState([]);
+    const [navItems, setNavItems] = useState(fetchAllNavItem());
     const location = useLocation();
 
     useEffect(() => {
-        getNavItems();
-    }, [navItems]);
+        const found = navItems.find((item) => item.url === location.pathname);
+        found
+            ? (document.title = found.title + " - HaUI MegaTech")
+            : navItems.forEach((parentItem) => {
+                  parentItem?.child?.forEach((childItem) => {
+                      childItem.url === location.pathname &&
+                          (document.title =
+                              childItem.title + " - HaUI MegaTech");
+                  });
+              });
+    }, []);
 
-    const getNavItems = () => {
-        const data = fetchAllNavItem();
-        setNavItems(data);
+    useEffect(() => {}, [navItems, location]);
+
+    const changePageTitle = (item) => {
+        !item.child && (document.title = item.title + " - HaUI MegaTech");
     };
 
     const renderSubNavItem = (item) => (
         <li>
-            <NavLink to={item.url}>
+            <NavLink to={item.url} onClick={() => changePageTitle(item)}>
                 <i className="bi bi-circle"></i>
                 <span>{item.title}</span>
             </NavLink>
@@ -46,6 +56,7 @@ function Sidebar() {
                 to={navItem.url}
                 data-bs-target={navItem.child && `#${navItem.id}`}
                 data-bs-toggle={navItem.child && "collapse"}
+                onClick={() => changePageTitle(navItem)}
             >
                 <i className={navItem.icon}></i>
                 <span>{navItem.title}</span>

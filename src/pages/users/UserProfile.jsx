@@ -9,20 +9,12 @@ import { fetchAllProfileMenus } from "../../services/ProfileMenuService";
 function UserProfile() {
     const location = useLocation();
     const navigate = useNavigate();
-    console.log(location.pathname);
 
     const [menuItems, setMenuItems] = useState(
         fetchAllProfileMenus().filter(
             (item) => item.url != "/faq" && item.url != "/logout",
         ),
     );
-
-    useEffect(() => {
-        console.log(menuItems);
-        menuItems.forEach((item) => {
-            console.log(">>>" + item.url.replace("/", "-"));
-        });
-    }, [menuItems]);
 
     const renderProfileTabItem = (item) => (
         <li class="nav-item">
