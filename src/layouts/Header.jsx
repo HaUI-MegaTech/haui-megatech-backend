@@ -1,14 +1,24 @@
 import React, { useEffect, useState } from "react";
+import { fetchAllProfileMenus } from "../services/ProfileMenuService";
+import { NavLink } from "react-router-dom";
 
 function Header() {
     const [showSidebar, setShowSidebar] = useState(true);
     const [showSearchBar, setShowSearchBar] = useState(false);
+    const [menuItems, setmenuItems] = useState([]);
 
     useEffect(() => {
+        getProfileMenuItems();
+
         showSidebar
             ? document.body.classList.remove("toggle-sidebar")
             : document.body.classList.add("toggle-sidebar");
-    }, [showSidebar]);
+    }, [showSidebar, menuItems]);
+
+    const getProfileMenuItems = () => {
+        const data = fetchAllProfileMenus();
+        setmenuItems(data);
+    };
 
     const handleToggleShowSidebar = () => {
         setShowSidebar(!showSidebar);
@@ -17,6 +27,24 @@ function Header() {
     const handleToggleShowSearchBar = () => {
         setShowSearchBar(!showSearchBar);
     };
+
+    const renderProfileMenuItem = (item) => (
+        <>
+            <li>
+                <hr className="dropdown-divider" />
+            </li>
+
+            <li>
+                <NavLink
+                    className="dropdown-item d-flex align-items-center"
+                    to={item.url}
+                >
+                    <i className={item.icon}></i>
+                    <span>{item.title}</span>
+                </NavLink>
+            </li>
+        </>
+    );
 
     return (
         <header
@@ -310,58 +338,10 @@ function Header() {
                                 <h6>Kevin Anderson</h6>
                                 <span>Web Designer</span>
                             </li>
-                            <li>
-                                <hr className="dropdown-divider" />
-                            </li>
-
-                            <li>
-                                <a
-                                    className="dropdown-item d-flex align-items-center"
-                                    href="users-profile.html"
-                                >
-                                    <i className="bi bi-person"></i>
-                                    <span>My Profile</span>
-                                </a>
-                            </li>
-                            <li>
-                                <hr className="dropdown-divider" />
-                            </li>
-
-                            <li>
-                                <a
-                                    className="dropdown-item d-flex align-items-center"
-                                    href="users-profile.html"
-                                >
-                                    <i className="bi bi-gear"></i>
-                                    <span>Account Settings</span>
-                                </a>
-                            </li>
-                            <li>
-                                <hr className="dropdown-divider" />
-                            </li>
-
-                            <li>
-                                <a
-                                    className="dropdown-item d-flex align-items-center"
-                                    href="pages-faq.html"
-                                >
-                                    <i className="bi bi-question-circle"></i>
-                                    <span>Need Help?</span>
-                                </a>
-                            </li>
-                            <li>
-                                <hr className="dropdown-divider" />
-                            </li>
-
-                            <li>
-                                <a
-                                    className="dropdown-item d-flex align-items-center"
-                                    href="#"
-                                >
-                                    <i className="bi bi-box-arrow-right"></i>
-                                    <span>Sign Out</span>
-                                </a>
-                            </li>
+                            {menuItems &&
+                                menuItems.map((item) =>
+                                    renderProfileMenuItem(item),
+                                )}
                         </ul>
                     </li>
                 </ul>
