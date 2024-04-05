@@ -28,7 +28,7 @@ function Sidebar() {
     const renderSubNavItems = (navItem) => (
         <ul
             id={`${navItem.id}`}
-            className={`nav-content collapse ${location.pathname.indexOf(navItem.url) != -1 && 'show'}`}
+            className={`nav-content collapse ${location.pathname.indexOf(navItem.url) !== -1 && 'show'}`}
             data-bs-parent="#sidebar-nav"
         >
             {navItem.child && navItem.child.map(item => renderSubNavItem(item))}
@@ -38,7 +38,7 @@ function Sidebar() {
     const renderNavItem = (navItem) => (
         <li className="nav-item">
             <NavLink
-                className={`nav-link ${location.pathname.indexOf(navItem.url) == -1 && 'collapsed'}`}
+                className={`nav-link ${location.pathname.indexOf(navItem.url) === -1 && 'collapsed'}`}
                 to={navItem.url}
                 data-bs-target={navItem.child && `#${navItem.id}`}
                 data-bs-toggle={navItem.child && "collapse"}
