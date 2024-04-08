@@ -1,11 +1,109 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+
+const listItem = [
+    {
+        title: "1",
+        child: [
+            {
+                title: "1.1",
+                child: [
+                    {
+                        title: "111",
+                    },
+                    {
+                        title: "112",
+                    },
+                ],
+            },
+            {
+                title: "1.2",
+                child: [
+                    {
+                        title: "121",
+                    },
+                    {
+                        title: "122",
+                    },
+                ],
+            },
+        ],
+    },
+    {
+        title: "2",
+        child: [
+            {
+                title: "21",
+                child: [
+                    {
+                        title: "211",
+                    },
+                    {
+                        title: "212",
+                    },
+                ],
+            },
+            {
+                title: "22",
+                child: [
+                    {
+                        title: "221",
+                    },
+                    {
+                        title: "222",
+                    },
+                ],
+            },
+        ],
+    },
+];
 
 function UserUpdateTab(props) {
     const { show } = props;
+    const [province, setProvince] = useState("");
+    const [district, setDistrict] = useState("");
+    const [conmmue, setCommune] = useState("");
 
     useEffect(() => {
         show && (document.title = "Cập nhật thông tin");
-    }, [show]);
+        console.log(province);
+        console.log("hi");
+    }, [show, province]);
+
+    const renderProvinces = (items) => (
+        <select
+            class="form-select"
+            aria-label="Default select example"
+            onChange={(e) => setProvince(e.target.value)}
+        >
+            {items.map((item) => (
+                <option value={item.title}>{item.title}</option>
+            ))}
+        </select>
+    );
+
+    const renderDistricts = (items) => (
+        <select
+            class="form-select"
+            aria-label="Default select example"
+            onChange={(e) => setDistrict(e.target.value)}
+        >
+            {items.map((item) => (
+                <option value={item.title}>{item.title}</option>
+            ))}
+        </select>
+    );
+
+    const renderCommunes = (items) => (
+        <select
+            class="form-select"
+            aria-label="Default select example"
+            onChange={(e) => setCommune(e.target.value)}
+        >
+            {items.map((item) => (
+                <option value={item.title}>{item.title}</option>
+            ))}
+        </select>
+    );
 
     return (
         <div
@@ -16,11 +114,11 @@ function UserUpdateTab(props) {
                 <div class="row mb-3">
                     <label
                         for="profileImage"
-                        class="col-md-4 col-lg-3 col-form-label"
+                        class="col-md-3 col-lg-3 col-form-label"
                     >
                         Profile Image
                     </label>
-                    <div class="col-md-8 col-lg-9">
+                    <div class="col-md-9 col-lg-9">
                         <img src="assets/img/profile-img.jpg" alt="Profile" />
                         <div class="pt-2">
                             <a
@@ -44,11 +142,11 @@ function UserUpdateTab(props) {
                 <div class="row mb-3">
                     <label
                         for="fullName"
-                        class="col-md-4 col-lg-3 col-form-label"
+                        class="col-md-3 col-lg-3 col-form-label"
                     >
                         Full Name
                     </label>
-                    <div class="col-md-8 col-lg-9">
+                    <div class="col-md-9 col-lg-9">
                         <input
                             name="fullName"
                             type="text"
@@ -60,10 +158,10 @@ function UserUpdateTab(props) {
                 </div>
 
                 <div class="row mb-3">
-                    <label for="about" class="col-md-4 col-lg-3 col-form-label">
+                    <label for="about" class="col-md-3 col-lg-3 col-form-label">
                         About
                     </label>
-                    <div class="col-md-8 col-lg-9">
+                    <div class="col-md-9 col-lg-9">
                         <textarea
                             name="about"
                             class="form-control"
@@ -82,11 +180,11 @@ function UserUpdateTab(props) {
                 <div class="row mb-3">
                     <label
                         for="company"
-                        class="col-md-4 col-lg-3 col-form-label"
+                        class="col-md-3 col-lg-3 col-form-label"
                     >
                         Company
                     </label>
-                    <div class="col-md-8 col-lg-9">
+                    <div class="col-md-9 col-lg-9">
                         <input
                             name="company"
                             type="text"
@@ -98,10 +196,10 @@ function UserUpdateTab(props) {
                 </div>
 
                 <div class="row mb-3">
-                    <label for="Job" class="col-md-4 col-lg-3 col-form-label">
+                    <label for="Job" class="col-md-3 col-lg-3 col-form-label">
                         Job
                     </label>
-                    <div class="col-md-8 col-lg-9">
+                    <div class="col-md-9 col-lg-9">
                         <input
                             name="job"
                             type="text"
@@ -115,11 +213,11 @@ function UserUpdateTab(props) {
                 <div class="row mb-3">
                     <label
                         for="Country"
-                        class="col-md-4 col-lg-3 col-form-label"
+                        class="col-md-3 col-lg-3 col-form-label"
                     >
                         Country
                     </label>
-                    <div class="col-md-8 col-lg-9">
+                    <div class="col-md-9 col-lg-9">
                         <input
                             name="country"
                             type="text"
@@ -133,26 +231,38 @@ function UserUpdateTab(props) {
                 <div class="row mb-3">
                     <label
                         for="Address"
-                        class="col-md-4 col-lg-3 col-form-label"
+                        class="col-md-3 col-lg-3 col-form-label"
                     >
                         Address
                     </label>
-                    <div class="col-md-8 col-lg-9">
-                        <input
-                            name="address"
-                            type="text"
-                            class="form-control"
-                            id="Address"
-                            value="A108 Adam Street, New York, NY 535022"
-                        />
+                    <div class="col-sm-4 col-md-3">
+                        {renderProvinces(listItem)}
+                    </div>
+                    <div class="col-sm-4 col-md-3">
+                        {province &&
+                            renderDistricts(
+                                listItem.find((item) => item.title === province)
+                                    .child,
+                            )}
+                    </div>
+                    <div class="col-sm-4 col-md-3">
+                        {province &&
+                            district &&
+                            renderCommunes(
+                                listItem
+                                    .find((item) => item.title === province)
+                                    .child.find(
+                                        (item) => item.title === district,
+                                    ).child,
+                            )}
                     </div>
                 </div>
 
                 <div class="row mb-3">
-                    <label for="Phone" class="col-md-4 col-lg-3 col-form-label">
+                    <label for="Phone" class="col-md-3 col-lg-3 col-form-label">
                         Phone
                     </label>
-                    <div class="col-md-8 col-lg-9">
+                    <div class="col-md-9 col-lg-9">
                         <input
                             name="phone"
                             type="text"
@@ -164,10 +274,10 @@ function UserUpdateTab(props) {
                 </div>
 
                 <div class="row mb-3">
-                    <label for="Email" class="col-md-4 col-lg-3 col-form-label">
+                    <label for="Email" class="col-md-3 col-lg-3 col-form-label">
                         Email
                     </label>
-                    <div class="col-md-8 col-lg-9">
+                    <div class="col-md-9 col-lg-9">
                         <input
                             name="email"
                             type="email"
@@ -181,11 +291,11 @@ function UserUpdateTab(props) {
                 <div class="row mb-3">
                     <label
                         for="Twitter"
-                        class="col-md-4 col-lg-3 col-form-label"
+                        class="col-md-3 col-lg-3 col-form-label"
                     >
                         Twitter Profile
                     </label>
-                    <div class="col-md-8 col-lg-9">
+                    <div class="col-md-9 col-lg-9">
                         <input
                             name="twitter"
                             type="text"
@@ -199,11 +309,11 @@ function UserUpdateTab(props) {
                 <div class="row mb-3">
                     <label
                         for="Facebook"
-                        class="col-md-4 col-lg-3 col-form-label"
+                        class="col-md-3 col-lg-3 col-form-label"
                     >
                         Facebook Profile
                     </label>
-                    <div class="col-md-8 col-lg-9">
+                    <div class="col-md-9 col-lg-9">
                         <input
                             name="facebook"
                             type="text"
@@ -217,11 +327,11 @@ function UserUpdateTab(props) {
                 <div class="row mb-3">
                     <label
                         for="Instagram"
-                        class="col-md-4 col-lg-3 col-form-label"
+                        class="col-md-3 col-lg-3 col-form-label"
                     >
                         Instagram Profile
                     </label>
-                    <div class="col-md-8 col-lg-9">
+                    <div class="col-md-9 col-lg-9">
                         <input
                             name="instagram"
                             type="text"
@@ -235,11 +345,11 @@ function UserUpdateTab(props) {
                 <div class="row mb-3">
                     <label
                         for="Linkedin"
-                        class="col-md-4 col-lg-3 col-form-label"
+                        class="col-md-3 col-lg-3 col-form-label"
                     >
                         Linkedin Profile
                     </label>
-                    <div class="col-md-8 col-lg-9">
+                    <div class="col-md-9 col-lg-9">
                         <input
                             name="linkedin"
                             type="text"
