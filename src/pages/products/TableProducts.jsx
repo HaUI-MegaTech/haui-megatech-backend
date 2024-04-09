@@ -1,18 +1,33 @@
 import { useEffect, useState } from "react";
 import { fetchAllProducts } from "../../services/ProductService";
+import ReactPaginate from "react-paginate";
 
 function TableProducts() {
     const [products, setProducts] = useState([]);
+    const [pageIndex, setPageIndex] = useState(0);
+    const [pageSize, setPageSize] = useState(15);
+    const [totalItems, setTotalItems] = useState();
+    const [totalPages, setTotalPages] = useState();
 
     useEffect(() => {
-        getProducts();
+        getProducts(0);
     }, []);
 
-    const getProducts = () => {
-        fetchAllProducts().then((response) => setProducts(response.data.items));
+    const getProducts = (pageIndex) => {
+        fetchAllProducts(pageIndex).then((response) => {
+            setPageIndex(response.data.pageIndex);
+            setPageSize(response.data.pageSize);
+            setTotalItems(response.data.totalItems);
+            setTotalPages(response.data.totalPages);
+            setProducts(response.data.items);
+        });
     };
 
     const renderProducts = (items) => items.map((item) => renderProduct(item));
+
+    const handlePageClick = (e) => {
+        getProducts(parseInt(e.selected));
+    };
 
     const renderProduct = (item) => (
         <tr>
@@ -40,19 +55,42 @@ function TableProducts() {
     );
 
     return (
-        <table className="table table-hover">
-            <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Tên sản phẩm</th>
-                    <th scope="col">Giá bán</th>
-                    <th scope="col" className="text-center">
-                        Hành động
-                    </th>
-                </tr>
-            </thead>
-            <tbody>{renderProducts(products)}</tbody>
-        </table>
+        <>
+            <table className="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Tên sản phẩm</th>
+                        <th scope="col">Giá bán</th>
+                        <th scope="col" className="text-center">
+                            Hành động
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>{renderProducts(products)}</tbody>
+            </table>
+            <div>
+                <ReactPaginate
+                    breakLabel="..."
+                    nextLabel="next >"
+                    onPageChange={handlePageClick}
+                    pageRangeDisplayed={5}
+                    pageCount={totalPages}
+                    previousLabel="< previous"
+                    pageClassName="page-item"
+                    pageLinkClassName="page-link"
+                    previousClassName="page-item"
+                    previousLinkClassName="page-link"
+                    nextClassName="page-item"
+                    nextLinkClassName="page-link"
+                    breakClassName="page-item"
+                    breakLinkClassName="page-link"
+                    containerClassName="pagination"
+                    activeClassName="active"
+                    renderOnZeroPageCount={null}
+                />
+            </div>
+        </>
     );
 }
 
