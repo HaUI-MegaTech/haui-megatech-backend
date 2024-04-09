@@ -69,40 +69,40 @@ function UserUpdateTab(props) {
         console.log("hi");
     }, [show, province]);
 
-    const renderProvinces = (items) => (
+    const renderProvinces = items => (
         <select
             class="form-select"
             aria-label="Default select example"
-            onChange={(e) => setProvince(e.target.value)}
+            onChange={e => setProvince(e.target.value)}
         >
             <option selected>Tỉnh/Thành phố</option>
-            {items.map((item) => (
+            {items.map(item => (
                 <option value={item.title}>{item.title}</option>
             ))}
         </select>
     );
 
-    const renderDistricts = (items) => (
+    const renderDistricts = items => (
         <select
             class="form-select"
             aria-label="Default select example"
-            onChange={(e) => setDistrict(e.target.value)}
+            onChange={e => setDistrict(e.target.value)}
             disabled={province ? false : true}
         >
-            {items.map((item) => (
+            {items.map(item => (
                 <option value={item.title}>{item.title}</option>
             ))}
         </select>
     );
 
-    const renderCommunes = (items) => (
+    const renderCommunes = items => (
         <select
             class="form-select"
             aria-label="Default select example"
-            onChange={(e) => setCommune(e.target.value)}
+            onChange={e => setCommune(e.target.value)}
             disabled={province && district ? false : true}
         >
-            {items.map((item) => (
+            {items.map(item => (
                 <option value={item.title}>{item.title}</option>
             ))}
         </select>
@@ -244,7 +244,7 @@ function UserUpdateTab(props) {
                     <div class="col-sm-4 col-md-3">
                         {province ? (
                             renderDistricts(
-                                listItem.find((item) => item.title === province)
+                                listItem.find(item => item.title === province)
                                     .child,
                             )
                         ) : (
@@ -257,10 +257,9 @@ function UserUpdateTab(props) {
                         {province && district ? (
                             renderCommunes(
                                 listItem
-                                    .find((item) => item.title === province)
-                                    .child.find(
-                                        (item) => item.title === district,
-                                    ).child,
+                                    .find(item => item.title === province)
+                                    .child.find(item => item.title === district)
+                                    .child,
                             )
                         ) : (
                             <select class="form-select">

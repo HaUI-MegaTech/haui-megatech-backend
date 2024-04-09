@@ -26,7 +26,7 @@ function Header() {
         setShowSearchBar(!showSearchBar);
     };
 
-    const renderProfileMenuItem = (item) => (
+    const renderProfileMenuItem = item => (
         <>
             <li>
                 <hr className="dropdown-divider" />
@@ -343,7 +343,7 @@ function Header() {
                                 <span>Web Designer</span>
                             </li>
                             {menuItems &&
-                                menuItems.map((item) =>
+                                menuItems.map(item =>
                                     renderProfileMenuItem(item),
                                 )}
                         </ul>

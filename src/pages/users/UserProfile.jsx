@@ -12,11 +12,11 @@ function UserProfile() {
 
     const [menuItems, setMenuItems] = useState(
         fetchAllProfileMenus().filter(
-            (item) => item.url != "/faq" && item.url != "/logout",
+            item => item.url != "/faq" && item.url != "/logout",
         ),
     );
 
-    const renderProfileTabItem = (item) => (
+    const renderProfileTabItem = item => (
         <li class="nav-item">
             <button
                 class={`nav-link ${item.url === location.pathname && "active"}`}
@@ -80,7 +80,7 @@ function UserProfile() {
                             <div class="card-body pt-3">
                                 <ul class="nav nav-tabs nav-tabs-bordered">
                                     {menuItems &&
-                                        menuItems.map((item) =>
+                                        menuItems.map(item =>
                                             renderProfileTabItem(item),
                                         )}
                                 </ul>

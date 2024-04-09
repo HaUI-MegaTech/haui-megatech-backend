@@ -13,8 +13,8 @@ function TableProducts() {
         getProducts(0);
     }, []);
 
-    const getProducts = (pageIndex) => {
-        fetchAllProducts(pageIndex).then((response) => {
+    const getProducts = pageIndex => {
+        fetchAllProducts(pageIndex).then(response => {
             setPageIndex(response.data.pageIndex);
             setPageSize(response.data.pageSize);
             setTotalItems(response.data.totalItems);
@@ -23,13 +23,13 @@ function TableProducts() {
         });
     };
 
-    const renderProducts = (items) => items.map((item) => renderProduct(item));
+    const renderProducts = items => items.map(item => renderProduct(item));
 
-    const handlePageClick = (e) => {
+    const handlePageClick = e => {
         getProducts(parseInt(e.selected));
     };
 
-    const renderProduct = (item) => (
+    const renderProduct = item => (
         <tr>
             <th scope="row" className="align-middle">
                 {item.id}

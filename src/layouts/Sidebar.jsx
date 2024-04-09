@@ -7,11 +7,11 @@ function Sidebar() {
     const location = useLocation();
 
     useEffect(() => {
-        const found = navItems.find((item) => item.url === location.pathname);
+        const found = navItems.find(item => item.url === location.pathname);
         found
             ? (document.title = found.title + " - HaUI MegaTech")
-            : navItems.forEach((parentItem) => {
-                  parentItem?.child?.forEach((childItem) => {
+            : navItems.forEach(parentItem => {
+                  parentItem?.child?.forEach(childItem => {
                       childItem.url === location.pathname &&
                           (document.title =
                               childItem.title + " - HaUI MegaTech");
@@ -21,11 +21,11 @@ function Sidebar() {
 
     useEffect(() => {}, [navItems, location]);
 
-    const changePageTitle = (item) => {
+    const changePageTitle = item => {
         !item.child && (document.title = item.title + " - HaUI MegaTech");
     };
 
-    const renderSubNavItem = (item) => (
+    const renderSubNavItem = item => (
         <li>
             <NavLink to={item.url} onClick={() => changePageTitle(item)}>
                 <i className="bi bi-circle"></i>
@@ -34,7 +34,7 @@ function Sidebar() {
         </li>
     );
 
-    const renderSubNavItems = (navItem) => (
+    const renderSubNavItems = navItem => (
         <ul
             id={`${navItem.id}`}
             className={`nav-content collapse ${
@@ -42,12 +42,11 @@ function Sidebar() {
             }`}
             data-bs-parent="#sidebar-nav"
         >
-            {navItem.child &&
-                navItem.child.map((item) => renderSubNavItem(item))}
+            {navItem.child && navItem.child.map(item => renderSubNavItem(item))}
         </ul>
     );
 
-    const renderNavItem = (navItem) => (
+    const renderNavItem = navItem => (
         <li className="nav-item">
             <NavLink
                 className={`nav-link ${
@@ -71,7 +70,7 @@ function Sidebar() {
     return (
         <aside id="sidebar" className="sidebar">
             <ul className="sidebar-nav" id="sidebar-nav">
-                {navItems && navItems.map((item) => renderNavItem(item))}
+                {navItems && navItems.map(item => renderNavItem(item))}
             </ul>
         </aside>
     );
