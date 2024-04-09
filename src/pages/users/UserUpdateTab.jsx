@@ -5,7 +5,7 @@ const listItem = [
         title: "1",
         child: [
             {
-                title: "1.1",
+                title: "11",
                 child: [
                     {
                         title: "111",
@@ -16,7 +16,7 @@ const listItem = [
                 ],
             },
             {
-                title: "1.2",
+                title: "12",
                 child: [
                     {
                         title: "121",
@@ -59,9 +59,9 @@ const listItem = [
 
 function UserUpdateTab(props) {
     const { show } = props;
-    const [province, setProvince] = useState("");
-    const [district, setDistrict] = useState("");
-    const [conmmue, setCommune] = useState("");
+    const [province, setProvince] = useState();
+    const [district, setDistrict] = useState();
+    const [conmmue, setCommune] = useState();
 
     useEffect(() => {
         show && (document.title = "Cập nhật thông tin");
@@ -75,6 +75,7 @@ function UserUpdateTab(props) {
             aria-label="Default select example"
             onChange={(e) => setProvince(e.target.value)}
         >
+            <option selected>Tỉnh/Thành phố</option>
             {items.map((item) => (
                 <option value={item.title}>{item.title}</option>
             ))}
@@ -86,6 +87,7 @@ function UserUpdateTab(props) {
             class="form-select"
             aria-label="Default select example"
             onChange={(e) => setDistrict(e.target.value)}
+            disabled={province ? false : true}
         >
             {items.map((item) => (
                 <option value={item.title}>{item.title}</option>
@@ -98,6 +100,7 @@ function UserUpdateTab(props) {
             class="form-select"
             aria-label="Default select example"
             onChange={(e) => setCommune(e.target.value)}
+            disabled={province && district ? false : true}
         >
             {items.map((item) => (
                 <option value={item.title}>{item.title}</option>
@@ -239,22 +242,31 @@ function UserUpdateTab(props) {
                         {renderProvinces(listItem)}
                     </div>
                     <div class="col-sm-4 col-md-3">
-                        {province &&
+                        {province ? (
                             renderDistricts(
                                 listItem.find((item) => item.title === province)
                                     .child,
-                            )}
+                            )
+                        ) : (
+                            <select class="form-select">
+                                <option>Quận/Huyện</option>
+                            </select>
+                        )}
                     </div>
                     <div class="col-sm-4 col-md-3">
-                        {province &&
-                            district &&
+                        {province && district ? (
                             renderCommunes(
                                 listItem
                                     .find((item) => item.title === province)
                                     .child.find(
                                         (item) => item.title === district,
                                     ).child,
-                            )}
+                            )
+                        ) : (
+                            <select class="form-select">
+                                <option>Xã/Phường</option>
+                            </select>
+                        )}
                     </div>
                 </div>
 

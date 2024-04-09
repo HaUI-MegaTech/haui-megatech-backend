@@ -10,6 +10,10 @@ import UsersStatistic from "./pages/users/UsersStatistic";
 import UsersHistory from "./pages/users/UsersHistory";
 import Home from "./pages/home/Home";
 import UserProfile from "./pages/users/UserProfile";
+import ActiveProducts from "./pages/products/ActiveProducts";
+import DeletedProducts from "./pages/products/DeletedProducts";
+import ProductsStatistic from "./pages/products/ProductsStatistic";
+import ProductsHistory from "./pages/products/ProductsHistory";
 
 function App() {
     return (
@@ -27,10 +31,24 @@ function App() {
                     element={<UsersStatistic />}
                 ></Route>
                 <Route path="/users/history" element={<UsersHistory />}></Route>
-                <Route path="/products/active" element={<Blank />}></Route>
-                <Route path="/products/deleted" element={<Blank />}></Route>
-                <Route path="/products/statistic" element={<Blank />}></Route>
-                <Route path="/products/history" element={<Blank />}></Route>
+
+                <Route
+                    path="/products/active"
+                    element={<ActiveProducts />}
+                ></Route>
+                <Route
+                    path="/products/deleted"
+                    element={<DeletedProducts />}
+                ></Route>
+                <Route
+                    path="/products/statistic"
+                    element={<ProductsStatistic />}
+                ></Route>
+                <Route
+                    path="/products/history"
+                    element={<ProductsHistory />}
+                ></Route>
+
                 <Route path="/user/detail" element={<UserProfile />}></Route>
                 <Route path="/user/update" element={<UserProfile />}></Route>
                 <Route path="/user/settings" element={<UserProfile />}></Route>

@@ -51,8 +51,14 @@ function Header() {
         >
             <div className="d-flex align-items-center justify-content-between">
                 <a href="index.html" className="logo d-flex align-items-center">
-                    <img src="assets/img/logo.png" alt="" />
-                    <span className="d-none d-lg-block">NiceAdmin</span>
+                    <img
+                        src="http://res.cloudinary.com/dlupgsjyq/image/upload/v1712624218/cd313c86-41c2-4796-ad53-e8e2c0b97cea.png"
+                        alt=""
+                        className="img-fluid"
+                    />
+                    <span className="d-none d-lg-block text-primary">
+                        Admin Center
+                    </span>
                 </a>
                 <i
                     className="bi bi-list toggle-sidebar-btn"
