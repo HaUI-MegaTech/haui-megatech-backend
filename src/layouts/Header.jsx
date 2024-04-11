@@ -284,7 +284,7 @@ function Header() {
                             href="#"
                             data-bs-toggle="dropdown"
                         >
-                            <i className="bi bi-globe"></i>
+                            <i className="bi bi-translate"></i>
                         </a>
 
                         <ul className="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages py-0">
