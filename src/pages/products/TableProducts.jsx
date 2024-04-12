@@ -35,7 +35,8 @@ function TableProducts() {
                 {item.id}
             </th>
             <td className="align-middle">{item.name}</td>
-            <td className="align-middle">{item.price}</td>
+            <td className="align-middle">{item.oldPrice}</td>
+            <td className="align-middle">{item.newPrice}</td>
             <td className="d-flex justify-content-center">
                 <a
                     className="btn btn-secondary btn-sm mx-2"
@@ -61,7 +62,8 @@ function TableProducts() {
                     <tr>
                         <th scope="col">#</th>
                         <th scope="col">Tên sản phẩm</th>
-                        <th scope="col">Giá bán</th>
+                        <th scope="col">Giá cũ</th>
+                        <th scope="col">Giá mới</th>
                         <th scope="col" className="text-center">
                             Hành động
                         </th>
