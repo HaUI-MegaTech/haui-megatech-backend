@@ -14,6 +14,7 @@ import ActiveProducts from "./pages/products/ActiveProducts";
 import DeletedProducts from "./pages/products/DeletedProducts";
 import ProductsStatistic from "./pages/products/ProductsStatistic";
 import ProductsHistory from "./pages/products/ProductsHistory";
+import { ToastContainer } from "react-toastify";
 
 function App() {
     return (
@@ -59,6 +60,18 @@ function App() {
                 <Route path="/faq" element={<Blank />}></Route>
                 <Route path="/logout" element={<Blank />}></Route>
             </Routes>
+            <ToastContainer
+                position="bottom-right"
+                autoClose={2000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="colored"
+            />
             <Footer />
         </>
     );

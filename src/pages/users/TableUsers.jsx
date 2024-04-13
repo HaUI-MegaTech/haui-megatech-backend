@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { fetchAllUsers } from "../../services/UserService";
+import { fetchAllActiveUsers } from "../../services/UserService";
 import ReactPaginate from "react-paginate";
 
 function TableUsers() {
@@ -14,13 +14,15 @@ function TableUsers() {
     }, []);
 
     const getUsers = pageIndex => {
-        fetchAllUsers(pageIndex).then(response => {
-            setPageIndex(response.data.pageIndex);
-            setPageSize(response.data.pageSize);
-            setTotalItems(response.data.totalItems);
-            setTotalPages(response.data.totalPages);
-            setUsers(response.data.items);
-        });
+        fetchAllActiveUsers(pageIndex)
+            .then(response => {
+                setPageIndex(response.data.pageIndex);
+                setPageSize(response.data.pageSize);
+                setTotalItems(response.data.totalItems);
+                setTotalPages(response.data.totalPages);
+                setUsers(response.data.items);
+            })
+            .catch(error => console.log(error));
     };
 
     const renderUsers = items => items.map(item => renderUser(item));
