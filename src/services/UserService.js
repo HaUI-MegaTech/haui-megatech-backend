@@ -6,11 +6,6 @@ const accessToken =
 const fetchAllUsers = pageIndex => {
     return axios.get(
         `http://localhost:8080/api/v1/users/active?pageIndex=${pageIndex}`,
-        {
-            headers: {
-                Authorization: "Bearer " + accessToken,
-            },
-        },
     );
 };
 
