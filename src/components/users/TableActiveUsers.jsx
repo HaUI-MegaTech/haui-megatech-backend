@@ -4,6 +4,7 @@ import ReactPaginate from "react-paginate";
 import { Button } from "react-bootstrap";
 import DeleteUserModal from "./DeleteUserModal";
 import UserInfoModal from "./UserInfoModal";
+import UpdateUserInfoModal from "./UpdateUserInfoModal";
 
 function TableActiveUsers(props) {
     const {
@@ -18,15 +19,18 @@ function TableActiveUsers(props) {
 
     const [targetUser, setTargetUser] = useState({});
 
-    const [showDeleteUserModal, setShowDeleteUserModal] = useState(false);
+    const [showTemporarilyDeleteUserModal, setShowTemporarilyDeleteUserModal] =
+        useState(false);
     const [showUserInfoModal, setShowUserInfoModal] = useState(false);
+    const [showUpdateUserInfoModal, setShowUpdateUserInfoModal] =
+        useState(false);
 
-    const handleShowDeleteUserModal = () => {
-        setShowDeleteUserModal(true);
-    };
+    const handleCloseTemorarilyDeleteUserModal = () =>
+        setShowTemporarilyDeleteUserModal(false);
 
-    const handleCloseDeleteUserModal = () => {
-        setShowDeleteUserModal(false);
+    const handleTemporarilyDeleteUser = item => {
+        setTargetUser(item);
+        setShowTemporarilyDeleteUserModal(true);
     };
 
     const handleShowUserInfoModal = item => {
@@ -35,10 +39,13 @@ function TableActiveUsers(props) {
     };
     const handleCloseUserInfoModal = () => setShowUserInfoModal(false);
 
-    const handleTemporarilyDeleteUser = item => {
+    const handleShowUpdateUserInfoModal = item => {
         setTargetUser(item);
-        setShowDeleteUserModal(true);
+        setShowUpdateUserInfoModal(true);
     };
+
+    const handleCloseUpdateUserInfoModal = () =>
+        setShowUpdateUserInfoModal(false);
 
     useEffect(() => {
         getUsers(0);
@@ -69,9 +76,13 @@ function TableActiveUsers(props) {
                     <i class="bi bi-eye"></i>
                 </Button>
 
-                <button type="button" className="btn btn-warning btn-sm mx-2">
+                <Button
+                    variant="primary"
+                    onClick={() => handleShowUpdateUserInfoModal(item)}
+                    className="btn btn-warning btn-sm mx-2"
+                >
                     <i class="bi bi-pencil-square"></i>
-                </button>
+                </Button>
 
                 <Button
                     variant="primary"
@@ -139,9 +150,18 @@ function TableActiveUsers(props) {
                 handleClose={handleCloseUserInfoModal}
                 targetUser={targetUser}
             />
+
+            <UpdateUserInfoModal
+                show={showUpdateUserInfoModal}
+                handleClose={handleCloseUpdateUserInfoModal}
+                targetUser={targetUser}
+                currentPageIndex={pageIndex}
+                handleUpdateTable={handleUpdateTable}
+            />
+
             <DeleteUserModal
-                show={showDeleteUserModal}
-                handleClose={handleCloseDeleteUserModal}
+                show={showTemporarilyDeleteUserModal}
+                handleClose={handleCloseTemorarilyDeleteUserModal}
                 targetUser={targetUser}
                 currentPageIndex={pageIndex}
                 handleUpdateTable={handleUpdateTable}
