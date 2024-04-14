@@ -1,12 +1,8 @@
-import { useState } from "react";
 import { Button, Modal } from "react-bootstrap";
-import {
-    fetchAllActiveUsers,
-    temporarilyDeleteUser,
-} from "../../services/UserService";
+import { temporarilyDeleteUser } from "../../services/UserService";
 import { toast } from "react-toastify";
 
-function DeleteUserModal(props) {
+function TemporarilyDeleteUserModal(props) {
     const {
         show,
         handleClose,
@@ -57,4 +53,4 @@ function DeleteUserModal(props) {
     );
 }
 
-export default DeleteUserModal;
+export default TemporarilyDeleteUserModal;

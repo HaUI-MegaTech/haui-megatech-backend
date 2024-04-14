@@ -2,7 +2,6 @@ import { Button, Modal } from "react-bootstrap";
 
 function UserInfoModal(props) {
     const { show, handleClose, targetUser } = props;
-    console.log(targetUser);
     return (
         <Modal show={show} onHide={handleClose}>
             <Modal.Header closeButton className="bg-info">

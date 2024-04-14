@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react";
-import { fetchAllActiveUsers } from "../../services/UserService";
 import ReactPaginate from "react-paginate";
 import { Button } from "react-bootstrap";
-import DeleteUserModal from "./DeleteUserModal";
 import UserInfoModal from "./UserInfoModal";
 import UpdateUserInfoModal from "./UpdateUserInfoModal";
 import ChangeUserPasswordModal from "./ChangeUserPasswordModal";
+import TemporarilyDeleteUserModal from "./TemporarilyDeleteUserModal";
 
 function TableActiveUsers(props) {
     const {
@@ -177,7 +176,7 @@ function TableActiveUsers(props) {
                 targetUser={targetUser}
             />
 
-            <DeleteUserModal
+            <TemporarilyDeleteUserModal
                 show={showTemporarilyDeleteUserModal}
                 handleClose={handleCloseTemorarilyDeleteUserModal}
                 targetUser={targetUser}

@@ -35,9 +35,18 @@ const addNewUser = (
 const temporarilyDeleteUser = user =>
     axios.patch(BASE_URL + "/api/v1/users/temporarily-delete/" + user.id);
 
+const updateUserInfo = (user, firstName, lastName, email, phoneNumber) =>
+    axios.put(BASE_URL + `/api/v1/users/${user.id}`, {
+        firstName,
+        lastName,
+        email,
+        phoneNumber,
+    });
+
 export {
     fetchAllActiveUsers,
     fetchAllDeletedUsers,
     temporarilyDeleteUser,
+    updateUserInfo,
     addNewUser,
 };
