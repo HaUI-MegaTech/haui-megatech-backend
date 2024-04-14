@@ -1,5 +1,6 @@
 import AddUserModal from "./AddUserModal";
-import TableUsers from "./TableUsers";
+import TableActiveUsers from "./TableActiveUsers";
+import TableUsers from "./TableActiveUsers";
 
 function ActiveUsers() {
     return (
@@ -36,7 +37,7 @@ function ActiveUsers() {
                     <div className="col-12">
                         <div className="card">
                             <div className="card-body">
-                                <TableUsers />
+                                <TableActiveUsers />
                             </div>
                         </div>
                     </div>

@@ -9,6 +9,9 @@ const fetchAllActiveUsers = pageIndex => {
     return axios.get(`${BASE_URL}/api/v1/users/active?pageIndex=${pageIndex}`);
 };
 
+const fetchAllDeletedUsers = pageIndex =>
+    axios.get(`${BASE_URL}/api/v1/users/deleted?pageIndex=${pageIndex}`);
+
 const addNewUser = (
     username,
     firstName,
@@ -25,4 +28,4 @@ const addNewUser = (
     });
 };
 
-export { fetchAllActiveUsers, addNewUser };
+export { fetchAllActiveUsers, fetchAllDeletedUsers, addNewUser };

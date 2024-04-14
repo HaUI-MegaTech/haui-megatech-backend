@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { fetchAllActiveUsers } from "../../services/UserService";
 import ReactPaginate from "react-paginate";
 
-function TableUsers() {
+function TableActiveUsers() {
     const [Users, setUsers] = useState([]);
     const [pageIndex, setPageIndex] = useState(0);
     const [pageSize, setPageSize] = useState(15);
@@ -102,4 +102,4 @@ function TableUsers() {
     );
 }
 
-export default TableUsers;
+export default TableActiveUsers;
