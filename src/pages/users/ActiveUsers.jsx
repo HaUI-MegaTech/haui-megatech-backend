@@ -1,9 +1,8 @@
 import { useState } from "react";
 import { fetchAllActiveUsers } from "../../services/UserService";
-import AddUserModal from "./AddUserModal";
-import TableActiveUsers from "./TableActiveUsers";
-import TableUsers from "./TableActiveUsers";
 import { Button } from "react-bootstrap";
+import TableActiveUsers from "../../components/users/TableActiveUsers";
+import AddUserModal from "../../components/users/AddUserModal";
 
 function ActiveUsers() {
     const [users, setUsers] = useState([]);

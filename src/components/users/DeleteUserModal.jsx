@@ -35,7 +35,11 @@ function DeleteUserModal(props) {
                 </Modal.Header>
                 <Modal.Body>
                     Bạn có chắc chắn muốn xoá tạm thời người dùng:&nbsp;
-                    <b>{targetUser.username}</b>?
+                    <b>
+                        {targetUser.username} (
+                        {targetUser.firstName + " " + targetUser.lastName})
+                    </b>
+                    ?
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleClose}>

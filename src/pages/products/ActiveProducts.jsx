@@ -1,4 +1,4 @@
-import TableProducts from "./TableProducts";
+import TableProducts from "../../components/products/TableProducts";
 
 function ActiveProducts() {
     return (

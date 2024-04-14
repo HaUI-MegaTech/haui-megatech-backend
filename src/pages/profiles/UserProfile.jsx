@@ -1,8 +1,8 @@
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
-import UserDetailTab from "./UserDetailTab";
-import UserUpdateTab from "./UserUpdateTab";
-import UserSettingsTab from "./UserSettingsTab";
-import UserChangePasswordTab from "./UserChangePasswordTab";
+import UserDetailTab from "../../components/profile/UserDetailTab";
+import UserUpdateTab from "../../components/profile/UserUpdateTab";
+import UserSettingsTab from "../../components/profile/UserSettingsTab";
+import UserChangePasswordTab from "../../components/profile/UserChangePasswordTab";
 import { useEffect, useState } from "react";
 import { fetchAllProfileMenus } from "../../services/ProfileMenuService";
 

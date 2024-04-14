@@ -9,12 +9,12 @@ import DeletedUsers from "./pages/users/DeletedUsers";
 import UsersStatistic from "./pages/users/UsersStatistic";
 import UsersHistory from "./pages/users/UsersHistory";
 import Home from "./pages/home/Home";
-import UserProfile from "./pages/users/UserProfile";
 import ActiveProducts from "./pages/products/ActiveProducts";
 import DeletedProducts from "./pages/products/DeletedProducts";
 import ProductsStatistic from "./pages/products/ProductsStatistic";
 import ProductsHistory from "./pages/products/ProductsHistory";
 import { ToastContainer } from "react-toastify";
+import UserProfile from "./pages/profiles/UserProfile";
 
 function App() {
     return (

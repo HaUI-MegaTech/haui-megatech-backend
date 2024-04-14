@@ -1,4 +1,4 @@
-import TableDeletedUsers from "./TableDeletedUsers";
+import TableDeletedUsers from "../../components/users/TableDeletedUsers";
 
 function DeletedUsers() {
     return (
