@@ -5,6 +5,7 @@ import { Button } from "react-bootstrap";
 import DeleteUserModal from "./DeleteUserModal";
 import UserInfoModal from "./UserInfoModal";
 import UpdateUserInfoModal from "./UpdateUserInfoModal";
+import ChangeUserPasswordModal from "./ChangeUserPasswordModal";
 
 function TableActiveUsers(props) {
     const {
@@ -24,6 +25,8 @@ function TableActiveUsers(props) {
     const [showUserInfoModal, setShowUserInfoModal] = useState(false);
     const [showUpdateUserInfoModal, setShowUpdateUserInfoModal] =
         useState(false);
+    const [showChangeUserPasswordModal, setShowChangeUserPasswordModal] =
+        useState(false);
 
     const handleCloseTemorarilyDeleteUserModal = () =>
         setShowTemporarilyDeleteUserModal(false);
@@ -37,6 +40,7 @@ function TableActiveUsers(props) {
         setTargetUser(item);
         setShowUserInfoModal(true);
     };
+
     const handleCloseUserInfoModal = () => setShowUserInfoModal(false);
 
     const handleShowUpdateUserInfoModal = item => {
@@ -46,6 +50,14 @@ function TableActiveUsers(props) {
 
     const handleCloseUpdateUserInfoModal = () =>
         setShowUpdateUserInfoModal(false);
+
+    const handleShowChangeUserPasswordModal = item => {
+        setTargetUser(item);
+        setShowChangeUserPasswordModal(true);
+    };
+
+    const handleCloseChangeUserPasswordModal = () =>
+        setShowChangeUserPasswordModal(false);
 
     useEffect(() => {
         getUsers(0);
@@ -86,7 +98,7 @@ function TableActiveUsers(props) {
 
                 <Button
                     variant="primary"
-                    onClick={() => {}}
+                    onClick={() => handleShowChangeUserPasswordModal(item)}
                     className="btn btn-success btn-sm mx-2"
                 >
                     <i class="bi bi-key"></i>
@@ -157,6 +169,12 @@ function TableActiveUsers(props) {
                 targetUser={targetUser}
                 currentPageIndex={pageIndex}
                 handleUpdateTable={handleUpdateTable}
+            />
+
+            <ChangeUserPasswordModal
+                show={showChangeUserPasswordModal}
+                handleClose={handleCloseChangeUserPasswordModal}
+                targetUser={targetUser}
             />
 
             <DeleteUserModal
