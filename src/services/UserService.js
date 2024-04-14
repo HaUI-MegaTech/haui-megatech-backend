@@ -32,4 +32,12 @@ const addNewUser = (
     });
 };
 
-export { fetchAllActiveUsers, fetchAllDeletedUsers, addNewUser };
+const temporarilyDeleteUser = user =>
+    axios.patch(BASE_URL + "/api/v1/users/temporarily-delete/" + user.id);
+
+export {
+    fetchAllActiveUsers,
+    fetchAllDeletedUsers,
+    temporarilyDeleteUser,
+    addNewUser,
+};

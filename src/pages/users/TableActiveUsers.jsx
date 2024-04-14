@@ -4,14 +4,20 @@ import ReactPaginate from "react-paginate";
 import { Button } from "react-bootstrap";
 import DeleteUserModal from "./DeleteUserModal";
 
-function TableActiveUsers() {
-    const [Users, setUsers] = useState([]);
-    const [pageIndex, setPageIndex] = useState(0);
-    const [pageSize, setPageSize] = useState(15);
-    const [totalItems, setTotalItems] = useState();
-    const [totalPages, setTotalPages] = useState();
-    const [showDeleteUserModal, setShowDeleteUserModal] = useState(false);
+function TableActiveUsers(props) {
+    const {
+        users,
+        pageIndex,
+        pageSize,
+        totalItems,
+        totalPages,
+        handleUpdateTable,
+        getUsers,
+    } = props;
+
     const [targetUser, setTargetUser] = useState({});
+
+    const [showDeleteUserModal, setShowDeleteUserModal] = useState(false);
 
     const handleShowDeleteUserModal = () => {
         setShowDeleteUserModal(true);
@@ -29,18 +35,6 @@ function TableActiveUsers() {
     useEffect(() => {
         getUsers(0);
     }, []);
-
-    const getUsers = pageIndex => {
-        fetchAllActiveUsers(pageIndex)
-            .then(response => {
-                setPageIndex(response.data.pageIndex);
-                setPageSize(response.data.pageSize);
-                setTotalItems(response.data.totalItems);
-                setTotalPages(response.data.totalPages);
-                setUsers(response.data.items);
-            })
-            .catch(error => console.log(error));
-    };
 
     const renderUsers = items => items.map(item => renderUser(item));
 
@@ -97,7 +91,7 @@ function TableActiveUsers() {
                         </th>
                     </tr>
                 </thead>
-                <tbody>{renderUsers(Users)}</tbody>
+                <tbody>{renderUsers(users)}</tbody>
             </table>
             <div>
                 <ReactPaginate
@@ -125,6 +119,8 @@ function TableActiveUsers() {
                 show={showDeleteUserModal}
                 handleClose={handleCloseDeleteUserModal}
                 targetUser={targetUser}
+                currentPageIndex={pageIndex}
+                handleUpdateTable={handleUpdateTable}
             />
         </>
     );
