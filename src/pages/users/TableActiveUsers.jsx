@@ -3,6 +3,7 @@ import { fetchAllActiveUsers } from "../../services/UserService";
 import ReactPaginate from "react-paginate";
 import { Button } from "react-bootstrap";
 import DeleteUserModal from "./DeleteUserModal";
+import UserInfoModal from "./UserInfoModal";
 
 function TableActiveUsers(props) {
     const {
@@ -18,6 +19,7 @@ function TableActiveUsers(props) {
     const [targetUser, setTargetUser] = useState({});
 
     const [showDeleteUserModal, setShowDeleteUserModal] = useState(false);
+    const [showUserInfoModal, setShowUserInfoModal] = useState(false);
 
     const handleShowDeleteUserModal = () => {
         setShowDeleteUserModal(true);
@@ -26,6 +28,12 @@ function TableActiveUsers(props) {
     const handleCloseDeleteUserModal = () => {
         setShowDeleteUserModal(false);
     };
+
+    const handleShowUserInfoModal = item => {
+        setTargetUser(item);
+        setShowUserInfoModal(true);
+    };
+    const handleCloseUserInfoModal = () => setShowUserInfoModal(false);
 
     const handleTemporarilyDeleteUser = item => {
         setTargetUser(item);
@@ -53,16 +61,25 @@ function TableActiveUsers(props) {
             <td className="align-middle">{item.email}</td>
             <td className="align-middle">{item.phoneNumber}</td>
             <td className="d-flex justify-content-center">
-                <a
-                    className="btn btn-secondary btn-sm mx-2"
-                    href="#"
-                    role="button"
+                <Button
+                    variant="primary"
+                    onClick={() => handleShowUserInfoModal(item)}
+                    className="btn btn-info btn-sm mx-2"
                 >
                     <i class="bi bi-eye"></i>
-                </a>
+                </Button>
+
                 <button type="button" className="btn btn-warning btn-sm mx-2">
                     <i class="bi bi-pencil-square"></i>
                 </button>
+
+                <Button
+                    variant="primary"
+                    onClick={() => {}}
+                    className="btn btn-success btn-sm mx-2"
+                >
+                    <i class="bi bi-key"></i>
+                </Button>
 
                 <Button
                     variant="primary"
@@ -77,30 +94,32 @@ function TableActiveUsers(props) {
 
     return (
         <>
-            <table className="table table-hover">
-                <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Tên đăng nhập</th>
-                        <th scope="col">Tên</th>
-                        <th scope="col">Họ đệm</th>
-                        <th scope="col">Hộp thư</th>
-                        <th scope="col">Số điện thoại</th>
-                        <th scope="col" className="text-center">
-                            Hành động
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>{renderUsers(users)}</tbody>
-            </table>
+            <div className="table-responsive">
+                <table className="table table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Tên đăng nhập</th>
+                            <th scope="col">Tên</th>
+                            <th scope="col">Họ đệm</th>
+                            <th scope="col">Hộp thư</th>
+                            <th scope="col">Số điện thoại</th>
+                            <th scope="col" className="text-center">
+                                Hành động
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>{renderUsers(users)}</tbody>
+                </table>
+            </div>
             <div>
                 <ReactPaginate
                     breakLabel="..."
-                    nextLabel="next >"
+                    nextLabel=">"
                     onPageChange={handlePageClick}
-                    pageRangeDisplayed={5}
+                    pageRangeDisplayed={3}
                     pageCount={totalPages}
-                    previousLabel="< previous"
+                    previousLabel="<"
                     pageClassName="page-item"
                     pageLinkClassName="page-link"
                     previousClassName="page-item"
@@ -115,6 +134,11 @@ function TableActiveUsers(props) {
                 />
             </div>
 
+            <UserInfoModal
+                show={showUserInfoModal}
+                handleClose={handleCloseUserInfoModal}
+                targetUser={targetUser}
+            />
             <DeleteUserModal
                 show={showDeleteUserModal}
                 handleClose={handleCloseDeleteUserModal}
