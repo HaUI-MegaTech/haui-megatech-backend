@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { fetchAllActiveUsers } from "../../services/UserService";
 import ReactPaginate from "react-paginate";
+import { Button } from "react-bootstrap";
+import DeleteUserModal from "./DeleteUserModal";
 
 function TableActiveUsers() {
     const [Users, setUsers] = useState([]);
@@ -8,6 +10,21 @@ function TableActiveUsers() {
     const [pageSize, setPageSize] = useState(15);
     const [totalItems, setTotalItems] = useState();
     const [totalPages, setTotalPages] = useState();
+    const [showDeleteUserModal, setShowDeleteUserModal] = useState(false);
+    const [targetUser, setTargetUser] = useState({});
+
+    const handleShowDeleteUserModal = () => {
+        setShowDeleteUserModal(true);
+    };
+
+    const handleCloseDeleteUserModal = () => {
+        setShowDeleteUserModal(false);
+    };
+
+    const handleTemporarilyDeleteUser = item => {
+        setTargetUser(item);
+        setShowDeleteUserModal(true);
+    };
 
     useEffect(() => {
         getUsers(0);
@@ -52,9 +69,14 @@ function TableActiveUsers() {
                 <button type="button" className="btn btn-warning btn-sm mx-2">
                     <i class="bi bi-pencil-square"></i>
                 </button>
-                <button type="button" className="btn btn-danger btn-sm mx-2">
+
+                <Button
+                    variant="primary"
+                    onClick={() => handleTemporarilyDeleteUser(item)}
+                    className="btn btn-danger btn-sm mx-2"
+                >
                     <i class="bi bi-trash"></i>
-                </button>
+                </Button>
             </td>
         </tr>
     );
@@ -98,6 +120,12 @@ function TableActiveUsers() {
                     renderOnZeroPageCount={null}
                 />
             </div>
+
+            <DeleteUserModal
+                show={showDeleteUserModal}
+                handleClose={handleCloseDeleteUserModal}
+                targetUser={targetUser}
+            />
         </>
     );
 }

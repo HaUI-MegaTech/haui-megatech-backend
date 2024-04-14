@@ -14,13 +14,15 @@ function TableProducts() {
     }, []);
 
     const getProducts = pageIndex => {
-        fetchAllProducts(pageIndex).then(response => {
-            setPageIndex(response.data.pageIndex);
-            setPageSize(response.data.pageSize);
-            setTotalItems(response.data.totalItems);
-            setTotalPages(response.data.totalPages);
-            setProducts(response.data.items);
-        });
+        fetchAllProducts(pageIndex)
+            .then(response => {
+                setPageIndex(response.data.pageIndex);
+                setPageSize(response.data.pageSize);
+                setTotalItems(response.data.totalItems);
+                setTotalPages(response.data.totalPages);
+                setProducts(response.data.items);
+            })
+            .catch(error => console.log(error));
     };
 
     const renderProducts = items => items.map(item => renderProduct(item));

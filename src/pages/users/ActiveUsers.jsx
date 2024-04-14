@@ -3,6 +3,8 @@ import TableActiveUsers from "./TableActiveUsers";
 import TableUsers from "./TableActiveUsers";
 
 function ActiveUsers() {
+    const handleShow = () => {};
+
     return (
         <main id="main" className="main">
             <div className="row d-flex justify-content-between">
