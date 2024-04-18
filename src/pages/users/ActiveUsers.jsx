@@ -36,7 +36,6 @@ function ActiveUsers() {
         <main id="main" className="main">
             <div className="row d-flex justify-content-between mb-3">
                 <PageTitle />
-
                 <div className="col-2 d-flex align-items-center justify-content-end">
                     <Button
                         variant="primary"

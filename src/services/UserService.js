@@ -66,10 +66,14 @@ const updateUserInfo = (user, firstName, lastName, email, phoneNumber) =>
         { headers },
     );
 
+const restoreUser = user =>
+    axios.patch(BASE_URL + `/api/v1/users/restore/${user.id}`, {}, { headers });
+
 export {
     fetchAllActiveUsers,
     fetchAllDeletedUsers,
     temporarilyDeleteUser,
     updateUserInfo,
     addNewUser,
+    restoreUser,
 };

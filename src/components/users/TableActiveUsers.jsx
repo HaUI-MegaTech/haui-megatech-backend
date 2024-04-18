@@ -80,33 +80,37 @@ function TableActiveUsers(props) {
             <td className="align-middle">{item.phoneNumber}</td>
             <td className="d-flex justify-content-center">
                 <Button
-                    variant="primary"
+                    variant="info"
+                    size="sm"
                     onClick={() => handleShowUserInfoModal(item)}
-                    className="btn btn-info btn-sm mx-2"
+                    className="mx-2"
                 >
                     <i class="bi bi-eye"></i>
                 </Button>
 
                 <Button
-                    variant="primary"
+                    variant="warning"
+                    size="sm"
                     onClick={() => handleShowUpdateUserInfoModal(item)}
-                    className="btn btn-warning btn-sm mx-2"
+                    className="mx-2"
                 >
                     <i class="bi bi-pencil-square"></i>
                 </Button>
 
                 <Button
-                    variant="primary"
+                    variant="success"
+                    size="sm"
                     onClick={() => handleShowChangeUserPasswordModal(item)}
-                    className="btn btn-success btn-sm mx-2"
+                    className="mx-2"
                 >
                     <i class="bi bi-key"></i>
                 </Button>
 
                 <Button
-                    variant="primary"
+                    variant="danger"
+                    size="sm"
                     onClick={() => handleTemporarilyDeleteUser(item)}
-                    className="btn btn-danger btn-sm mx-2"
+                    className="mx-2"
                 >
                     <i class="bi bi-trash"></i>
                 </Button>

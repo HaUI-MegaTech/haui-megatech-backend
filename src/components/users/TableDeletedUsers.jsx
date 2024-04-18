@@ -1,35 +1,45 @@
 import { useEffect, useState } from "react";
 import { fetchAllDeletedUsers } from "../../services/UserService";
 import ReactPaginate from "react-paginate";
+import UserInfoModal from "./UserInfoModal";
+import { Button } from "react-bootstrap";
+import RestoreUserModal from "./RestoreUserModal";
 
-function TableDeletedUsers() {
-    const [Users, setUsers] = useState([]);
-    const [pageIndex, setPageIndex] = useState(0);
-    const [pageSize, setPageSize] = useState(15);
-    const [totalItems, setTotalItems] = useState();
-    const [totalPages, setTotalPages] = useState();
-
-    useEffect(() => {
-        getUsers(0);
-    }, []);
-
-    const getUsers = pageIndex => {
-        fetchAllDeletedUsers(pageIndex)
-            .then(response => {
-                setPageIndex(response.data.pageIndex);
-                setPageSize(response.data.pageSize);
-                setTotalItems(response.data.totalItems);
-                setTotalPages(response.data.totalPages);
-                setUsers(response.data.items);
-            })
-            .catch(error => console.log(error));
-    };
+function TableDeletedUsers(props) {
+    const {
+        users,
+        pageIndex,
+        pageSize,
+        totalItems,
+        totalPages,
+        handleUpdateTable,
+        getUsers,
+    } = props;
 
     const renderUsers = items => items.map(item => renderUser(item));
 
     const handlePageClick = e => {
         getUsers(parseInt(e.selected));
     };
+
+    const [targetUser, setTargetUser] = useState({});
+    const [showUserInfoModal, setShowUserInfoModal] = useState(false);
+    const [showRestoreUserModal, setShowRestoreUserModal] = useState(false);
+
+    const handleShowUserInfoModal = item => {
+        setTargetUser(item);
+        setShowUserInfoModal(true);
+    };
+
+    const handleCloseUserInfoModal = () => setShowUserInfoModal(false);
+
+    const handleShowRestoreUserModal = item => {
+        setTargetUser(item);
+        setShowRestoreUserModal(true);
+    };
+
+    const handleCloseRestoreUserInfoModal = () =>
+        setShowRestoreUserModal(false);
 
     const renderUser = item => (
         <tr>
@@ -42,12 +52,22 @@ function TableDeletedUsers() {
             <td className="align-middle">{item.email}</td>
             <td className="align-middle">{item.phoneNumber}</td>
             <td className="d-flex justify-content-center">
-                <button className="btn btn-info btn-sm mx-2" type="button">
+                <Button
+                    className="mx-2"
+                    size="sm"
+                    variant="info"
+                    onClick={() => handleShowUserInfoModal(item)}
+                >
                     <i class="bi bi-eye"></i>
-                </button>
-                <button type="button" className="btn btn-success btn-sm mx-2">
+                </Button>
+                <Button
+                    variant="success"
+                    size="sm"
+                    className="mx-2"
+                    onClick={() => handleShowRestoreUserModal(item)}
+                >
                     <i class="bi bi-arrow-counterclockwise"></i>
-                </button>
+                </Button>
                 <button type="button" className="btn btn-danger btn-sm mx-2">
                     <i class="bi bi-trash"></i>
                 </button>
@@ -71,7 +91,7 @@ function TableDeletedUsers() {
                         </th>
                     </tr>
                 </thead>
-                <tbody>{renderUsers(Users)}</tbody>
+                <tbody>{renderUsers(users)}</tbody>
             </table>
             <div>
                 <ReactPaginate
@@ -94,6 +114,20 @@ function TableDeletedUsers() {
                     renderOnZeroPageCount={null}
                 />
             </div>
+
+            <UserInfoModal
+                show={showUserInfoModal}
+                handleClose={handleCloseUserInfoModal}
+                targetUser={targetUser}
+            />
+
+            <RestoreUserModal
+                show={showRestoreUserModal}
+                handleClose={handleCloseRestoreUserInfoModal}
+                targetUser={targetUser}
+                currentPageIndex={pageIndex}
+                handleUpdateTable={handleUpdateTable}
+            />
         </>
     );
 }
