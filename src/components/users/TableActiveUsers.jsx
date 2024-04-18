@@ -69,7 +69,7 @@ function TableActiveUsers(props) {
     };
 
     const renderUser = item => (
-        <tr>
+        <tr key={item.id}>
             <th scope="row" className="align-middle">
                 {item.id}
             </th>
@@ -85,7 +85,7 @@ function TableActiveUsers(props) {
                     onClick={() => handleShowUserInfoModal(item)}
                     className="mx-2"
                 >
-                    <i class="bi bi-eye"></i>
+                    <i className="bi bi-eye"></i>
                 </Button>
 
                 <Button
@@ -94,7 +94,7 @@ function TableActiveUsers(props) {
                     onClick={() => handleShowUpdateUserInfoModal(item)}
                     className="mx-2"
                 >
-                    <i class="bi bi-pencil-square"></i>
+                    <i className="bi bi-pencil-square"></i>
                 </Button>
 
                 <Button
@@ -103,7 +103,7 @@ function TableActiveUsers(props) {
                     onClick={() => handleShowChangeUserPasswordModal(item)}
                     className="mx-2"
                 >
-                    <i class="bi bi-key"></i>
+                    <i className="bi bi-key"></i>
                 </Button>
 
                 <Button
@@ -112,7 +112,7 @@ function TableActiveUsers(props) {
                     onClick={() => handleTemporarilyDeleteUser(item)}
                     className="mx-2"
                 >
-                    <i class="bi bi-trash"></i>
+                    <i className="bi bi-trash"></i>
                 </Button>
             </td>
         </tr>

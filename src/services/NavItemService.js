@@ -22,18 +22,22 @@ const navItems = [
         url: BASE_USER_URL,
         child: [
             {
+                id: 21,
                 title: "Danh sách",
                 url: BASE_USER_URL + "/active",
             },
             {
+                id: 22,
                 title: "Thùng rác",
                 url: BASE_USER_URL + "/deleted",
             },
             {
+                id: 23,
                 title: "Thống kê",
                 url: BASE_USER_URL + "/statistic",
             },
             {
+                id: 24,
                 title: "Lịch sử",
                 url: BASE_USER_URL + "/history",
             },
@@ -46,18 +50,22 @@ const navItems = [
         url: BASE_PRODUCT_URL,
         child: [
             {
+                id: 31,
                 title: "Danh sách",
                 url: BASE_PRODUCT_URL + "/active",
             },
             {
+                id: 32,
                 title: "Thùng rác",
                 url: BASE_PRODUCT_URL + "/deleted",
             },
             {
+                idL: 33,
                 title: "Thống kê",
                 url: BASE_PRODUCT_URL + "/statistic",
             },
             {
+                id: 34,
                 title: "Lịch sử",
                 url: BASE_PRODUCT_URL + "/history",
             },
@@ -70,18 +78,22 @@ const navItems = [
         url: BASE_BRAND_URL,
         child: [
             {
+                id: 41,
                 title: "Danh sách",
                 url: BASE_BRAND_URL + "/active",
             },
             {
+                id: 42,
                 title: "Thùng rác",
                 url: BASE_BRAND_URL + "/deleted",
             },
             {
+                id: 43,
                 title: "Thống kê",
                 url: BASE_BRAND_URL + "/statistic",
             },
             {
+                id: 44,
                 title: "Lịch sử",
                 url: BASE_BRAND_URL + "/history",
             },
@@ -94,18 +106,22 @@ const navItems = [
         url: BASE_PROMOTION,
         child: [
             {
+                id: 51,
                 title: "Danh sách",
                 url: BASE_PROMOTION + "/active",
             },
             {
+                id: 52,
                 title: "Thùng rác",
                 url: BASE_PROMOTION + "/deleted",
             },
             {
+                id: 53,
                 title: "Thống kê",
                 url: BASE_PROMOTION + "/statistic",
             },
             {
+                id: 54,
                 title: "Lịch sử",
                 url: BASE_PROMOTION + "/history",
             },
@@ -118,18 +134,22 @@ const navItems = [
         url: BASE_FEEDBACK,
         child: [
             {
+                id: 61,
                 title: "Danh sách",
                 url: BASE_FEEDBACK + "/active",
             },
             {
+                id: 62,
                 title: "Thùng rác",
                 url: BASE_FEEDBACK + "/deleted",
             },
             {
+                id: 63,
                 title: "Thống kê",
                 url: BASE_FEEDBACK + "/statistic",
             },
             {
+                id: 64,
                 title: "Lịch sử",
                 url: BASE_FEEDBACK + "/history",
             },
@@ -142,18 +162,22 @@ const navItems = [
         url: BASE_INVOICE,
         child: [
             {
+                id: 71,
                 title: "Danh sách",
                 url: BASE_INVOICE + "/active",
             },
             {
+                id: 72,
                 title: "Thùng rác",
                 url: BASE_INVOICE + "/deleted",
             },
             {
+                id: 73,
                 title: "Thống kê",
                 url: BASE_INVOICE + "/statistic",
             },
             {
+                id: 74,
                 title: "Lịch sử",
                 url: BASE_INVOICE + "/history",
             },

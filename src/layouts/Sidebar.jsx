@@ -25,8 +25,8 @@ function Sidebar() {
         !item.child && (document.title = item.title + " - HaUI MegaTech");
     };
 
-    const renderSubNavItem = item => (
-        <li>
+    const renderSubNavItem = (item, index) => (
+        <li key={index}>
             <NavLink to={item.url} onClick={() => changePageTitle(item)}>
                 <i className="bi bi-circle"></i>
                 <span>{item.title}</span>
@@ -42,12 +42,15 @@ function Sidebar() {
             }`}
             data-bs-parent="#sidebar-nav"
         >
-            {navItem.child && navItem.child.map(item => renderSubNavItem(item))}
+            {navItem.child &&
+                navItem.child.map((item, index) =>
+                    renderSubNavItem(item, index),
+                )}
         </ul>
     );
 
-    const renderNavItem = navItem => (
-        <li className="nav-item">
+    const renderNavItem = (navItem, index) => (
+        <li className="nav-item" key={index}>
             <NavLink
                 className={`nav-link ${
                     location.pathname.indexOf(navItem.url) === -1 && "collapsed"
@@ -70,7 +73,8 @@ function Sidebar() {
     return (
         <aside id="sidebar" className="sidebar">
             <ul className="sidebar-nav" id="sidebar-nav">
-                {navItems && navItems.map(item => renderNavItem(item))}
+                {navItems &&
+                    navItems.map((item, index) => renderNavItem(item, index))}
             </ul>
         </aside>
     );

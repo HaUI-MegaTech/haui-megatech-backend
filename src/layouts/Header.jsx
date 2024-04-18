@@ -26,8 +26,8 @@ function Header() {
         setShowSearchBar(!showSearchBar);
     };
 
-    const renderProfileMenuItem = item => (
-        <>
+    const renderProfileMenuItem = (item, index) => (
+        <div key={index}>
             <li>
                 <hr className="dropdown-divider" />
             </li>
@@ -41,7 +41,7 @@ function Header() {
                     <span>{item.title}</span>
                 </NavLink>
             </li>
-        </>
+        </div>
     );
 
     return (
@@ -343,8 +343,8 @@ function Header() {
                                 <span>Sinh viên</span>
                             </li>
                             {menuItems &&
-                                menuItems.map(item =>
-                                    renderProfileMenuItem(item),
+                                menuItems.map((item, index) =>
+                                    renderProfileMenuItem(item, index),
                                 )}
                         </ul>
                     </li>

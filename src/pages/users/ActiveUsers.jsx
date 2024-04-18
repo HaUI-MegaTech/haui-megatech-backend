@@ -39,7 +39,7 @@ function ActiveUsers() {
                 <div className="col-2 d-flex align-items-center justify-content-end">
                     <Button
                         variant="primary"
-                        class="btn btn-primary btn-sm"
+                        size="md"
                         onClick={handleShowAddUserModal}
                     >
                         Thêm mới
