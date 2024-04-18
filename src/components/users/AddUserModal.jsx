@@ -50,7 +50,6 @@ function AddUserModal(props) {
                     type="text"
                     class="form-control mb-3"
                     id="username"
-                    placeholder="viethoang2024"
                     onChange={e => setUsername(e.target.value)}
                     value={username}
                 />
@@ -62,7 +61,6 @@ function AddUserModal(props) {
                     type="text"
                     class="form-control mb-3"
                     id="firstName"
-                    placeholder="Hoang"
                     onChange={e => setFirstName(e.target.value)}
                     value={firstName}
                 />
@@ -74,7 +72,6 @@ function AddUserModal(props) {
                     type="text"
                     class="form-control mb-3"
                     id="lastName"
-                    placeholder="Nguyen Viet"
                     onChange={e => setLastName(e.target.value)}
                     value={lastName}
                 />

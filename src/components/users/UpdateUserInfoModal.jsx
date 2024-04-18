@@ -20,7 +20,6 @@ function UpdateUserInfoModal(props) {
     const handleUpdateUserInfo = () => {
         updateUserInfo(targetUser, firstName, lastName, email, phoneNumber)
             .then(response => {
-                console.log(response);
                 if (response && response.status === 200) {
                     toast.success(response.data.message);
                     handleUpdateTable();

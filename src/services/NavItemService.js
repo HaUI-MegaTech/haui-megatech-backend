@@ -5,6 +5,7 @@ const BASE_BRAND_URL = "/brands";
 const BASE_PROMOTION = "/promotions";
 const BASE_FEEDBACK = "/feedbacks";
 const BASE_INVOICE = "/invoices";
+const BASE_PROFILE = "/profile";
 const BASE_SYSTEM_URL = "/systems";
 
 const navItems = [
@@ -160,6 +161,12 @@ const navItems = [
     },
     {
         id: 8,
+        icon: "bi bi-person-badge",
+        title: "Thông tin cá nhân",
+        url: BASE_PROFILE,
+    },
+    {
+        id: 9,
         icon: "bi bi-building-gear",
         title: "Cài đặt hệ thống",
         url: BASE_SYSTEM_URL,

@@ -50,7 +50,7 @@ function Header() {
             className="header fixed-top d-flex align-items-center"
         >
             <div className="d-flex align-items-center justify-content-between">
-                <a href="index.html" className="logo d-flex align-items-center">
+                <NavLink to="/home" className="logo d-flex align-items-center">
                     <img
                         src="http://res.cloudinary.com/dlupgsjyq/image/upload/v1712624218/cd313c86-41c2-4796-ad53-e8e2c0b97cea.png"
                         alt=""
@@ -59,7 +59,7 @@ function Header() {
                     <span className="d-none d-lg-block text-primary">
                         Admin Center
                     </span>
-                </a>
+                </NavLink>
                 <i
                     className="bi bi-list toggle-sidebar-btn"
                     onClick={handleToggleShowSidebar}

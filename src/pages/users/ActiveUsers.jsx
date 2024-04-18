@@ -3,6 +3,7 @@ import { fetchAllActiveUsers } from "../../services/UserService";
 import { Button } from "react-bootstrap";
 import TableActiveUsers from "../../components/users/TableActiveUsers";
 import AddUserModal from "../../components/users/AddUserModal";
+import PageTitle from "../../components/shared/PageTitle";
 
 function ActiveUsers() {
     const [users, setUsers] = useState([]);
@@ -34,20 +35,8 @@ function ActiveUsers() {
     return (
         <main id="main" className="main">
             <div className="row d-flex justify-content-between mb-3">
-                <div className="pagetitle col-3 mb-0">
-                    <h1>ActiveUsers Page</h1>
-                    <nav>
-                        <ol className="breadcrumb mb-0">
-                            <li className="breadcrumb-item">
-                                <a href="index.html">Home</a>
-                            </li>
-                            <li className="breadcrumb-item">Pages</li>
-                            <li className="breadcrumb-item active">
-                                ActiveUsers
-                            </li>
-                        </ol>
-                    </nav>
-                </div>
+                <PageTitle />
+
                 <div className="col-2 d-flex align-items-center justify-content-end">
                     <Button
                         variant="primary"

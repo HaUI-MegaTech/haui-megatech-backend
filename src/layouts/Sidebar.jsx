@@ -17,7 +17,7 @@ function Sidebar() {
                               childItem.title + " - HaUI MegaTech");
                   });
               });
-    }, []);
+    }, [location.pathname]);
 
     useEffect(() => {}, [navItems, location]);
 

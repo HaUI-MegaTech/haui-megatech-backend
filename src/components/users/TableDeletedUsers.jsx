@@ -42,15 +42,11 @@ function TableDeletedUsers() {
             <td className="align-middle">{item.email}</td>
             <td className="align-middle">{item.phoneNumber}</td>
             <td className="d-flex justify-content-center">
-                <a
-                    className="btn btn-secondary btn-sm mx-2"
-                    href="#"
-                    role="button"
-                >
+                <button className="btn btn-info btn-sm mx-2" type="button">
                     <i class="bi bi-eye"></i>
-                </a>
-                <button type="button" className="btn btn-warning btn-sm mx-2">
-                    <i class="bi bi-pencil-square"></i>
+                </button>
+                <button type="button" className="btn btn-success btn-sm mx-2">
+                    <i class="bi bi-arrow-counterclockwise"></i>
                 </button>
                 <button type="button" className="btn btn-danger btn-sm mx-2">
                     <i class="bi bi-trash"></i>
