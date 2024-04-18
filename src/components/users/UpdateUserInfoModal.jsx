@@ -26,7 +26,9 @@ function UpdateUserInfoModal(props) {
                     handleClose();
                 }
             })
-            .catch(error => console.log(error));
+            .catch(error => {
+                toast.error(error.response.data.message);
+            });
     };
 
     useEffect(() => {

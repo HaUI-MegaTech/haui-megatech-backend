@@ -19,12 +19,11 @@ function PermanentlyDeleteUserModal(props) {
                     toast.success(response.data.message);
                     handleClose();
                     handleUpdateTable(currentPageIndex);
-                } else {
-                    toast.error(response.data.message);
-                    handleClose();
                 }
             })
-            .catch(error => console.log(error));
+            .catch(error => {
+                toast.error(error.response.data.message);
+            });
     };
 
     return (

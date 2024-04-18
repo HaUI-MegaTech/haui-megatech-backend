@@ -20,21 +20,19 @@ function AddUserModal(props) {
     };
 
     const handleAddUser = () => {
-        addNewUser(
-            username,
-            firstName,
-            lastName,
-            password,
-            confirmPassword,
-        ).then(response => {
-            console.log(response);
-            if (response && response.status === 201) {
-                toast.success(response.data.message);
-                handleUpdateTable();
-                handleClose();
-                clearInput();
-            }
-        });
+        addNewUser(username, firstName, lastName, password, confirmPassword)
+            .then(response => {
+                console.log(response);
+                if (response && response.status === 201) {
+                    toast.success(response.data.message);
+                    handleUpdateTable();
+                    handleClose();
+                    clearInput();
+                }
+            })
+            .catch(error => {
+                toast.error(error.response.data.message);
+            });
     };
 
     return (

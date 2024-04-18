@@ -14,11 +14,11 @@ function RestoreUserModal(props) {
                     toast.success(response.data.message);
                     handleUpdateTable(pageIndex);
                     handleClose();
-                } else {
-                    toast.error(response.data.message);
                 }
             })
-            .catch(error => console.log(error));
+            .catch(error => {
+                toast.error(error.response.data.message);
+            });
     };
 
     return (

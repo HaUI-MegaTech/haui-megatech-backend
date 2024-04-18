@@ -3,7 +3,7 @@ import axios from "axios";
 const BASE_URL = "http://localhost:8080";
 
 const accessToken =
-    "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ2aWV0aG9hbmd2aXBwcm9tYXgiLCJpYXQiOjE3MTM0MjE3NjUsImV4cCI6MTcxMzUwODE2NX0.FG0emlA7lsGELD-eH6srfDXZVJz7mnELmZX1GAlIdBE";
+    "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ2aWV0aG9hbmd2aXBwcm9tYXgiLCJpYXQiOjE3MTM0NDU1MzEsImV4cCI6MTcxMzUzMTkzMX0.qmrjhWDsN7iEg9dQPEMR77NjlCsBtYVfKBb04K8vmzU";
 
 const lang = "en";
 
@@ -74,6 +74,18 @@ const permanentlyDeleteUser = user =>
         headers,
     });
 
+const changeUserPassword = (
+    user,
+    oldPassword,
+    newPassword,
+    confirmNewPassword,
+) =>
+    axios.patch(
+        BASE_URL + `/api/v1/users/change-password/${user.id}`,
+        { oldPassword, newPassword, confirmNewPassword },
+        { headers },
+    );
+
 export {
     fetchAllActiveUsers,
     fetchAllDeletedUsers,
@@ -82,4 +94,5 @@ export {
     addNewUser,
     restoreUser,
     permanentlyDeleteUser,
+    changeUserPassword,
 };
