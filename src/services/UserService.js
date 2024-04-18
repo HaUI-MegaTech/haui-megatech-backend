@@ -69,6 +69,11 @@ const updateUserInfo = (user, firstName, lastName, email, phoneNumber) =>
 const restoreUser = user =>
     axios.patch(BASE_URL + `/api/v1/users/restore/${user.id}`, {}, { headers });
 
+const permanentlyDeleteUser = user =>
+    axios.delete(BASE_URL + `/api/v1/users/permanently-delete/${user.id}`, {
+        headers,
+    });
+
 export {
     fetchAllActiveUsers,
     fetchAllDeletedUsers,
@@ -76,4 +81,5 @@ export {
     updateUserInfo,
     addNewUser,
     restoreUser,
+    permanentlyDeleteUser,
 };

@@ -4,6 +4,7 @@ import ReactPaginate from "react-paginate";
 import UserInfoModal from "./UserInfoModal";
 import { Button } from "react-bootstrap";
 import RestoreUserModal from "./RestoreUserModal";
+import PermanentlyDeleteUserModal from "./PermanentlyDeleteUserModal";
 
 function TableDeletedUsers(props) {
     const {
@@ -25,6 +26,8 @@ function TableDeletedUsers(props) {
     const [targetUser, setTargetUser] = useState({});
     const [showUserInfoModal, setShowUserInfoModal] = useState(false);
     const [showRestoreUserModal, setShowRestoreUserModal] = useState(false);
+    const [showPermanentlyDeleteUserModal, setShowPermanentlyDeleteUserModal] =
+        useState(false);
 
     const handleShowUserInfoModal = item => {
         setTargetUser(item);
@@ -40,6 +43,14 @@ function TableDeletedUsers(props) {
 
     const handleCloseRestoreUserInfoModal = () =>
         setShowRestoreUserModal(false);
+
+    const handleShowPermanentlyDeleteUserModal = item => {
+        setTargetUser(item);
+        setShowPermanentlyDeleteUserModal(true);
+    };
+
+    const handleClosePermanentlyUserModal = () =>
+        setShowPermanentlyDeleteUserModal(false);
 
     const renderUser = item => (
         <tr>
@@ -68,9 +79,14 @@ function TableDeletedUsers(props) {
                 >
                     <i class="bi bi-arrow-counterclockwise"></i>
                 </Button>
-                <button type="button" className="btn btn-danger btn-sm mx-2">
+                <Button
+                    variant="danger"
+                    className="mx-2"
+                    size="sm"
+                    onClick={() => handleShowPermanentlyDeleteUserModal(item)}
+                >
                     <i class="bi bi-trash"></i>
-                </button>
+                </Button>
             </td>
         </tr>
     );
@@ -124,6 +140,14 @@ function TableDeletedUsers(props) {
             <RestoreUserModal
                 show={showRestoreUserModal}
                 handleClose={handleCloseRestoreUserInfoModal}
+                targetUser={targetUser}
+                currentPageIndex={pageIndex}
+                handleUpdateTable={handleUpdateTable}
+            />
+
+            <PermanentlyDeleteUserModal
+                show={showPermanentlyDeleteUserModal}
+                handleClose={handleClosePermanentlyUserModal}
                 targetUser={targetUser}
                 currentPageIndex={pageIndex}
                 handleUpdateTable={handleUpdateTable}
