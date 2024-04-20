@@ -1,3 +1,4 @@
+import { Navigate } from "react-router-dom";
 import Blank from "../pages/Blank";
 import Home from "../pages/home/Home";
 import ActiveProducts from "../pages/products/ActiveProducts";
@@ -9,8 +10,12 @@ import ActiveUsers from "../pages/users/ActiveUsers";
 import DeletedUsers from "../pages/users/DeletedUsers";
 import UsersHistory from "../pages/users/UsersHistory";
 import UsersStatistic from "../pages/users/UsersStatistic";
+import Login from "../pages/auth/Login";
 
-const publicRoutes = [];
+const publicRoutes = [
+    { path: "/login", page: Login },
+    { path: "/forgot-password", page: Login },
+];
 
 const privateRoutes = [
     // home

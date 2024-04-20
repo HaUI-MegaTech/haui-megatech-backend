@@ -1,19 +1,13 @@
 import "./App.css";
-import Header from "./layouts/Header";
-import Sidebar from "./layouts/Sidebar";
-import Footer from "./layouts/Footer";
-import { Navigate, Route, Routes } from "react-router-dom";
+import { Route } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import { privateRoutes } from "./routes";
+import PrivateLayout from "./layouts/PrivateLayout";
 
 function App() {
     return (
         <>
-            <Header />
-            <Sidebar />
-            <Routes>
-                <Route path="/" element={<Navigate to="/home" />}></Route>
-                <Route path="*" element={<Navigate to="/home" />} />
+            <PrivateLayout>
                 {privateRoutes.map((route, index) => {
                     const Page = route.page;
                     return (
@@ -24,7 +18,8 @@ function App() {
                         />
                     );
                 })}
-            </Routes>
+            </PrivateLayout>
+
             <ToastContainer
                 position="bottom-right"
                 autoClose={2000}
@@ -37,7 +32,6 @@ function App() {
                 pauseOnHover
                 theme="colored"
             />
-            <Footer />
         </>
     );
 }

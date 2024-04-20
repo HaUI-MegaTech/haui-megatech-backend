@@ -3,7 +3,7 @@ import axios from "axios";
 const BASE_URL = "http://localhost:8080";
 
 const accessToken =
-    "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ2aWV0aG9hbmd2aXBwcm9tYXgiLCJpYXQiOjE3MTM0NDU1MzEsImV4cCI6MTcxMzUzMTkzMX0.qmrjhWDsN7iEg9dQPEMR77NjlCsBtYVfKBb04K8vmzU";
+    "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ2aWV0aG9hbmd2aXBwcm9tYXgiLCJpYXQiOjE3MTM1ODgyNTcsImV4cCI6MTcxMzY3NDY1N30.rd0f0YL5F4LDSLEB-pz09Yp5y1ISDfZZAXvtN-gawbQ";
 
 const lang = "en";
 
@@ -81,7 +81,7 @@ const changeUserPassword = (
     confirmNewPassword,
 ) =>
     axios.patch(
-        BASE_URL + `/api/v1/users/change-password/${user.id}`,
+        BASE_URL + `/api/v1/users/update-password/${user.id}`,
         { oldPassword, newPassword, confirmNewPassword },
         { headers },
     );
