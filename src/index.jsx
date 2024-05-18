@@ -10,17 +10,17 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 import "../src/assets/css/style.css";
 import { BrowserRouter } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
-import { AuthContext } from "./contexts/AuthContext";
-
+import { AuthProvider } from "./contexts/AuthContext";
+console.log("index.jsx");
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-    <AuthContext.Provider>
+    <AuthProvider>
         <BrowserRouter>
             <React.StrictMode>
                 <App />
             </React.StrictMode>
         </BrowserRouter>
-    </AuthContext.Provider>,
+    </AuthProvider>,
 );
 
 // If you want to start measuring performance in your app, pass a function

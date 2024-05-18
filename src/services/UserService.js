@@ -2,8 +2,7 @@ import axios from "axios";
 
 const BASE_URL = "http://localhost:8080";
 
-const accessToken =
-    "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ2aWV0aG9hbmd2aXBwcm9tYXgiLCJpYXQiOjE3MTM1ODgyNTcsImV4cCI6MTcxMzY3NDY1N30.rd0f0YL5F4LDSLEB-pz09Yp5y1ISDfZZAXvtN-gawbQ";
+const accessToken = localStorage.getItem("token");
 
 const lang = "en";
 
@@ -14,16 +13,15 @@ const headers = {
 
 const fetchAllActiveUsers = pageIndex => {
     return axios.get(
-        `${BASE_URL}/api/v1/users/active?pageIndex=${pageIndex}&pageSize=10`,
+        `${BASE_URL}/api/v1/users/active?index=${pageIndex}&limit=10`,
         { headers },
     );
 };
 
 const fetchAllDeletedUsers = pageIndex =>
-    axios.get(
-        `${BASE_URL}/api/v1/users/deleted?pageIndex=${pageIndex}&pageSize=10`,
-        { headers },
-    );
+    axios.get(`${BASE_URL}/api/v1/users/deleted?index=${pageIndex}&limit=10`, {
+        headers,
+    });
 
 const addNewUser = (
     username,

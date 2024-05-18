@@ -8,11 +8,7 @@ function PrivateLayout({ children }) {
         <>
             <Header />
             <Sidebar />
-            <Routes>
-                {children}
-                <Route path="/" element={<Navigate to="/home" />} />
-                <Route path="*" element={<Navigate to="/home" />} />
-            </Routes>
+            <Routes>{children}</Routes>
             <Footer />
         </>
     );

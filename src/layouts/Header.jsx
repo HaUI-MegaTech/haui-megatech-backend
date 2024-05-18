@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { fetchAllProfileMenus } from "../services/ProfileMenuService";
 import { NavLink } from "react-router-dom";
+import { useAuth } from "../store/hooks";
+import { loggedOut } from "../store/actions";
 
 function Header() {
     const [showSidebar, setShowSidebar] = useState(true);
     const [showSearchBar, setShowSearchBar] = useState(false);
     const [menuItems, setmenuItems] = useState(fetchAllProfileMenus());
+    const [state, dispatch] = useAuth();
 
     useEffect(() => {
         showSidebar
@@ -36,6 +39,7 @@ function Header() {
                 <NavLink
                     className="dropdown-item d-flex align-items-center"
                     to={item.url}
+                    onClick={item.url === "/logout" ?? dispatch(loggedOut)}
                 >
                     <i className={item.icon}></i>
                     <span>{item.title}</span>
