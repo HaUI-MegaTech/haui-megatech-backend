@@ -11,7 +11,14 @@ const headers = {
     "Accept-Language": lang,
 };
 
-const authenticate = payload =>
-    axios.post(BASE_URL + "/api/v1/auth/authenticate", payload, { headers });
+async function authenticate(payload) {
+    setInterval(() => {
+        console.log("test");
+    }, 1000);
+
+    return axios.post(BASE_URL + "/api/v1/auth/authenticate", payload, {
+        headers,
+    });
+}
 
 export { authenticate };

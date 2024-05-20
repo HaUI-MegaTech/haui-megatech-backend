@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { fetchAllProfileMenus } from "../services/ProfileMenuService";
 import { NavLink } from "react-router-dom";
 import { useAuth } from "../store/hooks";
-import { loggedOut } from "../store/actions";
+import { logOut } from "../store/actions";
 
 function Header() {
     const [showSidebar, setShowSidebar] = useState(true);
@@ -29,6 +29,12 @@ function Header() {
         setShowSearchBar(!showSearchBar);
     };
 
+    const handleLogOut = () => {
+        console.log("called handle log out");
+        localStorage.setItem("token", "");
+        dispatch(logOut());
+    };
+
     const renderProfileMenuItem = (item, index) => (
         <div key={index}>
             <li>
@@ -39,7 +45,7 @@ function Header() {
                 <NavLink
                     className="dropdown-item d-flex align-items-center"
                     to={item.url}
-                    onClick={item.url === "/logout" ?? dispatch(loggedOut)}
+                    onClick={item.url === "/logout" ?? handleLogOut}
                 >
                     <i className={item.icon}></i>
                     <span>{item.title}</span>

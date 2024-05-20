@@ -3,10 +3,14 @@ import { ToastContainer } from "react-toastify";
 import PrivateContent from "./content/PrivateContent";
 import PublicContent from "./content/PublicContent";
 import { useAuth } from "./store/hooks";
+import { logIn } from "./store/actions";
+import { useEffect } from "react";
 
 function App() {
-    const [state] = useAuth();
-
+    const [state, dispatch] = useAuth();
+    // useEffect(() => {
+    //     dispatch(logIn());
+    // }, []);
     return (
         <>
             {state ? <PrivateContent /> : <PublicContent />}

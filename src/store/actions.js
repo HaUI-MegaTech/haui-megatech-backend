@@ -1,9 +1,9 @@
-import { LOGGED_IN, LOGGED_OUT } from "./constants";
+import { LOG_IN, LOG_OUT } from "./constants";
 
-export const loggedIn = () => ({
-    type: LOGGED_IN,
+export const logIn = () => ({
+    type: LOG_IN,
 });
 
-export const loggedOut = () => ({
-    type: LOGGED_OUT,
+export const logOut = () => ({
+    type: LOG_OUT,
 });

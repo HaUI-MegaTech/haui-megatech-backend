@@ -1,31 +1,35 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useAuth } from "../../store/hooks";
 import { authenticate } from "../../services/AuthService";
 import { toast } from "react-toastify";
-import { loggedIn, setAuthState } from "../../store/actions";
+import { logIn } from "../../store/actions";
 
 function Login() {
     const [state, dispatch] = useAuth();
     const [username, setUsername] = useState();
     const [password, setPassword] = useState();
-
-    const handleLogin = () => {
-        authenticate({ username, password })
+    const [loading, setLoading] = useState(false);
+    const handleLogin = async () => {
+        setLoading(true);
+        console.log(loading);
+        await authenticate({ username, password })
             .then(response => {
                 if (response && response.status === 200) {
                     localStorage.setItem("token", response.data.token);
-                    localStorage.setItem(
-                        "loggedInUser",
-                        response.data.loggedInUser,
-                    );
                     toast.success(response.data.message);
-                    dispatch(loggedIn());
+                    dispatch(logIn());
                 }
             })
             .catch(error => {
                 toast.error(error.response.data.message);
             });
+        setLoading(false);
+        console.log(loading);
     };
+
+    // useEffect(() => {
+    //     console.log(loading);
+    // }, [loading]);
 
     return (
         <main>
@@ -133,13 +137,25 @@ function Login() {
                                                     </label>
                                                 </div>
                                             </div>
+
                                             <div className="col-12">
                                                 <button
                                                     className="btn btn-primary w-100"
+                                                    disabled={loading}
                                                     type="button"
                                                     onClick={handleLogin}
                                                 >
-                                                    Login
+                                                    {loading && (
+                                                        <div
+                                                            class="spinner-border spinner-border-sm"
+                                                            role="status"
+                                                        >
+                                                            <span class="visually-hidden">
+                                                                Loading...
+                                                            </span>
+                                                        </div>
+                                                    )}
+                                                    &nbsp;Login
                                                 </button>
                                             </div>
                                             <div className="col-12">
@@ -152,13 +168,6 @@ function Login() {
                                             </div>
                                         </form>
                                     </div>
-                                </div>
-
-                                <div className="credits">
-                                    Designed by&nbsp;
-                                    <a href="https://bootstrapmade.com/">
-                                        BootstrapMade
-                                    </a>
                                 </div>
                             </div>
                         </div>

@@ -1,14 +1,14 @@
-import { LOGGED_IN, LOGGED_OUT } from "./constants";
+import { LOG_IN, LOG_OUT } from "./constants";
 
 const initState = false;
 
 function reducer(state, action) {
     switch (action.type) {
-        case LOGGED_IN:
+        case LOG_IN:
             return {
                 initState: true,
             };
-        case LOGGED_OUT:
+        case LOG_OUT:
             return {
                 initState: false,
             };
