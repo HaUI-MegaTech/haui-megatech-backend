@@ -9,12 +9,13 @@ function Header() {
     const [showSearchBar, setShowSearchBar] = useState(false);
     const [menuItems, setmenuItems] = useState(fetchAllProfileMenus());
     const [state, dispatch] = useAuth();
-
+    const [lang, setLang] = useState(localStorage.getItem("lang") ?? "en");
+    console.log(lang);
     useEffect(() => {
         showSidebar
             ? document.body.classList.remove("toggle-sidebar")
             : document.body.classList.add("toggle-sidebar");
-    }, [showSidebar]);
+    }, [showSidebar, lang]);
 
     const getProfileMenuItems = () => {
         const data = fetchAllProfileMenus();
@@ -53,6 +54,16 @@ function Header() {
             </li>
         </div>
     );
+
+    const handleSetPreferedViLang = () => {
+        setLang("vi");
+        localStorage.setItem("lang", "vi");
+    };
+
+    const handleSetPreferedEnLang = () => {
+        setLang("en");
+        localStorage.setItem("lang", "en");
+    };
 
     return (
         <header
@@ -297,8 +308,14 @@ function Header() {
                             <i className="bi bi-translate"></i>
                         </a>
 
-                        <ul className="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages py-0">
-                            <li className="message-item">
+                        <ul
+                            className="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages py-0"
+                            style={{ minWidth: 180 }}
+                        >
+                            <li
+                                className="message-item"
+                                onClick={handleSetPreferedEnLang}
+                            >
                                 <a href="#">
                                     <img
                                         src="https://images.freeimages.com/images/large-previews/fb0/uk-flag-1444045.jpg"
@@ -306,7 +323,11 @@ function Header() {
                                         className="rounded-circle"
                                         style={{ aspectRatio: 1 / 1 }}
                                     />
-                                    <div>
+                                    <div
+                                        className={`d-flex align-items-center ${
+                                            lang === "vi" && "text-black"
+                                        }`}
+                                    >
                                         <h6>English</h6>
                                     </div>
                                 </a>
@@ -315,7 +336,10 @@ function Header() {
                                 <hr className="dropdown-divider" />
                             </li>
 
-                            <li className="message-item">
+                            <li
+                                className="message-item"
+                                onClick={handleSetPreferedViLang}
+                            >
                                 <a href="#">
                                     <img
                                         src="https://th.bing.com/th/id/OIP.rfrIkx7yaRBTzCxaIKq1uAHaE9?rs=1&pid=ImgDetMain"
@@ -323,7 +347,11 @@ function Header() {
                                         className="rounded-circle"
                                         style={{ aspectRatio: 1 / 1 }}
                                     />
-                                    <div>
+                                    <div
+                                        className={`d-flex align-items-center ${
+                                            lang === "en" && "text-black"
+                                        }`}
+                                    >
                                         <h6>Tiếng Việt</h6>
                                     </div>
                                 </a>

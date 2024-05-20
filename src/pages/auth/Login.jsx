@@ -147,10 +147,10 @@ function Login() {
                                                 >
                                                     {loading && (
                                                         <div
-                                                            class="spinner-border spinner-border-sm"
+                                                            className="spinner-border spinner-border-sm"
                                                             role="status"
                                                         >
-                                                            <span class="visually-hidden">
+                                                            <span className="visually-hidden">
                                                                 Loading...
                                                             </span>
                                                         </div>
