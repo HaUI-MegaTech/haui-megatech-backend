@@ -1,10 +1,10 @@
 import { createContext, useReducer, useState } from "react";
-import reducer, { initState } from "../store/reducer";
+import reducer, { authenticated } from "../store/reducer";
 
 const AuthContext = createContext();
 
 function AuthProvider({ children }) {
-    const [state, dispatch] = useReducer(reducer, initState);
+    const [state, dispatch] = useReducer(reducer, authenticated);
 
     return (
         <AuthContext.Provider value={[state, dispatch]}>

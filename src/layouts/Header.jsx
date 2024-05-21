@@ -10,7 +10,11 @@ function Header() {
     const [menuItems, setmenuItems] = useState(fetchAllProfileMenus());
     const [state, dispatch] = useAuth();
     const [lang, setLang] = useState(localStorage.getItem("lang") ?? "en");
-    console.log(lang);
+    const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
+    if (!loggedInUser.avatarImageUrl)
+        loggedInUser.avatarImageUrl =
+            "https://res-console.cloudinary.com/dlupgsjyq/thumbnails/v1/image/upload/v1716195708/ZGVmYXVsdF91c2VyX2F2YXRhcl9hcWN5bTc=/drilldown";
+
     useEffect(() => {
         showSidebar
             ? document.body.classList.remove("toggle-sidebar")
@@ -31,8 +35,6 @@ function Header() {
     };
 
     const handleLogOut = () => {
-        console.log("called handle log out");
-        localStorage.setItem("token", "");
         dispatch(logOut());
     };
 
@@ -328,7 +330,7 @@ function Header() {
                                             lang === "vi" && "text-black"
                                         }`}
                                     >
-                                        <h6>English</h6>
+                                        <h6 className="mb-0">English</h6>
                                     </div>
                                 </a>
                             </li>
@@ -342,7 +344,7 @@ function Header() {
                             >
                                 <a href="#">
                                     <img
-                                        src="https://th.bing.com/th/id/OIP.rfrIkx7yaRBTzCxaIKq1uAHaE9?rs=1&pid=ImgDetMain"
+                                        src="https://th.bing.com/th/id/OIP._N_1zfKeZGiV6-N81bTTawHaE8?rs=1&pid=ImgDetMain"
                                         alt=""
                                         className="rounded-circle"
                                         style={{ aspectRatio: 1 / 1 }}
@@ -352,7 +354,7 @@ function Header() {
                                             lang === "en" && "text-black"
                                         }`}
                                     >
-                                        <h6>Tiếng Việt</h6>
+                                        <h6 className="mb-0">Tiếng Việt</h6>
                                     </div>
                                 </a>
                             </li>
@@ -366,19 +368,19 @@ function Header() {
                             data-bs-toggle="dropdown"
                         >
                             <img
-                                src="https://th.bing.com/th/id/R.90501fda39777948c197990afcffa993?rik=LKE2uMmp8vvz6g&pid=ImgRaw&r=0"
+                                src={loggedInUser.avatarImageUrl}
                                 alt=""
                                 className="rounded-circle"
                             />
                             <span className="d-none d-md-block dropdown-toggle ps-2">
-                                Nguyễn Việt Hoàng
+                                {loggedInUser.username}
                             </span>
                         </a>
 
                         <ul className="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
                             <li className="dropdown-header">
-                                <h6>Nguyễn Việt Hoàng</h6>
-                                <span>Sinh viên</span>
+                                <h6>{`${loggedInUser.firstName} ${loggedInUser.lastName}`}</h6>
+                                <span>{loggedInUser.role}</span>
                             </li>
                             {menuItems &&
                                 menuItems.map((item, index) =>

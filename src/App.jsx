@@ -10,7 +10,7 @@ function App() {
     const [state, dispatch] = useAuth();
     // useEffect(() => {
     //     dispatch(logIn());
-    // }, []);
+    // }, [state]);
     return (
         <>
             {state ? <PrivateContent /> : <PublicContent />}

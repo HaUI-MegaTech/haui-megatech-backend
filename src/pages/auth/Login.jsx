@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useAuth } from "../../store/hooks";
 import { authenticate } from "../../services/AuthService";
 import { toast } from "react-toastify";
-import { logIn } from "../../store/actions";
+import { logIn, logOut } from "../../store/actions";
 
 function Login() {
     const [state, dispatch] = useAuth();
@@ -14,8 +14,16 @@ function Login() {
         console.log(loading);
         await authenticate({ username, password })
             .then(response => {
+                // setInterval(() => {
+                //     console.log(Math.random());
+                //     localStorage.setItem("test", Math.random());
+                // }, 1000);
                 if (response && response.status === 200) {
                     localStorage.setItem("token", response.data.token);
+                    localStorage.setItem(
+                        "loggedInUser",
+                        JSON.stringify(response.data.loggedInUser),
+                    );
                     toast.success(response.data.message);
                     dispatch(logIn());
                 }
@@ -26,10 +34,6 @@ function Login() {
         setLoading(false);
         console.log(loading);
     };
-
-    // useEffect(() => {
-    //     console.log(loading);
-    // }, [loading]);
 
     return (
         <main>

@@ -4,7 +4,7 @@ const BASE_URL = "http://localhost:8080";
 
 const accessToken = localStorage.getItem("token");
 
-const lang = "en";
+const lang = localStorage.getItem("lang");
 
 const headers = {
     Authorization: "Bearer " + accessToken,
