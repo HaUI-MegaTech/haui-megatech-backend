@@ -29,4 +29,13 @@ const fetchRecentActivities = () => {
     );
 };
 
-export { fetchLoginStatistics, fetchBrandStatistics, fetchRecentActivities };
+const fetchTopSoldProducts = () => {
+    return axios.get(BASE_URL + "/api/v1/products/top-sold", { headers });
+};
+
+export {
+    fetchLoginStatistics,
+    fetchBrandStatistics,
+    fetchRecentActivities,
+    fetchTopSoldProducts,
+};

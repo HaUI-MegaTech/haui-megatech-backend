@@ -1,4 +1,43 @@
+import { useEffect, useState } from "react";
+import { fetchTopSoldProducts } from "../../services/HomeService";
+
 function TopSelling() {
+    const [data, setData] = useState();
+    const formatter = new Intl.NumberFormat("en-US");
+
+    useEffect(() => {
+        getData();
+    }, []);
+
+    const getData = () => {
+        fetchTopSoldProducts()
+            .then(res => setData(res.data.items))
+            .catch(err => console.log(err));
+    };
+
+    const renderTopSoldProductItem = item => (
+        <tr>
+            <th scope="row">
+                <a href="#">
+                    <img src={item.mainImageUrl} alt="" />
+                </a>
+            </th>
+            <td>
+                <a href="#" className="text-primary fw-bold">
+                    {item.name}
+                </a>
+            </td>
+            <td>{formatter.format(item.newPrice)}</td>
+            <td className="fw-bold">{item.totalSold}</td>
+            <td>{formatter.format(item.revenue)}</td>
+        </tr>
+    );
+
+    const renderTopSoldProductItems = data =>
+        data.map(item => renderTopSoldProductItem(item));
+
+    console.log(data);
+
     return (
         <div className="card top-selling overflow-auto">
             <div className="filter">
@@ -29,112 +68,19 @@ function TopSelling() {
             </div>
 
             <div className="card-body pb-0">
-                <h5 className="card-title">
-                    Top Selling <span>| Today</span>
-                </h5>
+                <h5 className="card-title">Top sản phẩm bán chạy nhất</h5>
 
                 <table className="table table-borderless">
                     <thead>
                         <tr>
-                            <th scope="col">Preview</th>
-                            <th scope="col">Product</th>
-                            <th scope="col">Price</th>
-                            <th scope="col">Sold</th>
-                            <th scope="col">Revenue</th>
+                            <th scope="col">Hình ảnh</th>
+                            <th scope="col">Tên sản phẩm</th>
+                            <th scope="col">Giá bán</th>
+                            <th scope="col">Đã bán</th>
+                            <th scope="col">Doanh thu</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <th scope="row">
-                                <a href="#">
-                                    <img
-                                        src="assets/img/product-1.jpg"
-                                        alt=""
-                                    />
-                                </a>
-                            </th>
-                            <td>
-                                <a href="#" className="text-primary fw-bold">
-                                    Ut inventore ipsa voluptas nulla
-                                </a>
-                            </td>
-                            <td>$64</td>
-                            <td className="fw-bold">124</td>
-                            <td>$5,828</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">
-                                <a href="#">
-                                    <img
-                                        src="assets/img/product-2.jpg"
-                                        alt=""
-                                    />
-                                </a>
-                            </th>
-                            <td>
-                                <a href="#" className="text-primary fw-bold">
-                                    Exercitationem similique doloremque
-                                </a>
-                            </td>
-                            <td>$46</td>
-                            <td className="fw-bold">98</td>
-                            <td>$4,508</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">
-                                <a href="#">
-                                    <img
-                                        src="assets/img/product-3.jpg"
-                                        alt=""
-                                    />
-                                </a>
-                            </th>
-                            <td>
-                                <a href="#" className="text-primary fw-bold">
-                                    Doloribus nisi exercitationem
-                                </a>
-                            </td>
-                            <td>$59</td>
-                            <td className="fw-bold">74</td>
-                            <td>$4,366</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">
-                                <a href="#">
-                                    <img
-                                        src="assets/img/product-4.jpg"
-                                        alt=""
-                                    />
-                                </a>
-                            </th>
-                            <td>
-                                <a href="#" className="text-primary fw-bold">
-                                    Officiis quaerat sint rerum error
-                                </a>
-                            </td>
-                            <td>$32</td>
-                            <td className="fw-bold">63</td>
-                            <td>$2,016</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">
-                                <a href="#">
-                                    <img
-                                        src="assets/img/product-5.jpg"
-                                        alt=""
-                                    />
-                                </a>
-                            </th>
-                            <td>
-                                <a href="#" className="text-primary fw-bold">
-                                    Sit unde debitis delectus repellendus
-                                </a>
-                            </td>
-                            <td>$79</td>
-                            <td className="fw-bold">41</td>
-                            <td>$3,239</td>
-                        </tr>
-                    </tbody>
+                    <tbody>{data && renderTopSoldProductItems(data)}</tbody>
                 </table>
             </div>
         </div>
