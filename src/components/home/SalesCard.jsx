@@ -1,5 +1,5 @@
-import { PureIncrement } from "pure_counter";
 import { useEffect, useState } from "react";
+import CountUp from "react-countup";
 import { fetchTotalSoldProducts } from "../../services/HomeService";
 
 function SalesCard() {
@@ -58,11 +58,11 @@ function SalesCard() {
                             data-purecounter-end="9001"
                         >
                             {data && (
-                                <PureIncrement
+                                <CountUp
                                     start={0}
                                     end={data}
-                                    duration={5}
-                                    className="purecounter"
+                                    duration={2.75}
+                                    separator=","
                                 />
                             )}
                         </h6>
