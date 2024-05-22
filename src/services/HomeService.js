@@ -41,6 +41,10 @@ const fetchTotalProductRevenue = () => {
     return axios.get(BASE_URL + "/api/v1/products/total-revenue", { headers });
 };
 
+const fetchTotalCustomers = () => {
+    return axios.get(BASE_URL + "/api/v1/users/total-customers", { headers });
+};
+
 export {
     fetchLoginStatistics,
     fetchBrandStatistics,
@@ -48,4 +52,5 @@ export {
     fetchTopSoldProducts,
     fetchTotalSoldProducts,
     fetchTotalProductRevenue,
+    fetchTotalCustomers,
 };
