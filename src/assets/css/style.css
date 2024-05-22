@@ -834,6 +834,11 @@ h6 {
     background: #ffecdf;
 }
 
+.dashboard .total-logged-in-card .card-icon {
+    color: #e9166d;
+    background-color: #ffe1ef;
+}
+
 /* Activity */
 .dashboard .activity {
     font-size: 14px;

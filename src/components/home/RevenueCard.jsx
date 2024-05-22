@@ -62,7 +62,7 @@ function RevenueCard() {
                                 />
                             )}
                         </h6>
-                        <span className="text-success small pt-1 fw-bold">
+                        <span className="text-black small pt-1 fw-bold">
                             VNĐ
                         </span>{" "}
                     </div>

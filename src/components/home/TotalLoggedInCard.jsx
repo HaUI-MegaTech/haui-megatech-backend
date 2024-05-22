@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import { fetchTotalCustomers } from "../../services/HomeService";
 import CountUp from "react-countup";
+import { fetTotalLoggedIn } from "../../services/HomeService";
 
-function CustomersCard() {
+function TotalLoggedInCard() {
     const [data, setData] = useState();
 
     useEffect(() => {
@@ -10,13 +10,13 @@ function CustomersCard() {
     }, []);
 
     const getData = () => {
-        fetchTotalCustomers()
+        fetTotalLoggedIn()
             .then(res => setData(res.data.item))
             .catch(err => console.log(err));
     };
 
     return (
-        <div className="card info-card customers-card">
+        <div className="card info-card total-logged-in-card">
             <div className="filter">
                 <a className="icon" href="#" data-bs-toggle="dropdown">
                     <i className="bi bi-three-dots"></i>
@@ -45,11 +45,11 @@ function CustomersCard() {
             </div>
 
             <div className="card-body">
-                <h5 className="card-title">Tổng số khách hàng</h5>
+                <h5 className="card-title">Tổng lượt đăng nhập</h5>
 
                 <div className="d-flex align-items-center">
                     <div className="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                        <i className="bi bi-people"></i>
+                        <i className="bi bi-box-arrow-in-right"></i>
                     </div>
                     <div className="ps-3">
                         <h6>
@@ -63,7 +63,7 @@ function CustomersCard() {
                             )}
                         </h6>
                         <span className="text-black small pt-1 fw-bold">
-                            Khách hàng
+                            Lượt đăng nhập
                         </span>{" "}
                     </div>
                 </div>
@@ -72,4 +72,4 @@ function CustomersCard() {
     );
 }
 
-export default CustomersCard;
+export default TotalLoggedInCard;

@@ -8,6 +8,7 @@ import RecentSales from "../../components/home/RecentSales";
 import TopSelling from "../../components/home/TopSelling";
 import WebsiteTrafficChart from "../../components/home/WebsiteTrafficChart";
 import NewsAndUpdatesCard from "../../components/home/NewAndUpdatesCart";
+import TotalLoggedInCard from "../../components/home/TotalLoggedInCard";
 
 function Home() {
     return (
@@ -16,16 +17,20 @@ function Home() {
                 <div className="row">
                     <div className="col-lg-8">
                         <div className="row">
-                            <div className="col-xxl-4 col-md-6">
+                            <div className="col-xxl-6 col-md-6">
                                 <SalesCard />
                             </div>
 
-                            <div className="col-xxl-4 col-md-6">
+                            <div className="col-xxl-6 col-md-6">
+                                <CustomersCard />
+                            </div>
+
+                            <div className="col-xxl-6 col-md-6">
                                 <RevenueCard />
                             </div>
 
-                            <div className="col-xxl-4 col-xl-12">
-                                <CustomersCard />
+                            <div className="col-xxl-6 col-md-6">
+                                <TotalLoggedInCard />
                             </div>
 
                             <div className="col-12">
