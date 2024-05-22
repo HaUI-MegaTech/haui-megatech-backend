@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { fetchAllProfileMenus } from "../services/ProfileMenuService";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import { useAuth } from "../store/hooks";
 import { logOut } from "../store/actions";
 
@@ -11,6 +11,7 @@ function Header() {
     const [state, dispatch] = useAuth();
     const [lang, setLang] = useState(localStorage.getItem("lang") ?? "en");
     const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
+    const location = useLocation();
     if (!loggedInUser.avatarImageUrl)
         loggedInUser.avatarImageUrl =
             "https://res-console.cloudinary.com/dlupgsjyq/thumbnails/v1/image/upload/v1716195708/ZGVmYXVsdF91c2VyX2F2YXRhcl9hcWN5bTc=/drilldown";
@@ -89,23 +90,29 @@ function Header() {
                 ></i>
             </div>
 
-            <div className={`search-bar ${showSearchBar && "search-bar-show"}`}>
-                <form
-                    className="search-form d-flex align-items-center"
-                    method="POST"
-                    action="#"
+            {location.pathname !== "/home" && (
+                <div
+                    className={`search-bar ${
+                        showSearchBar && "search-bar-show"
+                    }`}
                 >
-                    <input
-                        type="text"
-                        name="query"
-                        placeholder="Search"
-                        title="Enter search keyword"
-                    />
-                    <button type="submit" title="Search">
-                        <i className="bi bi-search"></i>
-                    </button>
-                </form>
-            </div>
+                    <form
+                        className="search-form d-flex align-items-center"
+                        method="POST"
+                        action="#"
+                    >
+                        <input
+                            type="text"
+                            name="query"
+                            placeholder="Search"
+                            title="Enter search keyword"
+                        />
+                        <button type="submit" title="Search">
+                            <i className="bi bi-search"></i>
+                        </button>
+                    </form>
+                </div>
+            )}
 
             <nav className="header-nav ms-auto">
                 <ul className="d-flex align-items-center">
