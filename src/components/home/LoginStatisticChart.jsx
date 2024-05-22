@@ -72,7 +72,7 @@ function LoginStatisticChart() {
             </div>
             <div className="card-body">
                 <h5 className="card-title">
-                    Reports <span>/Today</span>
+                    Thống kê lượt truy cập hệ thống <span>/Theo ngày</span>
                 </h5>
 
                 <div id="reportsChart">

@@ -4,8 +4,6 @@ const BASE_URL = "http://localhost:8080";
 
 const accessToken = localStorage.getItem("accessToken");
 
-// console.log(accessToken);
-
 const lang = localStorage.getItem("lang");
 
 const headers = {
@@ -19,4 +17,8 @@ const fetchLoginStatistics = () => {
     });
 };
 
-export { fetchLoginStatistics };
+const fetchBrandStatistics = () => {
+    return axios.get(BASE_URL + "/api/v1/brands/statistics", { headers });
+};
+
+export { fetchLoginStatistics, fetchBrandStatistics };
