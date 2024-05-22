@@ -1,4 +1,20 @@
+import { PureIncrement } from "pure_counter";
+import { useEffect, useState } from "react";
+import { fetchTotalSoldProducts } from "../../services/HomeService";
+
 function SalesCard() {
+    const [data, setData] = useState();
+
+    useEffect(() => {
+        getData();
+    }, []);
+
+    const getData = () => {
+        fetchTotalSoldProducts()
+            .then(res => setData(res.data.item))
+            .catch(err => console.log(err));
+    };
+
     return (
         <div className="card info-card sales-card">
             <div className="filter">
@@ -29,22 +45,30 @@ function SalesCard() {
             </div>
 
             <div className="card-body">
-                <h5 className="card-title">
-                    Sales <span>| Today</span>
-                </h5>
+                <h5 className="card-title">Tổng đã bán</h5>
 
                 <div className="d-flex align-items-center">
                     <div className="card-icon rounded-circle d-flex align-items-center justify-content-center">
                         <i className="bi bi-cart"></i>
                     </div>
                     <div className="ps-3">
-                        <h6>145</h6>
+                        <h6
+                            className="purecounter"
+                            data-purecounter-start="0"
+                            data-purecounter-end="9001"
+                        >
+                            {data && (
+                                <PureIncrement
+                                    start={0}
+                                    end={data}
+                                    duration={5}
+                                    className="purecounter"
+                                />
+                            )}
+                        </h6>
                         <span className="text-success small pt-1 fw-bold">
-                            12%
+                            Sản phẩm
                         </span>{" "}
-                        <span className="text-muted small pt-2 ps-1">
-                            increase
-                        </span>
                     </div>
                 </div>
             </div>
