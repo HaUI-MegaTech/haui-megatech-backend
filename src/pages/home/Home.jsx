@@ -12,37 +12,37 @@ import NewsAndUpdatesCard from "../../components/home/NewAndUpdatesCart";
 function Home() {
     return (
         <main id="main" className="main">
-            <section class="section dashboard">
-                <div class="row">
-                    <div class="col-lg-8">
-                        <div class="row">
-                            <div class="col-xxl-4 col-md-6">
+            <section className="section dashboard">
+                <div className="row">
+                    <div className="col-lg-8">
+                        <div className="row">
+                            <div className="col-xxl-4 col-md-6">
                                 <SalesCard />
                             </div>
 
-                            <div class="col-xxl-4 col-md-6">
+                            <div className="col-xxl-4 col-md-6">
                                 <RevenueCard />
                             </div>
 
-                            <div class="col-xxl-4 col-xl-12">
+                            <div className="col-xxl-4 col-xl-12">
                                 <CustomersCard />
                             </div>
 
-                            <div class="col-12">
+                            <div className="col-12">
                                 <LoginStatisticChart />
                             </div>
 
-                            <div class="col-12">
+                            <div className="col-12">
                                 <RecentSales />
                             </div>
 
-                            <div class="col-12">
+                            <div className="col-12">
                                 <TopSelling />
                             </div>
                         </div>
                     </div>
 
-                    <div class="col-lg-4">
+                    <div className="col-lg-4">
                         <RecentActivities />
 
                         <ProductByBrandStatisticChart />

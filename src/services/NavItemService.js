@@ -18,7 +18,7 @@ const navItems = [
     {
         id: 2,
         icon: "bi bi-people",
-        title: "Quản lý người dùng",
+        title: "Người dùng",
         url: BASE_USER_URL,
         child: [
             {
@@ -46,7 +46,7 @@ const navItems = [
     {
         id: 3,
         icon: "bi bi-laptop",
-        title: "Quản lý sản phẩm",
+        title: "Sản phẩm",
         url: BASE_PRODUCT_URL,
         child: [
             {
@@ -74,7 +74,7 @@ const navItems = [
     {
         id: 4,
         icon: "bi bi-badge-ad",
-        title: "Quản lý thương hiệu",
+        title: "Thương hiệu",
         url: BASE_BRAND_URL,
         child: [
             {
@@ -102,7 +102,7 @@ const navItems = [
     {
         id: 5,
         icon: "bi bi-ticket-perforated",
-        title: "Quản lý khuyến mại",
+        title: "Khuyến mại",
         url: BASE_PROMOTION,
         child: [
             {
@@ -130,7 +130,7 @@ const navItems = [
     {
         id: 6,
         icon: "bi bi-chat-square-text",
-        title: "Quản lý đánh giá",
+        title: "Đánh giá",
         url: BASE_FEEDBACK,
         child: [
             {
@@ -158,7 +158,7 @@ const navItems = [
     {
         id: 7,
         icon: "bi bi-receipt-cutoff",
-        title: "Quản lý hoá đơn",
+        title: "Hoá đơn",
         url: BASE_INVOICE,
         child: [
             {

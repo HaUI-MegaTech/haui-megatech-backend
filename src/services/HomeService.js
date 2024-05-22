@@ -4,17 +4,19 @@ const BASE_URL = "http://localhost:8080";
 
 const accessToken = localStorage.getItem("accessToken");
 
-const lang = "en";
+// console.log(accessToken);
+
+const lang = localStorage.getItem("lang");
 
 const headers = {
     Authorization: "Bearer " + accessToken,
     "Accept-Language": lang,
 };
 
-function authenticate(payload) {
-    return axios.post(BASE_URL + "/api/v1/auth/authenticate", payload, {
+const fetchLoginStatistics = () => {
+    return axios.get(BASE_URL + "/api/v1/login-statistics/daily", {
         headers,
     });
-}
+};
 
-export { authenticate };
+export { fetchLoginStatistics };

@@ -1,42 +1,42 @@
 function WebsiteTrafficChart() {
     return (
-        <div class="card">
-            <div class="filter">
-                <a class="icon" href="#" data-bs-toggle="dropdown">
-                    <i class="bi bi-three-dots"></i>
+        <div className="card">
+            <div className="filter">
+                <a className="icon" href="#" data-bs-toggle="dropdown">
+                    <i className="bi bi-three-dots"></i>
                 </a>
-                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                    <li class="dropdown-header text-start">
+                <ul className="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                    <li className="dropdown-header text-start">
                         <h6>Filter</h6>
                     </li>
 
                     <li>
-                        <a class="dropdown-item" href="#">
+                        <a className="dropdown-item" href="#">
                             Today
                         </a>
                     </li>
                     <li>
-                        <a class="dropdown-item" href="#">
+                        <a className="dropdown-item" href="#">
                             This Month
                         </a>
                     </li>
                     <li>
-                        <a class="dropdown-item" href="#">
+                        <a className="dropdown-item" href="#">
                             This Year
                         </a>
                     </li>
                 </ul>
             </div>
 
-            <div class="card-body pb-0">
-                <h5 class="card-title">
+            <div className="card-body pb-0">
+                <h5 className="card-title">
                     Website Traffic <span>| Today</span>
                 </h5>
 
                 <div
                     id="trafficChart"
                     style={{ minHeight: 400 }}
-                    class="echart"
+                    className="echart"
                 ></div>
             </div>
         </div>

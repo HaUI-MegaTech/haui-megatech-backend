@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const accessToken = localStorage.getItem("token");
+const accessToken = localStorage.getItem("accessToken");
 
 const lang = localStorage.getItem("lang");
 

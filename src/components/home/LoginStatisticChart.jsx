@@ -1,54 +1,77 @@
 import Chart from "react-apexcharts";
+import { fetchLoginStatistics } from "../../services/HomeService";
+import { useEffect, useState } from "react";
 
 function LoginStatisticChart() {
+    const [data, setData] = useState();
+
+    useEffect(() => {
+        getData();
+    }, []);
+
+    const categories = data && data.map(item => item.date);
+    console.log(categories);
+
+    console.log(data);
+
+    const getData = () => {
+        fetchLoginStatistics()
+            .then(response => {
+                setData(response.data.items);
+            })
+            .catch(error => console.log(error));
+    };
+
     const state = {
         options: {
             chart: {
                 id: "basic-bar",
             },
             xaxis: {
-                categories: [
-                    1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998, 1999,
-                ],
+                categories: data && data.map(item => item.date),
+            },
+            dataLabels: {
+                enabled: true,
             },
         },
         series: [
             {
-                name: "series-1",
-                data: [30, 40, 45, 50, 49, 60, 70, 91],
+                name: "Số lượt đăng nhập",
+                data: data && data.map(item => item.loggedIn),
             },
         ],
     };
+
     return (
-        <div class="card">
-            <div class="filter">
-                <a class="icon" href="#" data-bs-toggle="dropdown">
-                    <i class="bi bi-three-dots"></i>
+        <div className="card">
+            <div className="filter">
+                <a className="icon" href="#" data-bs-toggle="dropdown">
+                    <i className="bi bi-three-dots"></i>
                 </a>
-                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                    <li class="dropdown-header text-start">
+                <ul className="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                    <li className="dropdown-header text-start">
                         <h6>Filter</h6>
                     </li>
 
                     <li>
-                        <a class="dropdown-item" href="#">
+                        <a className="dropdown-item" href="#">
                             Today
                         </a>
                     </li>
                     <li>
-                        <a class="dropdown-item" href="#">
+                        <a className="dropdown-item" href="#">
                             This Month
                         </a>
                     </li>
                     <li>
-                        <a class="dropdown-item" href="#">
+                        <a className="dropdown-item" href="#">
                             This Year
                         </a>
                     </li>
                 </ul>
             </div>
-            <div class="card-body">
-                <h5 class="card-title">
+            <div className="card-body">
+                <h5 className="card-title">
                     Reports <span>/Today</span>
                 </h5>
 

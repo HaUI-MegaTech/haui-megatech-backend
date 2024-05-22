@@ -17,9 +17,11 @@ function UserProfile() {
     );
 
     const renderProfileTabItem = item => (
-        <li class="nav-item">
+        <li className="nav-item">
             <button
-                class={`nav-link ${item.url === location.pathname && "active"}`}
+                className={`nav-link ${
+                    item.url === location.pathname && "active"
+                }`}
                 data-bs-toggle="tab"
                 data-bs-target={`#${item.url}`}
                 onClick={() => navigate(item.url)}
@@ -31,60 +33,60 @@ function UserProfile() {
     );
 
     return (
-        <main id="main" class="main">
-            <div class="pagetitle">
+        <main id="main" className="main">
+            <div className="pagetitle">
                 <h1>Profile</h1>
                 <nav>
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item">
+                    <ol className="breadcrumb">
+                        <li className="breadcrumb-item">
                             <a href="index.html">Home</a>
                         </li>
-                        <li class="breadcrumb-item">Users</li>
-                        <li class="breadcrumb-item active">Profile</li>
+                        <li className="breadcrumb-item">Users</li>
+                        <li className="breadcrumb-item active">Profile</li>
                     </ol>
                 </nav>
             </div>
 
-            <section class="section profile">
-                <div class="row">
-                    <div class="col-xl-4">
-                        <div class="card">
-                            <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
+            <section className="section profile">
+                <div className="row">
+                    <div className="col-xl-4">
+                        <div className="card">
+                            <div className="card-body profile-card pt-4 d-flex flex-column align-items-center">
                                 <img
                                     src="assets/img/profile-img.jpg"
                                     alt="Profile"
-                                    class="rounded-circle"
+                                    className="rounded-circle"
                                 />
                                 <h2>Kevin Anderson</h2>
                                 <h3>Web Designer</h3>
-                                <div class="social-links mt-2">
-                                    <a href="#" class="twitter">
-                                        <i class="bi bi-twitter"></i>
+                                <div className="social-links mt-2">
+                                    <a href="#" className="twitter">
+                                        <i className="bi bi-twitter"></i>
                                     </a>
-                                    <a href="#" class="facebook">
-                                        <i class="bi bi-facebook"></i>
+                                    <a href="#" className="facebook">
+                                        <i className="bi bi-facebook"></i>
                                     </a>
-                                    <a href="#" class="instagram">
-                                        <i class="bi bi-instagram"></i>
+                                    <a href="#" className="instagram">
+                                        <i className="bi bi-instagram"></i>
                                     </a>
-                                    <a href="#" class="linkedin">
-                                        <i class="bi bi-linkedin"></i>
+                                    <a href="#" className="linkedin">
+                                        <i className="bi bi-linkedin"></i>
                                     </a>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="col-xl-8">
-                        <div class="card">
-                            <div class="card-body pt-3">
-                                <ul class="nav nav-tabs nav-tabs-bordered">
+                    <div className="col-xl-8">
+                        <div className="card">
+                            <div className="card-body pt-3">
+                                <ul className="nav nav-tabs nav-tabs-bordered">
                                     {menuItems &&
                                         menuItems.map(item =>
                                             renderProfileTabItem(item),
                                         )}
                                 </ul>
-                                <div class="tab-content pt-2">
+                                <div className="tab-content pt-2">
                                     <UserDetailTab
                                         show={
                                             location.pathname === "/user/detail"

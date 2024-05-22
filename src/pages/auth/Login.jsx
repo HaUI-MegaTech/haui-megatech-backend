@@ -19,7 +19,10 @@ function Login() {
                 //     localStorage.setItem("test", Math.random());
                 // }, 1000);
                 if (response && response.status === 200) {
-                    localStorage.setItem("token", response.data.token);
+                    localStorage.setItem(
+                        "accessToken",
+                        response.data.accessToken,
+                    );
                     localStorage.setItem(
                         "loggedInUser",
                         JSON.stringify(response.data.loggedInUser),
