@@ -3,16 +3,11 @@ import { fetchLoginStatistics } from "../../services/HomeService";
 import { useEffect, useState } from "react";
 
 function LoginStatisticChart() {
-    const [data, setData] = useState();
+    let [data, setData] = useState();
 
     useEffect(() => {
         getData();
     }, []);
-
-    const categories = data && data.map(item => item.date);
-    console.log(categories);
-
-    console.log(data);
 
     const getData = () => {
         fetchLoginStatistics()
@@ -22,7 +17,7 @@ function LoginStatisticChart() {
             .catch(error => console.log(error));
     };
 
-    const state = {
+    let state = {
         options: {
             chart: {
                 id: "basic-bar",
@@ -76,12 +71,14 @@ function LoginStatisticChart() {
                 </h5>
 
                 <div id="reportsChart">
-                    <Chart
-                        options={state.options}
-                        series={state.series}
-                        type="line"
-                        height={400}
-                    />
+                    {data && (
+                        <Chart
+                            options={state.options}
+                            series={state.series}
+                            type="line"
+                            height={400}
+                        />
+                    )}
                 </div>
             </div>
         </div>

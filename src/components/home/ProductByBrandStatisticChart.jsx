@@ -4,13 +4,9 @@ import { fetchBrandStatistics } from "../../services/HomeService";
 
 function ProductByBrandStatisticChart() {
     const [data, setData] = useState();
-    const [series, setSeries] = useState();
-    const [labels, setLabels] = useState();
 
     useEffect(() => {
         getData();
-        data && setSeries(data.map(item => item.count));
-        data && setLabels(data.map(item => item.name));
     }, []);
 
     const getData = () => {
@@ -21,29 +17,24 @@ function ProductByBrandStatisticChart() {
             .catch(error => console.log(error));
     };
 
-    const state = {
-        series: series,
-        labels: labels,
+    let state = {
+        series: data && data.map(item => item.count),
+        labels: data && data.map(item => item.name),
         options: {
-            series: series,
-            labels: labels,
+            series: data && data.map(item => item.count),
+            labels: data && data.map(item => item.name),
             plotOptions: {
                 pie: {
                     donut: {
                         labels: {
                             show: true,
-                            name: {
-                                // ...
-                            },
-                            value: {
-                                // ...
-                            },
                         },
                     },
                 },
             },
         },
     };
+
     return (
         <div className="card">
             <div className="filter">
@@ -78,18 +69,16 @@ function ProductByBrandStatisticChart() {
                     Thống kê số lượng sản phẩm theo thương hiệu
                 </h5>
 
-                <div
-                    id="budgetChart"
-                    style={{ minHeight: 400 }}
-                    className="echart"
-                >
-                    <Chart
-                        options={state.options}
-                        series={state.series}
-                        labels={state.labels}
-                        type="donut"
-                        height={400}
-                    />
+                <div id="budgetChart" className="echart">
+                    {data && (
+                        <Chart
+                            options={state.options}
+                            series={state?.series}
+                            labels={state?.labels}
+                            type="donut"
+                            height={400}
+                        />
+                    )}
                 </div>
             </div>
         </div>

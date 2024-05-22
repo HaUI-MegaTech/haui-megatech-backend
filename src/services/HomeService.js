@@ -21,4 +21,12 @@ const fetchBrandStatistics = () => {
     return axios.get(BASE_URL + "/api/v1/brands/statistics", { headers });
 };
 
-export { fetchLoginStatistics, fetchBrandStatistics };
+const fetchRecentActivities = () => {
+    return axios.get(
+        BASE_URL + "/api/v1/activity-logs",
+        { headers },
+        { index: 0, limit: 6 },
+    );
+};
+
+export { fetchLoginStatistics, fetchBrandStatistics, fetchRecentActivities };
