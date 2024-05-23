@@ -78,7 +78,7 @@ function Header() {
                     <img
                         src="http://res.cloudinary.com/dlupgsjyq/image/upload/v1712624218/cd313c86-41c2-4796-ad53-e8e2c0b97cea.png"
                         alt=""
-                        className="img-fluid"
+                        className="img-fluid d-none d-lg-block"
                     />
                     <span className="d-none d-lg-block text-primary">
                         Admin Center
