@@ -32,7 +32,9 @@ function Login() {
                 }
             })
             .catch(error => {
-                toast.error(error.response.data.message);
+                error.code === "ERR_NETWORK"
+                    ? toast.error("Lỗi kết nối đến máy chủ.")
+                    : toast.error(error.response.data.meta.message);
             });
         setLoading(false);
         console.log(loading);

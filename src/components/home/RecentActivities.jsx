@@ -11,7 +11,7 @@ function RecentActivities() {
     const getData = () => {
         fetchRecentActivities()
             .then(res => {
-                res && setData(res.data.items);
+                res && setData(res.data.data);
             })
             .catch(err => {
                 console.log(err);

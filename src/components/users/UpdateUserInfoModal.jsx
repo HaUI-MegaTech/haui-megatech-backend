@@ -21,13 +21,13 @@ function UpdateUserInfoModal(props) {
         updateUserInfo(targetUser, firstName, lastName, email, phoneNumber)
             .then(response => {
                 if (response && response.status === 200) {
-                    toast.success(response.data.message);
+                    toast.success(response.data.data.message);
                     handleUpdateTable();
                     handleClose();
                 }
             })
             .catch(error => {
-                toast.error(error.response.data.message);
+                toast.error(error.response.data.data.message);
             });
     };
 

@@ -12,7 +12,7 @@ function ProductByBrandStatisticChart() {
     const getData = () => {
         fetchBrandStatistics()
             .then(res => {
-                setData(res.data.items);
+                setData(res.data.data);
             })
             .catch(error => console.log(error));
     };

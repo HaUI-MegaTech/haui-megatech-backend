@@ -12,7 +12,7 @@ function LoginStatisticChart() {
     const getData = () => {
         fetchLoginStatistics()
             .then(response => {
-                setData(response.data.items);
+                setData(response.data.data);
             })
             .catch(error => console.log(error));
     };

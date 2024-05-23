@@ -11,7 +11,7 @@ function BrandRevenuePieChart() {
 
     const getData = () => {
         fetchTotalBrandRevenue()
-            .then(res => setData(res.data.items))
+            .then(res => setData(res.data.data))
             .catch(err => console.log(err));
     };
 
@@ -43,7 +43,7 @@ function BrandRevenuePieChart() {
         <div className="card h-100">
             <div className="card-body">
                 <h5 className="card-title">
-                    <b>Biểu đồ tròn: </b>Thống kê <b>doanh thu</b> theo thương
+                    <b>Biểu đồ tròn: </b>Thống kê <b>lợi nhuận</b> theo thương
                     hiệu
                 </h5>
                 <div>

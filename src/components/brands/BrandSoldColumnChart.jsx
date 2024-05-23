@@ -12,7 +12,7 @@ function BrandSoldColumnChart() {
 
     const getData = () => {
         fetchTotalSoldByBrand()
-            .then(res => setData(res.data.items))
+            .then(res => setData(res.data.data))
             .catch(err => console.log(err));
     };
 

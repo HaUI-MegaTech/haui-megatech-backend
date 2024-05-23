@@ -16,11 +16,11 @@ function TableProducts() {
     const getProducts = pageIndex => {
         fetchAllProducts(pageIndex)
             .then(response => {
-                setPageIndex(response.data.pageIndex);
-                setPageSize(response.data.pageSize);
-                setTotalItems(response.data.totalItems);
-                setTotalPages(response.data.totalPages);
-                setProducts(response.data.items);
+                setPageIndex(response.data.data.pageIndex);
+                setPageSize(response.data.data.pageSize);
+                setTotalItems(response.data.data.totalItems);
+                setTotalPages(response.data.data.totalPages);
+                setProducts(response.data.data);
             })
             .catch(error => console.log(error));
     };

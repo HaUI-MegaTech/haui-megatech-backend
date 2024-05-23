@@ -15,13 +15,13 @@ function TemporarilyDeleteUserModal(props) {
         temporarilyDeleteUser(targetUser)
             .then(response => {
                 if (response && response.status === 200) {
-                    toast.success(response.data.message);
+                    toast.success(response.data.data.message);
                     handleClose();
                     handleUpdateTable();
                 }
             })
             .catch(error => {
-                toast.error(error.response.data.message);
+                toast.error(error.response.data.data.message);
             });
     };
 

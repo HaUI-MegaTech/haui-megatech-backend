@@ -12,7 +12,7 @@ function BrandRevenueColumnChart() {
 
     const getData = () => {
         fetchTotalBrandRevenue()
-            .then(res => setData(res.data.items))
+            .then(res => setData(res.data.data))
             .catch(err => console.log(err));
     };
 
@@ -49,7 +49,7 @@ function BrandRevenueColumnChart() {
         },
         series: [
             {
-                name: "Tổng doanh thu",
+                name: "Tổng lợi nhuận",
                 data: data && data.map(item => item.value),
             },
         ],
@@ -59,7 +59,7 @@ function BrandRevenueColumnChart() {
         <div className="card h-100">
             <div className="card-body">
                 <h5 className="card-title">
-                    <b>Biểu đồ cột: </b>Thống kê <b>doanh thu</b> theo thương
+                    <b>Biểu đồ cột: </b>Thống kê <b>lợi nhuận</b> theo thương
                     hiệu
                 </h5>
                 <div>

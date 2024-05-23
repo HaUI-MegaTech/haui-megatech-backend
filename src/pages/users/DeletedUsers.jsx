@@ -17,11 +17,11 @@ function DeletedUsers() {
     const getUsers = pageIndex => {
         fetchAllDeletedUsers(pageIndex)
             .then(response => {
-                setPageIndex(response.data.pageIndex);
-                setPageSize(response.data.pageSize);
-                setTotalItems(response.data.totalItems);
-                setTotalPages(response.data.totalPages);
-                setUsers(response.data.items);
+                setPageIndex(response.data.data.pageIndex);
+                setPageSize(response.data.data.pageSize);
+                setTotalItems(response.data.data.totalItems);
+                setTotalPages(response.data.data.totalPages);
+                setUsers(response.data.data);
             })
             .catch(error => console.log(error));
     };

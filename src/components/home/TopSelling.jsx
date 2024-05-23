@@ -11,7 +11,7 @@ function TopSelling() {
 
     const getData = () => {
         fetchTopSoldProducts()
-            .then(res => setData(res.data.items))
+            .then(res => setData(res.data.data))
             .catch(err => console.log(err));
     };
 
@@ -75,7 +75,7 @@ function TopSelling() {
                             <th scope="col">Tên sản phẩm</th>
                             <th scope="col">Giá bán</th>
                             <th scope="col">Đã bán</th>
-                            <th scope="col">Doanh thu</th>
+                            <th scope="col">lợi nhuận</th>
                         </tr>
                     </thead>
                     <tbody>{data && renderTopSoldProductItems(data)}</tbody>

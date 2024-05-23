@@ -11,7 +11,7 @@ function SalesCard() {
 
     const getData = () => {
         fetchTotalSoldProducts()
-            .then(res => setData(res.data.item))
+            .then(res => setData(res.data.data))
             .catch(err => console.log(err));
     };
 

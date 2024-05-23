@@ -18,14 +18,14 @@ function ChangeUserPasswordModal(props) {
             confirmNewPassword,
         )
             .then(response => {
-                console.log(response.data.message);
+                console.log(response.data.data.message);
                 if (response && response.status === 200) {
-                    toast.success(response.data.message);
+                    toast.success(response.data.data.message);
                     handleClose();
                 }
             })
             .catch(error => {
-                toast.error(error.response.data.message);
+                toast.error(error.response.data.data.message);
             });
     };
 

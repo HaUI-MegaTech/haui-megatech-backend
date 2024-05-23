@@ -11,7 +11,7 @@ function BrandViewPieChart() {
 
     const getData = () => {
         fetchTotalViewByBrand()
-            .then(res => setData(res.data.items))
+            .then(res => setData(res.data.data))
             .catch(err => console.log(err));
     };
 
