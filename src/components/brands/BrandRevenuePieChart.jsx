@@ -21,12 +21,17 @@ function BrandRevenuePieChart() {
             labels: data && data.map(item => item.name),
             plotOptions: {
                 pie: {
-                    donut: {
-                        labels: {
-                            show: true,
-                        },
-                    },
                     customScale: 1.0,
+                },
+            },
+            dataLabels: {
+                enabled: true,
+            },
+            tooltip: {
+                y: {
+                    formatter: function (val) {
+                        return val.toLocaleString() + "đ";
+                    },
                 },
             },
         },

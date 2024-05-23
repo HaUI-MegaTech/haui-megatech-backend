@@ -19,25 +19,60 @@ function BrandRevenueColumnChart() {
     console.log(data);
 
     const state = {
+        // options: {
+        //     chart: {
+        //         id: "basic-bar",
+        //     },
+        //     dataLabels: {
+        //         enabled: true,
+        //         formatter: function (val) {
+        //             return val.toLocaleString(); // Format number with commas
+        //         },
+        //     },
+        //     tooltip: {
+        //         y: {
+        //             formatter: function (val) {
+        //                 return "$" + val.toLocaleString(); // Format number with commas and add dollar sign
+        //             },
+        //         },
+        //     },
+        //     plotOptions: {
+        //         bar: {
+        //             distributed: true,
+        //             horizontal: true,
+        //         },
+        //     },
+        // },
+        // series: [
+        //     {
+        //         name: "Doanh thu",
+        //         data: data && data.map(item => item.value),
+        //     },
+        // ],
+
         options: {
-            chart: {
-                id: "basic-bar",
-            },
+            chart: {},
+
             xaxis: {
                 categories: data && data.map(item => item.name),
                 labels: {
-                    /**
-                     * Allows users to apply a custom formatter function to yaxis labels.
-                     *
-                     * @param { String } value - The generated value of the y-axis tick
-                     * @param { index } index of the tick / currently executing iteration in yaxis labels array
-                     */
-                    formatter: function (val, index) {
-                        return "";
-                        // return formatter.format(val);
+                    show: false,
+                },
+            },
+            dataLabels: {
+                enabled: true,
+                formatter: function (val) {
+                    return val.toLocaleString();
+                },
+            },
+            tooltip: {
+                y: {
+                    formatter: function (val) {
+                        return val.toLocaleString() + "đ";
                     },
                 },
             },
+
             plotOptions: {
                 bar: {
                     distributed: true,
@@ -47,23 +82,10 @@ function BrandRevenueColumnChart() {
         },
         series: [
             {
-                name: "Doanh thu",
+                name: "Tổng doanh thu",
                 data: data && data.map(item => item.value),
             },
         ],
-        yaxis: {
-            labels: {
-                /**
-                 * Allows users to apply a custom formatter function to yaxis labels.
-                 *
-                 * @param { String } value - The generated value of the y-axis tick
-                 * @param { index } index of the tick / currently executing iteration in yaxis labels array
-                 */
-                formatter: function (val, index) {
-                    return "hihi";
-                },
-            },
-        },
     };
 
     return (
