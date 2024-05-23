@@ -21,12 +21,12 @@ function RecentActivities() {
     const renderRecentActivities = data =>
         data && (
             <div className="activity">
-                {data.map(item => renderActivityItem(item))}
+                {data.map((item, index) => renderActivityItem(item, index))}
             </div>
         );
 
-    const renderActivityItem = item => (
-        <div className="activity-item d-flex">
+    const renderActivityItem = (item, index) => (
+        <div className="activity-item d-flex" key={index}>
             <div className="activite-label">{item.whenCreated}</div>
             <i className="bi bi-circle-fill activity-badge text-primary align-self-start"></i>
             <div className="activity-content">

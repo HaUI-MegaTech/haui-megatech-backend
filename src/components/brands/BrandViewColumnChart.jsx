@@ -16,8 +16,6 @@ function BrandViewColumnChart() {
             .catch(err => console.log(err));
     };
 
-    console.log(data);
-
     const state = {
         options: {
             chart: {},

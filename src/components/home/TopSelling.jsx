@@ -15,8 +15,8 @@ function TopSelling() {
             .catch(err => console.log(err));
     };
 
-    const renderTopSoldProductItem = item => (
-        <tr>
+    const renderTopSoldProductItem = (item, index) => (
+        <tr key={index}>
             <th scope="row">
                 <a href="#">
                     <img src={item.mainImageUrl} alt="" />
@@ -34,7 +34,7 @@ function TopSelling() {
     );
 
     const renderTopSoldProductItems = data =>
-        data.map(item => renderTopSoldProductItem(item));
+        data.map((item, index) => renderTopSoldProductItem(item, index));
 
     return (
         <div className="card top-selling overflow-auto">

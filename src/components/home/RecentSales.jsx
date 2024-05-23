@@ -15,13 +15,11 @@ function RecentSales() {
             .catch(err => console.log(err));
     };
 
-    console.log(data);
-
     const renderLatestOrders = data =>
-        data.map(item => renderLatestOrder(item));
+        data.map((item, index) => renderLatestOrder(item, index));
 
-    const renderLatestOrder = item => (
-        <tr>
+    const renderLatestOrder = (item, index) => (
+        <tr key={index}>
             <th scope="row">
                 <a href="#">{item.id}</a>
             </th>
