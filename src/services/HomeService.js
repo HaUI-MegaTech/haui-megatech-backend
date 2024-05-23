@@ -49,6 +49,10 @@ const fetchTotalLoggedIn = () => {
     return axios.get(BASE_URL + "/api/v1/login-statistics/total", { headers });
 };
 
+const fetchLatestOrders = () => {
+    return axios.get(BASE_URL + "/api/v1/orders/latest", { headers });
+};
+
 export {
     fetchLoginStatistics,
     fetchBrandStatistics,
@@ -58,4 +62,5 @@ export {
     fetchTotalProductRevenue,
     fetchTotalCustomers,
     fetchTotalLoggedIn,
+    fetchLatestOrders,
 };

@@ -1,4 +1,43 @@
+import { useEffect, useState } from "react";
+import { fetchLatestOrders } from "../../services/HomeService";
+
 function RecentSales() {
+    const [data, setData] = useState();
+    const formatter = new Intl.NumberFormat("en-US");
+
+    useEffect(() => {
+        getData();
+    }, []);
+
+    const getData = () => {
+        fetchLatestOrders()
+            .then(res => setData(res.data.items))
+            .catch(err => console.log(err));
+    };
+
+    console.log(data);
+
+    const renderLatestOrders = data =>
+        data.map(item => renderLatestOrder(item));
+
+    const renderLatestOrder = item => (
+        <tr>
+            <th scope="row">
+                <a href="#">{item.id}</a>
+            </th>
+            <td>{item.customer}</td>
+            <td>
+                <a href="#" className="text-primary">
+                    {item.orderTime}
+                </a>
+            </td>
+            <td>{formatter.format(item.total)}đ</td>
+            <td>
+                <span className="badge bg-success">{item.status}</span>
+            </td>
+        </tr>
+    );
+
     return (
         <div className="card recent-sales overflow-auto">
             <div className="filter">
@@ -29,107 +68,19 @@ function RecentSales() {
             </div>
 
             <div className="card-body">
-                <h5 className="card-title">
-                    Recent Sales <span>| Today</span>
-                </h5>
+                <h5 className="card-title">Đơn hàng mới nhất</h5>
 
                 <table className="table table-borderless datatable">
                     <thead>
                         <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Customer</th>
-                            <th scope="col">Product</th>
-                            <th scope="col">Price</th>
-                            <th scope="col">Status</th>
+                            <th scope="col">ID</th>
+                            <th scope="col">Khách hàng</th>
+                            <th scope="col">Thời gian thanh toán</th>
+                            <th scope="col">Tổng tiền</th>
+                            <th scope="col">Trạng thái</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <th scope="row">
-                                <a href="#">#2457</a>
-                            </th>
-                            <td>Brandon Jacob</td>
-                            <td>
-                                <a href="#" className="text-primary">
-                                    At praesentium minu
-                                </a>
-                            </td>
-                            <td>$64</td>
-                            <td>
-                                <span className="badge bg-success">
-                                    Approved
-                                </span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">
-                                <a href="#">#2147</a>
-                            </th>
-                            <td>Bridie Kessler</td>
-                            <td>
-                                <a href="#" className="text-primary">
-                                    Blanditiis dolor omnis similique
-                                </a>
-                            </td>
-                            <td>$47</td>
-                            <td>
-                                <span className="badge bg-warning">
-                                    Pending
-                                </span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">
-                                <a href="#">#2049</a>
-                            </th>
-                            <td>Ashleigh Langosh</td>
-                            <td>
-                                <a href="#" className="text-primary">
-                                    At recusandae consectetur
-                                </a>
-                            </td>
-                            <td>$147</td>
-                            <td>
-                                <span className="badge bg-success">
-                                    Approved
-                                </span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">
-                                <a href="#">#2644</a>
-                            </th>
-                            <td>Angus Grady</td>
-                            <td>
-                                <a href="#" className="text-primar">
-                                    Ut voluptatem id earum et
-                                </a>
-                            </td>
-                            <td>$67</td>
-                            <td>
-                                <span className="badge bg-danger">
-                                    Rejected
-                                </span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">
-                                <a href="#">#2644</a>
-                            </th>
-                            <td>Raheem Lehner</td>
-                            <td>
-                                <a href="#" className="text-primary">
-                                    Sunt similique distinctio
-                                </a>
-                            </td>
-                            <td>$165</td>
-                            <td>
-                                <span className="badge bg-success">
-                                    Approved
-                                </span>
-                            </td>
-                        </tr>
-                    </tbody>
+                    <tbody>{data && renderLatestOrders(data)}</tbody>
                 </table>
             </div>
         </div>
