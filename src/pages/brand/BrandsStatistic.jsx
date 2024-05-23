@@ -1,5 +1,7 @@
 import BrandRevenueColumnChart from "../../components/brands/BrandRevenueColumnChart";
 import BrandRevenuePieChart from "../../components/brands/BrandRevenuePieChart";
+import BrandSoldColumnChart from "../../components/brands/BrandSoldColumnChart";
+import BrandSoldPieChart from "../../components/brands/BrandSoldPieChart";
 
 function BrandsStatistic() {
     return (
@@ -20,13 +22,23 @@ function BrandsStatistic() {
             </div>
 
             <section className="section">
-                <div className="row">
+                <div className="row mb-4">
                     <div className="col-lg-6">
                         <BrandRevenueColumnChart />
                     </div>
 
                     <div className="col-lg-6">
                         <BrandRevenuePieChart />
+                    </div>
+                </div>
+
+                <div className="row">
+                    <div className="col-lg-6">
+                        <BrandSoldColumnChart />
+                    </div>
+
+                    <div className="col-lg-6">
+                        <BrandSoldPieChart />
                     </div>
                 </div>
             </section>

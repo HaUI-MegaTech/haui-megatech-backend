@@ -1,74 +1,56 @@
 import { useEffect, useState } from "react";
 import Chart from "react-apexcharts";
-import { fetchTotalBrandRevenue } from "../../services/BrandService";
+import { fetchTotalSoldByBrand } from "../../services/BrandService";
 
-function BrandRevenueColumnChart() {
+function BrandSoldPieChart() {
     const [data, setData] = useState();
-    const formatter = new Intl.NumberFormat("en-US");
 
     useEffect(() => {
         getData();
     }, []);
 
     const getData = () => {
-        fetchTotalBrandRevenue()
+        fetchTotalSoldByBrand()
             .then(res => setData(res.data.items))
             .catch(err => console.log(err));
     };
 
-    console.log(data);
-
     const state = {
         options: {
-            chart: {},
-
-            xaxis: {
-                categories: data && data.map(item => item.name),
-                labels: {
-                    show: false,
+            series: data && data.map(item => item.value),
+            labels: data && data.map(item => item.name),
+            plotOptions: {
+                pie: {
+                    customScale: 1.0,
                 },
             },
             dataLabels: {
                 enabled: true,
-                formatter: function (val) {
-                    return val.toLocaleString() + "đ";
-                },
             },
             tooltip: {
                 y: {
                     formatter: function (val) {
-                        return val.toLocaleString() + "đ";
+                        return val.toLocaleString() + " lượt mua";
                     },
                 },
             },
-
-            plotOptions: {
-                bar: {
-                    distributed: true,
-                    horizontal: true,
-                },
-            },
         },
-        series: [
-            {
-                name: "Tổng doanh thu",
-                data: data && data.map(item => item.value),
-            },
-        ],
+        series: data && data.map(item => item.value),
+        labels: data && data.map(item => item.name),
     };
 
     return (
         <div className="card h-100">
             <div className="card-body">
                 <h5 className="card-title">
-                    Thống kê doanh thu theo thương hiệu - Biểu đồ cột
+                    Thống kê lượt mua theo thương hiệu - Biểu đồ tròn
                 </h5>
                 <div>
                     {data && (
                         <Chart
                             options={state.options}
                             series={state.series}
-                            type="bar"
+                            type="donut"
                         />
                     )}
                 </div>
@@ -77,4 +59,4 @@ function BrandRevenueColumnChart() {
     );
 }
 
-export default BrandRevenueColumnChart;
+export default BrandSoldPieChart;
