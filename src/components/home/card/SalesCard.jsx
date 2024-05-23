@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import CountUp from "react-countup";
-import { fetTotalLoggedIn } from "../../services/HomeService";
+import { fetchTotalSoldProducts } from "../../../services/HomeService";
 
-function TotalLoggedInCard() {
+function SalesCard() {
     const [data, setData] = useState();
 
     useEffect(() => {
@@ -10,13 +10,13 @@ function TotalLoggedInCard() {
     }, []);
 
     const getData = () => {
-        fetTotalLoggedIn()
+        fetchTotalSoldProducts()
             .then(res => setData(res.data.item))
             .catch(err => console.log(err));
     };
 
     return (
-        <div className="card info-card total-logged-in-card">
+        <div className="card info-card sales-card">
             <div className="filter">
                 <a className="icon" href="#" data-bs-toggle="dropdown">
                     <i className="bi bi-three-dots"></i>
@@ -45,14 +45,18 @@ function TotalLoggedInCard() {
             </div>
 
             <div className="card-body">
-                <h5 className="card-title">Tổng lượt đăng nhập</h5>
+                <h5 className="card-title">Tổng đã bán</h5>
 
                 <div className="d-flex align-items-center">
                     <div className="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                        <i className="bi bi-box-arrow-in-right"></i>
+                        <i className="bi bi-cart"></i>
                     </div>
                     <div className="ps-3">
-                        <h6>
+                        <h6
+                            className="purecounter"
+                            data-purecounter-start="0"
+                            data-purecounter-end="9001"
+                        >
                             {data && (
                                 <CountUp
                                     start={0}
@@ -63,7 +67,7 @@ function TotalLoggedInCard() {
                             )}
                         </h6>
                         <span className="text-black small pt-1 fw-bold">
-                            Lượt đăng nhập
+                            Sản phẩm
                         </span>{" "}
                     </div>
                 </div>
@@ -72,4 +76,4 @@ function TotalLoggedInCard() {
     );
 }
 
-export default TotalLoggedInCard;
+export default SalesCard;

@@ -1,14 +1,14 @@
 import LoginStatisticChart from "../../components/home/LoginStatisticChart";
 import ProductByBrandStatisticChart from "../../components/home/ProductByBrandStatisticChart";
 import RecentActivities from "../../components/home/RecentActivities";
-import SalesCard from "../../components/home/SalesCard";
-import RevenueCard from "../../components/home/RevenueCard";
-import CustomersCard from "../../components/home/CustomersCard";
+import SalesCard from "../../components/home/card/SalesCard";
+import RevenueCard from "../../components/home/card/RevenueCard";
+import CustomersCard from "../../components/home/card/CustomersCard";
 import RecentSales from "../../components/home/RecentSales";
 import TopSelling from "../../components/home/TopSelling";
 import WebsiteTrafficChart from "../../components/home/WebsiteTrafficChart";
 import NewsAndUpdatesCard from "../../components/home/NewAndUpdatesCart";
-import TotalLoggedInCard from "../../components/home/TotalLoggedInCard";
+import TotalLoggedInCard from "../../components/home/card/TotalLoggedInCard";
 
 function Home() {
     return (

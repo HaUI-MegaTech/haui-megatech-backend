@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { fetchTotalCustomers } from "../../services/HomeService";
+import { fetchTotalCustomers } from "../../../services/HomeService";
 import CountUp from "react-countup";
 
 function CustomersCard() {

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { fetchTotalProductRevenue } from "../../services/HomeService";
+import { fetchTotalProductRevenue } from "../../../services/HomeService";
 import CountUp from "react-countup";
 
 function RevenueCard() {
