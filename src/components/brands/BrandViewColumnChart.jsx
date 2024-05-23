@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import Chart from "react-apexcharts";
-import { fetchTotalBrandRevenue } from "../../services/BrandService";
+import { fetchTotalViewByBrand } from "../../services/BrandService";
 
-function BrandRevenueColumnChart() {
+function BrandViewColumnChart() {
     const [data, setData] = useState();
     const formatter = new Intl.NumberFormat("en-US");
 
@@ -11,7 +11,7 @@ function BrandRevenueColumnChart() {
     }, []);
 
     const getData = () => {
-        fetchTotalBrandRevenue()
+        fetchTotalViewByBrand()
             .then(res => setData(res.data.items))
             .catch(err => console.log(err));
     };
@@ -37,7 +37,7 @@ function BrandRevenueColumnChart() {
             tooltip: {
                 y: {
                     formatter: function (val) {
-                        return val.toLocaleString() + "đ";
+                        return val.toLocaleString();
                     },
                 },
             },
@@ -51,7 +51,7 @@ function BrandRevenueColumnChart() {
         },
         series: [
             {
-                name: "Tổng doanh thu",
+                name: "Tổng lượt xem",
                 data: data && data.map(item => item.value),
             },
         ],
@@ -61,7 +61,7 @@ function BrandRevenueColumnChart() {
         <div className="card h-100">
             <div className="card-body">
                 <h5 className="card-title">
-                    Thống kê doanh thu theo thương hiệu - Biểu đồ cột
+                    Thống kê lượt xem theo thương hiệu - Biểu đồ cột
                 </h5>
                 <div>
                     {data && (
@@ -77,4 +77,4 @@ function BrandRevenueColumnChart() {
     );
 }
 
-export default BrandRevenueColumnChart;
+export default BrandViewColumnChart;
