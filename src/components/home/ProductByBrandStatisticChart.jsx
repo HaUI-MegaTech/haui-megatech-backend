@@ -76,7 +76,6 @@ function ProductByBrandStatisticChart() {
                             series={state?.series}
                             labels={state?.labels}
                             type="donut"
-                            height={400}
                         />
                     )}
                 </div>

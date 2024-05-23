@@ -1,28 +1,53 @@
+import { useEffect, useState } from "react";
 import Chart from "react-apexcharts";
+import { fetchTotalBrandRevenue } from "../../services/BrandService";
 
 function BrandRevenuePieChart() {
+    const [data, setData] = useState();
+
+    useEffect(() => {
+        getData();
+    }, []);
+
+    const getData = () => {
+        fetchTotalBrandRevenue()
+            .then(res => setData(res.data.items))
+            .catch(err => console.log(err));
+    };
+
     const state = {
         options: {
+            series: data && data.map(item => item.value),
+            labels: data && data.map(item => item.name),
             plotOptions: {
                 pie: {
+                    donut: {
+                        labels: {
+                            show: true,
+                        },
+                    },
                     customScale: 1.0,
                 },
             },
         },
-        series: [44, 55, 41, 17, 15],
-        labels: ["A", "B", "C", "D", "E"],
+        series: data && data.map(item => item.value),
+        labels: data && data.map(item => item.name),
     };
 
     return (
         <div className="card h-100">
             <div className="card-body">
-                <h5 className="card-title">Example Card</h5>
+                <h5 className="card-title">
+                    Thống kê doanh thu theo thương hiệu - Biểu đồ tròn
+                </h5>
                 <div>
-                    <Chart
-                        options={state.options}
-                        series={state.series}
-                        type="donut"
-                    />
+                    {data && (
+                        <Chart
+                            options={state.options}
+                            series={state.series}
+                            type="donut"
+                        />
+                    )}
                 </div>
             </div>
         </div>

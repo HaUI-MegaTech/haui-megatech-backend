@@ -36,8 +36,6 @@ function TopSelling() {
     const renderTopSoldProductItems = data =>
         data.map(item => renderTopSoldProductItem(item));
 
-    console.log(data);
-
     return (
         <div className="card top-selling overflow-auto">
             <div className="filter">

@@ -8,8 +8,6 @@ function RecentActivities() {
         getData();
     }, []);
 
-    console.log(data);
-
     const getData = () => {
         fetchRecentActivities()
             .then(res => {

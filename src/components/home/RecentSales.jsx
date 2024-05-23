@@ -68,7 +68,7 @@ function RecentSales() {
             </div>
 
             <div className="card-body">
-                <h5 className="card-title">Đơn hàng mới nhất</h5>
+                <h5 className="card-title">Đơn hàng gần đây</h5>
 
                 <table className="table table-borderless datatable">
                     <thead>
