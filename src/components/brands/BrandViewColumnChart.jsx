@@ -61,7 +61,8 @@ function BrandViewColumnChart() {
         <div className="card h-100">
             <div className="card-body">
                 <h5 className="card-title">
-                    Thống kê lượt xem theo thương hiệu - Biểu đồ cột
+                    <b>Biểu đồ cột: </b>Thống kê <b>lượt xem</b> theo thương
+                    hiệu
                 </h5>
                 <div>
                     {data && (

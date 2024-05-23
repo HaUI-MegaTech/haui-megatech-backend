@@ -43,7 +43,8 @@ function BrandRevenuePieChart() {
         <div className="card h-100">
             <div className="card-body">
                 <h5 className="card-title">
-                    Thống kê doanh thu theo thương hiệu - Biểu đồ tròn
+                    <b>Biểu đồ tròn: </b>Thống kê <b>doanh thu</b> theo thương
+                    hiệu
                 </h5>
                 <div>
                     {data && (
