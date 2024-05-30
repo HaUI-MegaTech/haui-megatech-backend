@@ -84,6 +84,9 @@ const changeUserPassword = (
         { headers },
     );
 
+const getOneUser = id =>
+    axios.get(BASE_URL + `/api/v1/users/${id}`, { headers });
+
 export {
     fetchAllActiveUsers,
     fetchAllDeletedUsers,
@@ -93,4 +96,5 @@ export {
     restoreUser,
     hardDeleteUser,
     changeUserPassword,
+    getOneUser,
 };
