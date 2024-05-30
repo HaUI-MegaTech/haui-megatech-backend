@@ -16,11 +16,11 @@ function TableProducts() {
     const getProducts = pageIndex => {
         fetchAllProducts(pageIndex)
             .then(response => {
-                setPageIndex(response.data.pageIndex);
-                setPageSize(response.data.pageSize);
-                setTotalItems(response.data.totalItems);
-                setTotalPages(response.data.totalPages);
-                setProducts(response.data.items);
+                setPageIndex(response.data.data.pageIndex);
+                setPageSize(response.data.data.pageSize);
+                setTotalItems(response.data.data.totalItems);
+                setTotalPages(response.data.data.totalPages);
+                setProducts(response.data.data);
             })
             .catch(error => console.log(error));
     };
@@ -45,13 +45,13 @@ function TableProducts() {
                     href="#"
                     role="button"
                 >
-                    <i class="bi bi-eye"></i>
+                    <i className="bi bi-eye"></i>
                 </a>
                 <button type="button" className="btn btn-warning btn-sm mx-2">
-                    <i class="bi bi-pencil-square"></i>
+                    <i className="bi bi-pencil-square"></i>
                 </button>
                 <button type="button" className="btn btn-danger btn-sm mx-2">
-                    <i class="bi bi-trash"></i>
+                    <i className="bi bi-trash"></i>
                 </button>
             </td>
         </tr>

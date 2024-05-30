@@ -11,13 +11,13 @@ function RestoreUserModal(props) {
             .then(response => {
                 console.log(response);
                 if (response.status === 200) {
-                    toast.success(response.data.message);
+                    toast.success(response.data.data.message);
                     handleUpdateTable(pageIndex);
                     handleClose();
                 }
             })
             .catch(error => {
-                toast.error(error.response.data.message);
+                toast.error(error.response.data.data.message);
             });
     };
 

@@ -2,10 +2,9 @@ import axios from "axios";
 
 const BASE_URL = "http://localhost:8080";
 
-const accessToken =
-    "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ2aWV0aG9hbmciLCJpYXQiOjE3MTM5MzU2NTMsImV4cCI6MTcxNDAyMjA1M30.wpLFeR_4iqLo4u29ICTy3Amct79x52vx1Z-E9KBiI3g";
+const accessToken = localStorage.getItem("accessToken");
 
-const lang = "vi";
+const lang = localStorage.getItem("lang");
 
 const headers = {
     Authorization: "Bearer " + accessToken,
@@ -14,16 +13,15 @@ const headers = {
 
 const fetchAllActiveUsers = pageIndex => {
     return axios.get(
-        `${BASE_URL}/api/v1/users/active?pageIndex=${pageIndex}&pageSize=10`,
+        `${BASE_URL}/api/v1/users/active?index=${pageIndex}&limit=10`,
         { headers },
     );
 };
 
 const fetchAllDeletedUsers = pageIndex =>
-    axios.get(
-        `${BASE_URL}/api/v1/users/deleted?pageIndex=${pageIndex}&pageSize=10`,
-        { headers },
-    );
+    axios.get(`${BASE_URL}/api/v1/users/deleted?index=${pageIndex}&limit=10`, {
+        headers,
+    });
 
 const addNewUser = (
     username,

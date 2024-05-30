@@ -24,14 +24,14 @@ function AddUserModal(props) {
             .then(response => {
                 console.log(response);
                 if (response && response.status === 201) {
-                    toast.success(response.data.message);
+                    toast.success(response.data.data.message);
                     handleUpdateTable();
                     handleClose();
                     clearInput();
                 }
             })
             .catch(error => {
-                toast.error(error.response.data.message);
+                toast.error(error.response.data.data.message);
             });
     };
 
@@ -41,57 +41,57 @@ function AddUserModal(props) {
                 <Modal.Title>Thêm mới người dùng</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <label for="username" class="form-label">
+                <label for="username" className="form-label">
                     Tên đăng nhập
                 </label>
                 <input
                     type="text"
-                    class="form-control mb-3"
+                    className="form-control mb-3"
                     id="username"
                     onChange={e => setUsername(e.target.value)}
                     value={username}
                 />
 
-                <label for="firstName" class="form-label">
+                <label for="firstName" className="form-label">
                     Tên
                 </label>
                 <input
                     type="text"
-                    class="form-control mb-3"
+                    className="form-control mb-3"
                     id="firstName"
                     onChange={e => setFirstName(e.target.value)}
                     value={firstName}
                 />
 
-                <label for="lastName" class="form-label">
+                <label for="lastName" className="form-label">
                     Họ đệm
                 </label>
                 <input
                     type="text"
-                    class="form-control mb-3"
+                    className="form-control mb-3"
                     id="lastName"
                     onChange={e => setLastName(e.target.value)}
                     value={lastName}
                 />
 
-                <label for="password" class="form-label">
+                <label for="password" className="form-label">
                     Mật khẩu
                 </label>
                 <input
                     type="password"
                     id="password"
-                    class="form-control mb-3"
+                    className="form-control mb-3"
                     onChange={e => setPassword(e.target.value)}
                     value={password}
                 />
 
-                <label for="confirmPassword" class="form-label">
+                <label for="confirmPassword" className="form-label">
                     Xác nhận mật khẩu
                 </label>
                 <input
                     type="password"
                     id="confirmPassword"
-                    class="form-control"
+                    className="form-control"
                     onChange={e => setConfirmPassword(e.target.value)}
                     value={confirmPassword}
                 />

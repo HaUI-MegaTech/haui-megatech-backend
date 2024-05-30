@@ -11,6 +11,7 @@ import DeletedUsers from "../pages/users/DeletedUsers";
 import UsersHistory from "../pages/users/UsersHistory";
 import UsersStatistic from "../pages/users/UsersStatistic";
 import Login from "../pages/auth/Login";
+import BrandsStatistic from "../pages/brand/BrandsStatistic";
 
 const publicRoutes = [
     { path: "/login", page: Login },
@@ -32,6 +33,9 @@ const privateRoutes = [
     { path: "/products/deleted", page: DeletedProducts },
     { path: "/products/statistic", page: ProductsStatistic },
     { path: "/products/history", page: ProductsHistory },
+
+    // brands
+    { path: "/brands/statistic", page: BrandsStatistic },
 
     // profile
     { path: "/user/detail", page: UserProfile },

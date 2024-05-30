@@ -1,17 +1,26 @@
 import React, { useEffect, useState } from "react";
 import { fetchAllProfileMenus } from "../services/ProfileMenuService";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
+import { useAuth } from "../store/hooks";
+import { logOut } from "../store/actions";
 
 function Header() {
     const [showSidebar, setShowSidebar] = useState(true);
     const [showSearchBar, setShowSearchBar] = useState(false);
     const [menuItems, setmenuItems] = useState(fetchAllProfileMenus());
+    const [state, dispatch] = useAuth();
+    const [lang, setLang] = useState(localStorage.getItem("lang") ?? "en");
+    const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
+    const location = useLocation();
+    if (!loggedInUser.avatarImageUrl)
+        loggedInUser.avatarImageUrl =
+            "https://res-console.cloudinary.com/dlupgsjyq/thumbnails/v1/image/upload/v1716195708/ZGVmYXVsdF91c2VyX2F2YXRhcl9hcWN5bTc=/drilldown";
 
     useEffect(() => {
         showSidebar
             ? document.body.classList.remove("toggle-sidebar")
             : document.body.classList.add("toggle-sidebar");
-    }, [showSidebar]);
+    }, [showSidebar, lang]);
 
     const getProfileMenuItems = () => {
         const data = fetchAllProfileMenus();
@@ -26,6 +35,10 @@ function Header() {
         setShowSearchBar(!showSearchBar);
     };
 
+    const handleLogOut = () => {
+        dispatch(logOut());
+    };
+
     const renderProfileMenuItem = (item, index) => (
         <div key={index}>
             <li>
@@ -36,6 +49,7 @@ function Header() {
                 <NavLink
                     className="dropdown-item d-flex align-items-center"
                     to={item.url}
+                    onClick={item.url === "/logout" ?? handleLogOut}
                 >
                     <i className={item.icon}></i>
                     <span>{item.title}</span>
@@ -43,6 +57,16 @@ function Header() {
             </li>
         </div>
     );
+
+    const handleSetPreferedViLang = () => {
+        setLang("vi");
+        localStorage.setItem("lang", "vi");
+    };
+
+    const handleSetPreferedEnLang = () => {
+        setLang("en");
+        localStorage.setItem("lang", "en");
+    };
 
     return (
         <header
@@ -54,7 +78,7 @@ function Header() {
                     <img
                         src="http://res.cloudinary.com/dlupgsjyq/image/upload/v1712624218/cd313c86-41c2-4796-ad53-e8e2c0b97cea.png"
                         alt=""
-                        className="img-fluid"
+                        className="img-fluid d-none d-lg-block"
                     />
                     <span className="d-none d-lg-block text-primary">
                         Admin Center
@@ -66,23 +90,29 @@ function Header() {
                 ></i>
             </div>
 
-            <div className={`search-bar ${showSearchBar && "search-bar-show"}`}>
-                <form
-                    className="search-form d-flex align-items-center"
-                    method="POST"
-                    action="#"
+            {location.pathname !== "/home" && (
+                <div
+                    className={`search-bar ${
+                        showSearchBar && "search-bar-show"
+                    }`}
                 >
-                    <input
-                        type="text"
-                        name="query"
-                        placeholder="Search"
-                        title="Enter search keyword"
-                    />
-                    <button type="submit" title="Search">
-                        <i className="bi bi-search"></i>
-                    </button>
-                </form>
-            </div>
+                    <form
+                        className="search-form d-flex align-items-center"
+                        method="POST"
+                        action="#"
+                    >
+                        <input
+                            type="text"
+                            name="query"
+                            placeholder="Search"
+                            title="Enter search keyword"
+                        />
+                        <button type="submit" title="Search">
+                            <i className="bi bi-search"></i>
+                        </button>
+                    </form>
+                </div>
+            )}
 
             <nav className="header-nav ms-auto">
                 <ul className="d-flex align-items-center">
@@ -287,8 +317,14 @@ function Header() {
                             <i className="bi bi-translate"></i>
                         </a>
 
-                        <ul className="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages py-0">
-                            <li className="message-item">
+                        <ul
+                            className="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages py-0"
+                            style={{ minWidth: 180 }}
+                        >
+                            <li
+                                className="message-item"
+                                onClick={handleSetPreferedEnLang}
+                            >
                                 <a href="#">
                                     <img
                                         src="https://images.freeimages.com/images/large-previews/fb0/uk-flag-1444045.jpg"
@@ -296,8 +332,12 @@ function Header() {
                                         className="rounded-circle"
                                         style={{ aspectRatio: 1 / 1 }}
                                     />
-                                    <div>
-                                        <h6>English</h6>
+                                    <div
+                                        className={`d-flex align-items-center ${
+                                            lang === "vi" && "text-black"
+                                        }`}
+                                    >
+                                        <h6 className="mb-0">English</h6>
                                     </div>
                                 </a>
                             </li>
@@ -305,16 +345,23 @@ function Header() {
                                 <hr className="dropdown-divider" />
                             </li>
 
-                            <li className="message-item">
+                            <li
+                                className="message-item"
+                                onClick={handleSetPreferedViLang}
+                            >
                                 <a href="#">
                                     <img
-                                        src="https://th.bing.com/th/id/OIP.rfrIkx7yaRBTzCxaIKq1uAHaE9?rs=1&pid=ImgDetMain"
+                                        src="https://th.bing.com/th/id/OIP._N_1zfKeZGiV6-N81bTTawHaE8?rs=1&pid=ImgDetMain"
                                         alt=""
                                         className="rounded-circle"
                                         style={{ aspectRatio: 1 / 1 }}
                                     />
-                                    <div>
-                                        <h6>Tiếng Việt</h6>
+                                    <div
+                                        className={`d-flex align-items-center ${
+                                            lang === "en" && "text-black"
+                                        }`}
+                                    >
+                                        <h6 className="mb-0">Tiếng Việt</h6>
                                     </div>
                                 </a>
                             </li>
@@ -328,19 +375,19 @@ function Header() {
                             data-bs-toggle="dropdown"
                         >
                             <img
-                                src="https://th.bing.com/th/id/R.90501fda39777948c197990afcffa993?rik=LKE2uMmp8vvz6g&pid=ImgRaw&r=0"
+                                src={loggedInUser.avatarImageUrl}
                                 alt=""
                                 className="rounded-circle"
                             />
                             <span className="d-none d-md-block dropdown-toggle ps-2">
-                                Nguyễn Việt Hoàng
+                                {loggedInUser.username}
                             </span>
                         </a>
 
                         <ul className="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
                             <li className="dropdown-header">
-                                <h6>Nguyễn Việt Hoàng</h6>
-                                <span>Sinh viên</span>
+                                <h6>{`${loggedInUser.firstName} ${loggedInUser.lastName}`}</h6>
+                                <span>{loggedInUser.role}</span>
                             </li>
                             {menuItems &&
                                 menuItems.map((item, index) =>

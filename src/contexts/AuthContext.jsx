@@ -1,12 +1,15 @@
-import { createContext, useState } from "react";
+import { createContext, useReducer, useState } from "react";
+import reducer, { authenticated } from "../store/reducer";
 
 const AuthContext = createContext();
 
-function AuthProvider(children) {
-    const [token, setToken] = useState("");
+function AuthProvider({ children }) {
+    const [state, dispatch] = useReducer(reducer, authenticated);
 
     return (
-        <AuthContext.Provider value={token}>{children}</AuthContext.Provider>
+        <AuthContext.Provider value={[state, dispatch]}>
+            {children}
+        </AuthContext.Provider>
     );
 }
 

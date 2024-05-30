@@ -71,7 +71,7 @@ function UserUpdateTab(props) {
 
     const renderProvinces = items => (
         <select
-            class="form-select"
+            className="form-select"
             aria-label="Default select example"
             onChange={e => setProvince(e.target.value)}
         >
@@ -84,7 +84,7 @@ function UserUpdateTab(props) {
 
     const renderDistricts = items => (
         <select
-            class="form-select"
+            className="form-select"
             aria-label="Default select example"
             onChange={e => setDistrict(e.target.value)}
             disabled={province ? false : true}
@@ -97,7 +97,7 @@ function UserUpdateTab(props) {
 
     const renderCommunes = items => (
         <select
-            class="form-select"
+            className="form-select"
             aria-label="Default select example"
             onChange={e => setCommune(e.target.value)}
             disabled={province && district ? false : true}
@@ -110,64 +110,69 @@ function UserUpdateTab(props) {
 
     return (
         <div
-            class={`tab-pane fade profile-edit pt-3 ${show && "show active"}`}
+            className={`tab-pane fade profile-edit pt-3 ${
+                show && "show active"
+            }`}
             id="/user/update"
         >
             <form>
-                <div class="row mb-3">
+                <div className="row mb-3">
                     <label
                         for="profileImage"
-                        class="col-md-3 col-lg-3 col-form-label"
+                        className="col-md-3 col-lg-3 col-form-label"
                     >
                         Profile Image
                     </label>
-                    <div class="col-md-9 col-lg-9">
+                    <div className="col-md-9 col-lg-9">
                         <img src="assets/img/profile-img.jpg" alt="Profile" />
-                        <div class="pt-2">
+                        <div className="pt-2">
                             <a
                                 href="#"
-                                class="btn btn-primary btn-sm"
+                                className="btn btn-primary btn-sm"
                                 title="Upload new profile image"
                             >
-                                <i class="bi bi-upload"></i>
+                                <i className="bi bi-upload"></i>
                             </a>
                             <a
                                 href="#"
-                                class="btn btn-danger btn-sm"
+                                className="btn btn-danger btn-sm"
                                 title="Remove my profile image"
                             >
-                                <i class="bi bi-trash"></i>
+                                <i className="bi bi-trash"></i>
                             </a>
                         </div>
                     </div>
                 </div>
 
-                <div class="row mb-3">
+                <div className="row mb-3">
                     <label
                         for="fullName"
-                        class="col-md-3 col-lg-3 col-form-label"
+                        className="col-md-3 col-lg-3 col-form-label"
                     >
                         Full Name
                     </label>
-                    <div class="col-md-9 col-lg-9">
+                    <div className="col-md-9 col-lg-9">
                         <input
                             name="fullName"
                             type="text"
-                            class="form-control"
+                            className="form-control"
                             id="fullName"
                             value="Kevin Anderson"
                         />
                     </div>
                 </div>
 
-                <div class="row mb-3">
-                    <label for="about" class="col-md-3 col-lg-3 col-form-label">
+                <div className="row mb-3">
+                    <label
+                        for="about"
+                        className="col-md-3 col-lg-3 col-form-label"
+                    >
                         About
                     </label>
-                    <div class="col-md-9 col-lg-9">
+                    <div className="col-md-9 col-lg-9">
                         <textarea
                             name="about"
-                            class="form-control"
+                            className="form-control"
                             id="about"
                             style={{ height: 100 }}
                         >
@@ -180,80 +185,83 @@ function UserUpdateTab(props) {
                     </div>
                 </div>
 
-                <div class="row mb-3">
+                <div className="row mb-3">
                     <label
                         for="company"
-                        class="col-md-3 col-lg-3 col-form-label"
+                        className="col-md-3 col-lg-3 col-form-label"
                     >
                         Company
                     </label>
-                    <div class="col-md-9 col-lg-9">
+                    <div className="col-md-9 col-lg-9">
                         <input
                             name="company"
                             type="text"
-                            class="form-control"
+                            className="form-control"
                             id="company"
                             value="Lueilwitz, Wisoky and Leuschke"
                         />
                     </div>
                 </div>
 
-                <div class="row mb-3">
-                    <label for="Job" class="col-md-3 col-lg-3 col-form-label">
+                <div className="row mb-3">
+                    <label
+                        for="Job"
+                        className="col-md-3 col-lg-3 col-form-label"
+                    >
                         Job
                     </label>
-                    <div class="col-md-9 col-lg-9">
+                    <div className="col-md-9 col-lg-9">
                         <input
                             name="job"
                             type="text"
-                            class="form-control"
+                            className="form-control"
                             id="Job"
                             value="Web Designer"
                         />
                     </div>
                 </div>
 
-                <div class="row mb-3">
+                <div className="row mb-3">
                     <label
                         for="Country"
-                        class="col-md-3 col-lg-3 col-form-label"
+                        className="col-md-3 col-lg-3 col-form-label"
                     >
                         Country
                     </label>
-                    <div class="col-md-9 col-lg-9">
+                    <div className="col-md-9 col-lg-9">
                         <input
                             name="country"
                             type="text"
-                            class="form-control"
+                            className="form-control"
                             id="Country"
                             value="USA"
                         />
                     </div>
                 </div>
 
-                <div class="row mb-3">
+                <div className="row mb-3">
                     <label
                         for="Address"
-                        class="col-md-3 col-lg-3 col-form-label"
+                        className="col-md-3 col-lg-3 col-form-label"
                     >
                         Address
                     </label>
-                    <div class="col-sm-4 col-md-3">
+                    <div className="col-sm-4 col-md-3">
                         {renderProvinces(listItem)}
                     </div>
-                    <div class="col-sm-4 col-md-3">
+                    <div className="col-sm-4 col-md-3">
                         {province ? (
                             renderDistricts(
                                 listItem.find(item => item.title === province)
                                     .child,
                             )
                         ) : (
-                            <select class="form-select">
+                            <select className="form-select">
                                 <option>Quận/Huyện</option>
                             </select>
                         )}
                     </div>
-                    <div class="col-sm-4 col-md-3">
+                    <div className="col-sm-4 col-md-3">
                         {province && district ? (
                             renderCommunes(
                                 listItem
@@ -262,117 +270,123 @@ function UserUpdateTab(props) {
                                     .child,
                             )
                         ) : (
-                            <select class="form-select">
+                            <select className="form-select">
                                 <option>Xã/Phường</option>
                             </select>
                         )}
                     </div>
                 </div>
 
-                <div class="row mb-3">
-                    <label for="Phone" class="col-md-3 col-lg-3 col-form-label">
+                <div className="row mb-3">
+                    <label
+                        for="Phone"
+                        className="col-md-3 col-lg-3 col-form-label"
+                    >
                         Phone
                     </label>
-                    <div class="col-md-9 col-lg-9">
+                    <div className="col-md-9 col-lg-9">
                         <input
                             name="phone"
                             type="text"
-                            class="form-control"
+                            className="form-control"
                             id="Phone"
                             value="(436) 486-3538 x29071"
                         />
                     </div>
                 </div>
 
-                <div class="row mb-3">
-                    <label for="Email" class="col-md-3 col-lg-3 col-form-label">
+                <div className="row mb-3">
+                    <label
+                        for="Email"
+                        className="col-md-3 col-lg-3 col-form-label"
+                    >
                         Email
                     </label>
-                    <div class="col-md-9 col-lg-9">
+                    <div className="col-md-9 col-lg-9">
                         <input
                             name="email"
                             type="email"
-                            class="form-control"
+                            className="form-control"
                             id="Email"
                             value="k.anderson@example.com"
                         />
                     </div>
                 </div>
 
-                <div class="row mb-3">
+                <div className="row mb-3">
                     <label
                         for="Twitter"
-                        class="col-md-3 col-lg-3 col-form-label"
+                        className="col-md-3 col-lg-3 col-form-label"
                     >
                         Twitter Profile
                     </label>
-                    <div class="col-md-9 col-lg-9">
+                    <div className="col-md-9 col-lg-9">
                         <input
                             name="twitter"
                             type="text"
-                            class="form-control"
+                            className="form-control"
                             id="Twitter"
                             value="https://twitter.com/#"
                         />
                     </div>
                 </div>
 
-                <div class="row mb-3">
+                <div className="row mb-3">
                     <label
                         for="Facebook"
-                        class="col-md-3 col-lg-3 col-form-label"
+                        className="col-md-3 col-lg-3 col-form-label"
                     >
                         Facebook Profile
                     </label>
-                    <div class="col-md-9 col-lg-9">
+                    <div className="col-md-9 col-lg-9">
                         <input
                             name="facebook"
                             type="text"
-                            class="form-control"
+                            className="form-control"
                             id="Facebook"
                             value="https://facebook.com/#"
                         />
                     </div>
                 </div>
 
-                <div class="row mb-3">
+                <div className="row mb-3">
                     <label
                         for="Instagram"
-                        class="col-md-3 col-lg-3 col-form-label"
+                        className="col-md-3 col-lg-3 col-form-label"
                     >
                         Instagram Profile
                     </label>
-                    <div class="col-md-9 col-lg-9">
+                    <div className="col-md-9 col-lg-9">
                         <input
                             name="instagram"
                             type="text"
-                            class="form-control"
+                            className="form-control"
                             id="Instagram"
                             value="https://instagram.com/#"
                         />
                     </div>
                 </div>
 
-                <div class="row mb-3">
+                <div className="row mb-3">
                     <label
                         for="Linkedin"
-                        class="col-md-3 col-lg-3 col-form-label"
+                        className="col-md-3 col-lg-3 col-form-label"
                     >
                         Linkedin Profile
                     </label>
-                    <div class="col-md-9 col-lg-9">
+                    <div className="col-md-9 col-lg-9">
                         <input
                             name="linkedin"
                             type="text"
-                            class="form-control"
+                            className="form-control"
                             id="Linkedin"
                             value="https://linkedin.com/#"
                         />
                     </div>
                 </div>
 
-                <div class="text-center">
-                    <button type="submit" class="btn btn-primary">
+                <div className="text-center">
+                    <button type="submit" className="btn btn-primary">
                         Save Changes
                     </button>
                 </div>

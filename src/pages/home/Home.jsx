@@ -1,44 +1,63 @@
+import LoginStatisticChart from "../../components/home/LoginStatisticChart";
+import ProductByBrandStatisticChart from "../../components/home/ProductByBrandStatisticChart";
+import RecentActivities from "../../components/home/RecentActivities";
+import SalesCard from "../../components/home/card/SalesCard";
+import RevenueCard from "../../components/home/card/RevenueCard";
+import CustomersCard from "../../components/home/card/CustomersCard";
+import RecentSales from "../../components/home/RecentSales";
+import TopSelling from "../../components/home/TopSelling";
+import WebsiteTrafficChart from "../../components/home/WebsiteTrafficChart";
+import NewsAndUpdatesCard from "../../components/home/NewAndUpdatesCart";
+import TotalLoggedInCard from "../../components/home/card/TotalLoggedInCard";
+
 function Home() {
     return (
         <main id="main" className="main">
-
-            <div className="pagetitle">
-                <h1>Home Page</h1>
-                <nav>
-                    <ol className="breadcrumb">
-                        <li className="breadcrumb-item"><a href="index.html">Home</a></li>
-                        <li className="breadcrumb-item">Pages</li>
-                        <li className="breadcrumb-item active">Home</li>
-                    </ol>
-                </nav>
-            </div>
-
-            <section className="section">
+            <section className="section dashboard">
                 <div className="row">
-                    <div className="col-lg-6">
+                    <div className="col-lg-8">
+                        <div className="row">
+                            <div className="col-xxl-6 col-md-6">
+                                <SalesCard />
+                            </div>
 
-                        <div className="card">
-                            <div className="card-body">
-                                <h5 className="card-title">Example Card</h5>
-                                <p>This is an examle page with no contrnt. You can use it as a starter for your custom pages.</p>
+                            <div className="col-xxl-6 col-md-6">
+                                <CustomersCard />
+                            </div>
+
+                            <div className="col-xxl-6 col-md-6">
+                                <RevenueCard />
+                            </div>
+
+                            <div className="col-xxl-6 col-md-6">
+                                <TotalLoggedInCard />
+                            </div>
+
+                            <div className="col-12">
+                                <LoginStatisticChart />
+                            </div>
+
+                            <div className="col-12">
+                                <RecentSales />
+                            </div>
+
+                            <div className="col-12">
+                                <TopSelling />
                             </div>
                         </div>
-
                     </div>
 
-                    <div className="col-lg-6">
+                    <div className="col-lg-4">
+                        <RecentActivities />
 
-                        <div className="card">
-                            <div className="card-body">
-                                <h5 className="card-title">Example Card</h5>
-                                <p>This is an examle page with no contrnt. You can use it as a starter for your custom pages.</p>
-                            </div>
-                        </div>
+                        <ProductByBrandStatisticChart />
 
+                        <WebsiteTrafficChart />
+
+                        <NewsAndUpdatesCard />
                     </div>
                 </div>
             </section>
-
         </main>
     );
 }

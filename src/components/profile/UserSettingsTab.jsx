@@ -9,60 +9,66 @@ function UserSettingsTab(props) {
 
     return (
         <div
-            class={`tab-pane fade pt-3 ${show && "show active"}`}
+            className={`tab-pane fade pt-3 ${show && "show active"}`}
             id="/user/settings"
         >
             <form>
-                <div class="row mb-3">
+                <div className="row mb-3">
                     <label
                         for="fullName"
-                        class="col-md-4 col-lg-3 col-form-label"
+                        className="col-md-4 col-lg-3 col-form-label"
                     >
                         Email Notifications
                     </label>
-                    <div class="col-md-8 col-lg-9">
-                        <div class="form-check">
+                    <div className="col-md-8 col-lg-9">
+                        <div className="form-check">
                             <input
-                                class="form-check-input"
+                                className="form-check-input"
                                 type="checkbox"
                                 id="changesMade"
                                 checked
                             />
-                            <label class="form-check-label" for="changesMade">
+                            <label
+                                className="form-check-label"
+                                for="changesMade"
+                            >
                                 Changes made to your account
                             </label>
                         </div>
-                        <div class="form-check">
+                        <div className="form-check">
                             <input
-                                class="form-check-input"
+                                className="form-check-input"
                                 type="checkbox"
                                 id="newProducts"
                                 checked
                             />
-                            <label class="form-check-label" for="newProducts">
+                            <label
+                                className="form-check-label"
+                                for="newProducts"
+                            >
                                 Information on new products and services
                             </label>
                         </div>
-                        <div class="form-check">
+                        <div className="form-check">
                             <input
-                                class="form-check-input"
+                                className="form-check-input"
                                 type="checkbox"
                                 id="proOffers"
                             />
-                            <label class="form-check-label" for="proOffers">
+                            <label className="form-check-label" for="proOffers">
                                 Marketing and promo offers
                             </label>
                         </div>
-                        <div class="form-check">
+                        <div className="form-check">
                             <input
-                                class="form-check-input"
+                                className="form-check-input"
                                 type="checkbox"
                                 id="securityNotify"
                                 checked
                                 disabled
                             />
                             <label
-                                class="form-check-label"
+                                className="form-check-label"
                                 for="securityNotify"
                             >
                                 Security alerts
@@ -71,8 +77,8 @@ function UserSettingsTab(props) {
                     </div>
                 </div>
 
-                <div class="text-center">
-                    <button type="submit" class="btn btn-primary">
+                <div className="text-center">
+                    <button type="submit" className="btn btn-primary">
                         Save Changes
                     </button>
                 </div>

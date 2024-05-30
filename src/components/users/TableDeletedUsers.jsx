@@ -60,7 +60,7 @@ function TableDeletedUsers(props) {
                     variant="info"
                     onClick={() => handleShowUserInfoModal(item)}
                 >
-                    <i class="bi bi-eye"></i>
+                    <i className="bi bi-eye"></i>
                 </Button>
                 <Button
                     variant="success"
@@ -68,7 +68,7 @@ function TableDeletedUsers(props) {
                     className="mx-2"
                     onClick={() => handleShowRestoreUserModal(item)}
                 >
-                    <i class="bi bi-arrow-counterclockwise"></i>
+                    <i className="bi bi-arrow-counterclockwise"></i>
                 </Button>
                 <Button
                     variant="danger"
@@ -76,7 +76,7 @@ function TableDeletedUsers(props) {
                     size="sm"
                     onClick={() => handleShowPermanentlyDeleteUserModal(item)}
                 >
-                    <i class="bi bi-trash"></i>
+                    <i className="bi bi-trash"></i>
                 </Button>
             </td>
         </tr>
