@@ -4,22 +4,14 @@ import { Button } from "react-bootstrap";
 import UserInfoModal from "./UserInfoModal";
 import UpdateUserInfoModal from "./UpdateUserInfoModal";
 import ChangeUserPasswordModal from "./ChangeUserPasswordModal";
-import TemporarilyDeleteUserModal from "./TemporarilyDeleteUserModal";
+import SoftDeleteUserModal from "./SoftDeleteUserModal";
 
 function TableActiveUsers(props) {
-    const {
-        users,
-        pageIndex,
-        pageSize,
-        totalItems,
-        totalPages,
-        handleUpdateTable,
-        getUsers,
-    } = props;
+    const { users, pageIndex, totalPages, handleUpdateTable, getUsers } = props;
 
     const [targetUser, setTargetUser] = useState({});
 
-    const [showTemporarilyDeleteUserModal, setShowTemporarilyDeleteUserModal] =
+    const [showSoftDeleteUserModal, setShowSoftDeleteUserModal] =
         useState(false);
     const [showUserInfoModal, setShowUserInfoModal] = useState(false);
     const [showUpdateUserInfoModal, setShowUpdateUserInfoModal] =
@@ -27,12 +19,12 @@ function TableActiveUsers(props) {
     const [showChangeUserPasswordModal, setShowChangeUserPasswordModal] =
         useState(false);
 
-    const handleCloseTemorarilyDeleteUserModal = () =>
-        setShowTemporarilyDeleteUserModal(false);
+    const handleCloseSoftDeleteUserModal = () =>
+        setShowSoftDeleteUserModal(false);
 
-    const handleTemporarilyDeleteUser = item => {
+    const handleSoftDeleteUser = item => {
         setTargetUser(item);
-        setShowTemporarilyDeleteUserModal(true);
+        setShowSoftDeleteUserModal(true);
     };
 
     const handleShowUserInfoModal = item => {
@@ -109,7 +101,7 @@ function TableActiveUsers(props) {
                 <Button
                     variant="danger"
                     size="sm"
-                    onClick={() => handleTemporarilyDeleteUser(item)}
+                    onClick={() => handleSoftDeleteUser(item)}
                     className="mx-2"
                 >
                     <i className="bi bi-trash"></i>
@@ -180,9 +172,9 @@ function TableActiveUsers(props) {
                 targetUser={targetUser}
             />
 
-            <TemporarilyDeleteUserModal
-                show={showTemporarilyDeleteUserModal}
-                handleClose={handleCloseTemorarilyDeleteUserModal}
+            <SoftDeleteUserModal
+                show={showSoftDeleteUserModal}
+                handleClose={handleCloseSoftDeleteUserModal}
                 targetUser={targetUser}
                 currentPageIndex={pageIndex}
                 handleUpdateTable={handleUpdateTable}

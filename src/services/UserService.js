@@ -3,9 +3,9 @@ import axios from "axios";
 const BASE_URL = "http://localhost:8080";
 
 const accessToken =
-    "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ2aWV0aG9hbmd2aXBwcm9tYXgiLCJpYXQiOjE3MTM1ODgyNTcsImV4cCI6MTcxMzY3NDY1N30.rd0f0YL5F4LDSLEB-pz09Yp5y1ISDfZZAXvtN-gawbQ";
+    "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ2aWV0aG9hbmciLCJpYXQiOjE3MTM5MzU2NTMsImV4cCI6MTcxNDAyMjA1M30.wpLFeR_4iqLo4u29ICTy3Amct79x52vx1Z-E9KBiI3g";
 
-const lang = "en";
+const lang = "vi";
 
 const headers = {
     Authorization: "Bearer " + accessToken,
@@ -45,9 +45,9 @@ const addNewUser = (
     );
 };
 
-const temporarilyDeleteUser = user =>
+const softDeleteUser = user =>
     axios.patch(
-        BASE_URL + "/api/v1/users/temporarily-delete/" + user.id,
+        BASE_URL + "/api/v1/users/soft-delete/" + user.id,
         {},
         {
             headers,
@@ -69,8 +69,8 @@ const updateUserInfo = (user, firstName, lastName, email, phoneNumber) =>
 const restoreUser = user =>
     axios.patch(BASE_URL + `/api/v1/users/restore/${user.id}`, {}, { headers });
 
-const permanentlyDeleteUser = user =>
-    axios.delete(BASE_URL + `/api/v1/users/permanently-delete/${user.id}`, {
+const hardDeleteUser = user =>
+    axios.delete(BASE_URL + `/api/v1/users/hard-delete/${user.id}`, {
         headers,
     });
 
@@ -89,10 +89,10 @@ const changeUserPassword = (
 export {
     fetchAllActiveUsers,
     fetchAllDeletedUsers,
-    temporarilyDeleteUser,
+    softDeleteUser,
     updateUserInfo,
     addNewUser,
     restoreUser,
-    permanentlyDeleteUser,
+    hardDeleteUser,
     changeUserPassword,
 };

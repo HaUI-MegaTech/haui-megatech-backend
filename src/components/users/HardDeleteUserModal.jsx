@@ -1,8 +1,8 @@
 import { Button, Modal } from "react-bootstrap";
-import { permanentlyDeleteUser } from "../../services/UserService";
+import { hardDeleteUser } from "../../services/UserService";
 import { toast } from "react-toastify";
 
-function PermanentlyDeleteUserModal(props) {
+function HardDeleteUserModal(props) {
     const {
         show,
         handleClose,
@@ -11,8 +11,8 @@ function PermanentlyDeleteUserModal(props) {
         handleUpdateTable,
     } = props;
 
-    const handlePermanentlyDeleteUser = () => {
-        permanentlyDeleteUser(targetUser)
+    const handleHardDeleteUser = () => {
+        hardDeleteUser(targetUser)
             .then(response => {
                 console.log(response);
                 if (response.status === 200) {
@@ -29,7 +29,7 @@ function PermanentlyDeleteUserModal(props) {
     return (
         <Modal show={show} onHide={handleClose}>
             <Modal.Header closeButton className="bg-danger text-white">
-                <Modal.Title>Permanently delete user</Modal.Title>
+                <Modal.Title>Hard delete user</Modal.Title>
             </Modal.Header>
             <Modal.Body>
                 Bạn có chắc chắn xoá vĩnh viễn người dùng{" "}
@@ -43,7 +43,7 @@ function PermanentlyDeleteUserModal(props) {
                 <Button variant="secondary" onClick={handleClose}>
                     Huỷ
                 </Button>
-                <Button variant="danger" onClick={handlePermanentlyDeleteUser}>
+                <Button variant="danger" onClick={handleHardDeleteUser}>
                     Xoá vĩnh viễn
                 </Button>
             </Modal.Footer>
@@ -51,4 +51,4 @@ function PermanentlyDeleteUserModal(props) {
     );
 }
 
-export default PermanentlyDeleteUserModal;
+export default HardDeleteUserModal;

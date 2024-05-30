@@ -5,7 +5,7 @@ const accessToken =
 
 const fetchAllProducts = pageIndex => {
     return axios.get(
-        `http://localhost:8080/api/v1/products?pageIndex=${pageIndex}`,
+        `http://localhost:8080/api/v1/products/active?pageIndex=${pageIndex}`,
     );
 };
 

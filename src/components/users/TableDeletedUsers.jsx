@@ -1,21 +1,12 @@
-import { useEffect, useState } from "react";
-import { fetchAllDeletedUsers } from "../../services/UserService";
+import { useState } from "react";
 import ReactPaginate from "react-paginate";
 import UserInfoModal from "./UserInfoModal";
 import { Button } from "react-bootstrap";
 import RestoreUserModal from "./RestoreUserModal";
-import PermanentlyDeleteUserModal from "./PermanentlyDeleteUserModal";
+import HardDeleteUserModal from "./HardDeleteUserModal";
 
 function TableDeletedUsers(props) {
-    const {
-        users,
-        pageIndex,
-        pageSize,
-        totalItems,
-        totalPages,
-        handleUpdateTable,
-        getUsers,
-    } = props;
+    const { users, pageIndex, totalPages, handleUpdateTable, getUsers } = props;
 
     const renderUsers = items => items.map(item => renderUser(item));
 
@@ -145,7 +136,7 @@ function TableDeletedUsers(props) {
                 handleUpdateTable={handleUpdateTable}
             />
 
-            <PermanentlyDeleteUserModal
+            <HardDeleteUserModal
                 show={showPermanentlyDeleteUserModal}
                 handleClose={handleClosePermanentlyUserModal}
                 targetUser={targetUser}

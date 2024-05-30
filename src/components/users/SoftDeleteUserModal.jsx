@@ -1,8 +1,8 @@
 import { Button, Modal } from "react-bootstrap";
-import { temporarilyDeleteUser } from "../../services/UserService";
+import { softDeleteUser } from "../../services/UserService";
 import { toast } from "react-toastify";
 
-function TemporarilyDeleteUserModal(props) {
+function SoftDeleteUserModal(props) {
     const {
         show,
         handleClose,
@@ -11,8 +11,8 @@ function TemporarilyDeleteUserModal(props) {
         handleUpdateTable,
     } = props;
 
-    const handleTemporarilyDeleteUser = () => {
-        temporarilyDeleteUser(targetUser)
+    const handleSoftDeleteUser = () => {
+        softDeleteUser(targetUser)
             .then(response => {
                 if (response && response.status === 200) {
                     toast.success(response.data.message);
@@ -43,10 +43,7 @@ function TemporarilyDeleteUserModal(props) {
                     <Button variant="secondary" onClick={handleClose}>
                         Huỷ
                     </Button>
-                    <Button
-                        variant="danger"
-                        onClick={handleTemporarilyDeleteUser}
-                    >
+                    <Button variant="danger" onClick={handleSoftDeleteUser}>
                         Xác nhận xoá
                     </Button>
                 </Modal.Footer>
@@ -55,4 +52,4 @@ function TemporarilyDeleteUserModal(props) {
     );
 }
 
-export default TemporarilyDeleteUserModal;
+export default SoftDeleteUserModal;
