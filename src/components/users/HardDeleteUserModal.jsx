@@ -14,15 +14,14 @@ function HardDeleteUserModal(props) {
     const handleHardDeleteUser = () => {
         hardDeleteUser(targetUser)
             .then(response => {
-                console.log(response);
-                if (response.status === 200) {
-                    toast.success(response.data.data.message);
+                if (response && response.status === 200) {
+                    toast.success(response.data.meta.message);
                     handleClose();
                     handleUpdateTable(currentPageIndex);
                 }
             })
             .catch(error => {
-                toast.error(error.response.data.data.message);
+                toast.error(error.response.data.meta.message);
             });
     };
 

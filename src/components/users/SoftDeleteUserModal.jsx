@@ -15,13 +15,13 @@ function SoftDeleteUserModal(props) {
         softDeleteUser(targetUser)
             .then(response => {
                 if (response && response.status === 200) {
-                    toast.success(response.data.data.message);
+                    toast.success(response.data.meta.message);
                     handleClose();
                     handleUpdateTable();
                 }
             })
             .catch(error => {
-                toast.error(error.response.data.data.message);
+                toast.error(error.response.data.meta.message);
             });
     };
 
