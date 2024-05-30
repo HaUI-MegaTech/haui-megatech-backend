@@ -103,11 +103,11 @@ function TableDeletedUsers(props) {
             <div>
                 <ReactPaginate
                     breakLabel="..."
-                    nextLabel="next >"
+                    nextLabel=">"
                     onPageChange={handlePageClick}
                     pageRangeDisplayed={5}
                     pageCount={totalPages}
-                    previousLabel="< previous"
+                    previousLabel="<"
                     pageClassName="page-item"
                     pageLinkClassName="page-link"
                     previousClassName="page-item"

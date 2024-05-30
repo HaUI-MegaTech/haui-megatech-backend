@@ -15,7 +15,7 @@ function UserSettingsTab(props) {
             <form>
                 <div className="row mb-3">
                     <label
-                        for="fullName"
+                        htmlFor="fullName"
                         className="col-md-4 col-lg-3 col-form-label"
                     >
                         Email Notifications
@@ -30,7 +30,7 @@ function UserSettingsTab(props) {
                             />
                             <label
                                 className="form-check-label"
-                                for="changesMade"
+                                htmlFor="changesMade"
                             >
                                 Changes made to your account
                             </label>
@@ -44,7 +44,7 @@ function UserSettingsTab(props) {
                             />
                             <label
                                 className="form-check-label"
-                                for="newProducts"
+                                htmlFor="newProducts"
                             >
                                 Information on new products and services
                             </label>
@@ -55,7 +55,10 @@ function UserSettingsTab(props) {
                                 type="checkbox"
                                 id="proOffers"
                             />
-                            <label className="form-check-label" for="proOffers">
+                            <label
+                                className="form-check-label"
+                                htmlFor="proOffers"
+                            >
                                 Marketing and promo offers
                             </label>
                         </div>
@@ -69,7 +72,7 @@ function UserSettingsTab(props) {
                             />
                             <label
                                 className="form-check-label"
-                                for="securityNotify"
+                                htmlFor="securityNotify"
                             >
                                 Security alerts
                             </label>

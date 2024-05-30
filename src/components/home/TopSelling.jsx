@@ -75,7 +75,7 @@ function TopSelling() {
                             <th scope="col">Tên sản phẩm</th>
                             <th scope="col">Giá bán</th>
                             <th scope="col">Đã bán</th>
-                            <th scope="col">lợi nhuận</th>
+                            <th scope="col">Lợi nhuận</th>
                         </tr>
                     </thead>
                     <tbody>{data && renderTopSoldProductItems(data)}</tbody>

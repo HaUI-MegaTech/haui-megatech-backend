@@ -14,20 +14,21 @@ function Login() {
         console.log(loading);
         await authenticate({ username, password })
             .then(response => {
+                console.log(response);
                 // setInterval(() => {
                 //     console.log(Math.random());
                 //     localStorage.setItem("test", Math.random());
                 // }, 1000);
-                if (response && response.status === 200) {
+                if (response && response.data.meta.status === "SUCCESS") {
                     localStorage.setItem(
                         "accessToken",
-                        response.data.accessToken,
+                        response.data.data.accessToken,
                     );
                     localStorage.setItem(
                         "loggedInUser",
-                        JSON.stringify(response.data.loggedInUser),
+                        JSON.stringify(response.data.data.loggedInUser),
                     );
-                    toast.success(response.data.message);
+                    toast.success(response.data.meta.message);
                     dispatch(logIn());
                 }
             })

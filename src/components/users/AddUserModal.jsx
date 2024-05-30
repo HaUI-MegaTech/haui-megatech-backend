@@ -41,7 +41,7 @@ function AddUserModal(props) {
                 <Modal.Title>Thêm mới người dùng</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <label for="username" className="form-label">
+                <label htmlFor="username" className="form-label">
                     Tên đăng nhập
                 </label>
                 <input
@@ -52,7 +52,7 @@ function AddUserModal(props) {
                     value={username}
                 />
 
-                <label for="firstName" className="form-label">
+                <label htmlFor="firstName" className="form-label">
                     Tên
                 </label>
                 <input
@@ -63,7 +63,7 @@ function AddUserModal(props) {
                     value={firstName}
                 />
 
-                <label for="lastName" className="form-label">
+                <label htmlFor="lastName" className="form-label">
                     Họ đệm
                 </label>
                 <input
@@ -74,7 +74,7 @@ function AddUserModal(props) {
                     value={lastName}
                 />
 
-                <label for="password" className="form-label">
+                <label htmlFor="password" className="form-label">
                     Mật khẩu
                 </label>
                 <input
@@ -85,7 +85,7 @@ function AddUserModal(props) {
                     value={password}
                 />
 
-                <label for="confirmPassword" className="form-label">
+                <label htmlFor="confirmPassword" className="form-label">
                     Xác nhận mật khẩu
                 </label>
                 <input

@@ -118,7 +118,7 @@ function UserUpdateTab(props) {
             <form>
                 <div className="row mb-3">
                     <label
-                        for="profileImage"
+                        htmlFor="profileImage"
                         className="col-md-3 col-lg-3 col-form-label"
                     >
                         Profile Image
@@ -146,7 +146,7 @@ function UserUpdateTab(props) {
 
                 <div className="row mb-3">
                     <label
-                        for="fullName"
+                        htmlFor="fullName"
                         className="col-md-3 col-lg-3 col-form-label"
                     >
                         Full Name
@@ -164,7 +164,7 @@ function UserUpdateTab(props) {
 
                 <div className="row mb-3">
                     <label
-                        for="about"
+                        htmlFor="about"
                         className="col-md-3 col-lg-3 col-form-label"
                     >
                         About
@@ -187,7 +187,7 @@ function UserUpdateTab(props) {
 
                 <div className="row mb-3">
                     <label
-                        for="company"
+                        htmlFor="company"
                         className="col-md-3 col-lg-3 col-form-label"
                     >
                         Company
@@ -205,7 +205,7 @@ function UserUpdateTab(props) {
 
                 <div className="row mb-3">
                     <label
-                        for="Job"
+                        htmlFor="Job"
                         className="col-md-3 col-lg-3 col-form-label"
                     >
                         Job
@@ -223,7 +223,7 @@ function UserUpdateTab(props) {
 
                 <div className="row mb-3">
                     <label
-                        for="Country"
+                        htmlFor="Country"
                         className="col-md-3 col-lg-3 col-form-label"
                     >
                         Country
@@ -241,7 +241,7 @@ function UserUpdateTab(props) {
 
                 <div className="row mb-3">
                     <label
-                        for="Address"
+                        htmlFor="Address"
                         className="col-md-3 col-lg-3 col-form-label"
                     >
                         Address
@@ -279,7 +279,7 @@ function UserUpdateTab(props) {
 
                 <div className="row mb-3">
                     <label
-                        for="Phone"
+                        htmlFor="Phone"
                         className="col-md-3 col-lg-3 col-form-label"
                     >
                         Phone
@@ -297,7 +297,7 @@ function UserUpdateTab(props) {
 
                 <div className="row mb-3">
                     <label
-                        for="Email"
+                        htmlFor="Email"
                         className="col-md-3 col-lg-3 col-form-label"
                     >
                         Email
@@ -315,7 +315,7 @@ function UserUpdateTab(props) {
 
                 <div className="row mb-3">
                     <label
-                        for="Twitter"
+                        htmlFor="Twitter"
                         className="col-md-3 col-lg-3 col-form-label"
                     >
                         Twitter Profile
@@ -333,7 +333,7 @@ function UserUpdateTab(props) {
 
                 <div className="row mb-3">
                     <label
-                        for="Facebook"
+                        htmlFor="Facebook"
                         className="col-md-3 col-lg-3 col-form-label"
                     >
                         Facebook Profile
@@ -351,7 +351,7 @@ function UserUpdateTab(props) {
 
                 <div className="row mb-3">
                     <label
-                        for="Instagram"
+                        htmlFor="Instagram"
                         className="col-md-3 col-lg-3 col-form-label"
                     >
                         Instagram Profile
@@ -369,7 +369,7 @@ function UserUpdateTab(props) {
 
                 <div className="row mb-3">
                     <label
-                        for="Linkedin"
+                        htmlFor="Linkedin"
                         className="col-md-3 col-lg-3 col-form-label"
                     >
                         Linkedin Profile

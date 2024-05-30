@@ -15,7 +15,7 @@ function UserChangePasswordTab(props) {
             <form>
                 <div className="row mb-3">
                     <label
-                        for="currentPassword"
+                        htmlFor="currentPassword"
                         className="col-md-4 col-lg-3 col-form-label"
                     >
                         Current Password
@@ -32,7 +32,7 @@ function UserChangePasswordTab(props) {
 
                 <div className="row mb-3">
                     <label
-                        for="newPassword"
+                        htmlFor="newPassword"
                         className="col-md-4 col-lg-3 col-form-label"
                     >
                         New Password
@@ -49,7 +49,7 @@ function UserChangePasswordTab(props) {
 
                 <div className="row mb-3">
                     <label
-                        for="renewPassword"
+                        htmlFor="renewPassword"
                         className="col-md-4 col-lg-3 col-form-label"
                     >
                         Re-enter New Password
