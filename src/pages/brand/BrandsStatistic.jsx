@@ -4,6 +4,8 @@ import BrandSoldColumnChart from "../../components/brands/BrandSoldColumnChart";
 import BrandSoldPieChart from "../../components/brands/BrandSoldPieChart";
 import BrandViewColumnChart from "../../components/brands/BrandViewColumnChart";
 import BrandViewPieChart from "../../components/brands/BrandViewPieChart";
+import OrderByAdminRegionBarChart from "../../components/orders/OrderByAdminRegionBarChart";
+import OrderByMonthAreaChart from "../../components/orders/OrderByMonthAreaChart";
 
 function BrandsStatistic() {
     return (
@@ -51,6 +53,15 @@ function BrandsStatistic() {
 
                     <div className="col-lg-6">
                         <BrandViewPieChart />
+                    </div>
+                </div>
+                <div className="row">
+                    <div className="col-lg-6">
+                        <OrderByMonthAreaChart />
+                    </div>
+
+                    <div className="col-lg-6">
+                        <OrderByAdminRegionBarChart />
                     </div>
                 </div>
             </section>
