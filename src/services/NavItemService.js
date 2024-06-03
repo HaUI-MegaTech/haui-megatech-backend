@@ -56,16 +56,21 @@ const navItems = [
             },
             {
                 id: 32,
+                title: "Tạm ẩn",
+                url: BASE_PRODUCT_URL + "/hidden",
+            },
+            {
+                id: 33,
                 title: "Thùng rác",
                 url: BASE_PRODUCT_URL + "/deleted",
             },
             {
-                idL: 33,
+                idL: 34,
                 title: "Thống kê",
                 url: BASE_PRODUCT_URL + "/statistic",
             },
             {
-                id: 34,
+                id: 35,
                 title: "Lịch sử",
                 url: BASE_PRODUCT_URL + "/history",
             },

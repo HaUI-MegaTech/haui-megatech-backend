@@ -23,24 +23,8 @@ const fetchAllDeletedUsers = pageIndex =>
         headers,
     });
 
-const addNewUser = (
-    username,
-    firstName,
-    lastName,
-    password,
-    confirmPassword,
-) => {
-    return axios.post(
-        BASE_URL + "/api/v1/users",
-        {
-            username,
-            firstName,
-            lastName,
-            password,
-            confirmPassword,
-        },
-        { headers },
-    );
+const addNewUser = payload => {
+    return axios.post(BASE_URL + "/api/v1/users", payload, { headers });
 };
 
 const softDeleteUser = user =>
@@ -87,6 +71,13 @@ const changeUserPassword = (
 const getOneUser = id =>
     axios.get(BASE_URL + `/api/v1/users/${id}`, { headers });
 
+const resetUserPassword = payload =>
+    axios.patch(
+        BASE_URL + `/api/v1/users/reset-password/${payload.id}`,
+        {},
+        { headers },
+    );
+
 export {
     fetchAllActiveUsers,
     fetchAllDeletedUsers,
@@ -97,4 +88,5 @@ export {
     hardDeleteUser,
     changeUserPassword,
     getOneUser,
+    resetUserPassword,
 };

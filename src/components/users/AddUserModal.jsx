@@ -10,6 +10,7 @@ function AddUserModal(props) {
     const [lastName, setLastName] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
+    const [email, setEmail] = useState("");
 
     const clearInput = () => {
         setUsername("");
@@ -17,10 +18,18 @@ function AddUserModal(props) {
         setLastName("");
         setPassword("");
         setConfirmPassword("");
+        setEmail("");
     };
 
     const handleAddUser = () => {
-        addNewUser(username, firstName, lastName, password, confirmPassword)
+        addNewUser({
+            username,
+            firstName,
+            lastName,
+            password,
+            confirmPassword,
+            email,
+        })
             .then(response => {
                 console.log(response);
                 if (response && response.status === 201) {
@@ -31,6 +40,7 @@ function AddUserModal(props) {
                 }
             })
             .catch(error => {
+                console.log(error);
                 toast.error(error.response.data.meta.message);
             });
     };
@@ -91,9 +101,20 @@ function AddUserModal(props) {
                 <input
                     type="password"
                     id="confirmPassword"
-                    className="form-control"
+                    className="form-control mb-3"
                     onChange={e => setConfirmPassword(e.target.value)}
                     value={confirmPassword}
+                />
+
+                <label htmlFor="email" className="form-label">
+                    Email
+                </label>
+                <input
+                    type="text"
+                    id="email"
+                    className="form-control"
+                    onChange={e => setEmail(e.target.value)}
+                    value={email}
                 />
             </Modal.Body>
             <Modal.Footer>
