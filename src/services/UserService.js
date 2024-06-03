@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BASE_URL = "http://localhost:8080";
+import BASE_URL from "./Const";
 
 const accessToken = localStorage.getItem("accessToken");
 
@@ -38,7 +38,7 @@ const softDeleteUser = user =>
 
 const updateUserInfo = (user, firstName, lastName, email, phoneNumber) =>
     axios.put(
-        BASE_URL + `/api/v1/users/${user.id}`,
+        BASE_URL + `/api/v1/users/update-info/${user.id}`,
         {
             firstName,
             lastName,

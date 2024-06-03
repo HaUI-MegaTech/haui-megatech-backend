@@ -1,5 +1,7 @@
 import axios from "axios";
 
+import BASE_URL from "./Const";
+
 const accessToken = localStorage.getItem("accessToken");
 
 const lang = localStorage.getItem("lang");
@@ -10,10 +12,9 @@ const headers = {
 };
 
 const fetchAllProducts = pageIndex => {
-    return axios.get(
-        `http://localhost:8080/api/v1/products/active?index=${pageIndex}`,
-        { headers },
-    );
+    return axios.get(`${BASE_URL}/api/v1/products/active?index=${pageIndex}`, {
+        headers,
+    });
 };
 
 const addNewProduct = (name, price) => {

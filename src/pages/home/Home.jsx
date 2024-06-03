@@ -9,6 +9,7 @@ import TopSelling from "../../components/home/TopSelling";
 import WebsiteTrafficChart from "../../components/home/WebsiteTrafficChart";
 import NewsAndUpdatesCard from "../../components/home/NewAndUpdatesCart";
 import TotalLoggedInCard from "../../components/home/card/TotalLoggedInCard";
+import OrderByMonthAreaChart from "../../components/orders/OrderByMonthAreaChart";
 
 function Home() {
     return (
@@ -35,6 +36,10 @@ function Home() {
 
                             <div className="col-12">
                                 <LoginStatisticChart />
+                            </div>
+
+                            <div className="col-12 mb-4">
+                                <OrderByMonthAreaChart />
                             </div>
 
                             <div className="col-12">

@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BASE_URL = "http://localhost:8080";
+import BASE_URL from "./Const";
 
 const accessToken = localStorage.getItem("accessToken");
 
@@ -23,9 +23,10 @@ const fetchBrandStatistics = () => {
 
 const fetchRecentActivities = () => {
     return axios.get(
-        BASE_URL + "/api/v1/activity-logs",
+        BASE_URL +
+            "/api/v1/activity-logs?index=0&limit=10&direction=desc&fields=id",
         { headers },
-        { index: 0, limit: 6 },
+        {},
     );
 };
 
