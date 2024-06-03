@@ -23,24 +23,8 @@ const fetchAllDeletedUsers = pageIndex =>
         headers,
     });
 
-const addNewUser = (
-    username,
-    firstName,
-    lastName,
-    password,
-    confirmPassword,
-) => {
-    return axios.post(
-        BASE_URL + "/api/v1/users",
-        {
-            username,
-            firstName,
-            lastName,
-            password,
-            confirmPassword,
-        },
-        { headers },
-    );
+const addNewUser = payload => {
+    return axios.post(BASE_URL + "/api/v1/users", payload, { headers });
 };
 
 const softDeleteUser = user =>

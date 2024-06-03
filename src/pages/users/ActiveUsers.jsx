@@ -5,6 +5,8 @@ import TableActiveUsers from "../../components/users/TableActiveUsers";
 import AddUserModal from "../../components/users/AddUserModal";
 import PageTitle from "../../components/shared/PageTitle";
 
+import { CSVLink, CSVDownload } from "react-csv";
+
 function ActiveUsers() {
     const [users, setUsers] = useState([]);
     const [pageIndex, setPageIndex] = useState(0);
@@ -19,6 +21,13 @@ function ActiveUsers() {
     const handleUpdateTable = () => {
         getUsers(pageIndex);
     };
+
+    const csvData = [
+        ["firstname", "lastname", "email"],
+        ["Ahmed", "Tomi", "ah@smthing.co.com"],
+        ["Raed", "Labes", "rl@smthing.co.com"],
+        ["Yezzi", "Min l3b", "ymin@cocococo.com"],
+    ];
 
     const getUsers = pageIndex => {
         fetchAllActiveUsers(pageIndex)
@@ -37,6 +46,11 @@ function ActiveUsers() {
             <div className="row d-flex justify-content-between mb-3">
                 <PageTitle />
                 <div className="col-2 d-flex align-items-center justify-content-end">
+                    <Button variant="success me-2">
+                        <CSVLink data={users} className="text-white">
+                            Export CSV
+                        </CSVLink>
+                    </Button>
                     <Button
                         variant="primary"
                         size="md"
