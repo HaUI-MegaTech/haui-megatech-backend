@@ -71,6 +71,13 @@ const changeUserPassword = (
 const getOneUser = id =>
     axios.get(BASE_URL + `/api/v1/users/${id}`, { headers });
 
+const resetUserPassword = payload =>
+    axios.patch(
+        BASE_URL + `/api/v1/users/reset-password/${payload.id}`,
+        {},
+        { headers },
+    );
+
 export {
     fetchAllActiveUsers,
     fetchAllDeletedUsers,
@@ -81,4 +88,5 @@ export {
     hardDeleteUser,
     changeUserPassword,
     getOneUser,
+    resetUserPassword,
 };

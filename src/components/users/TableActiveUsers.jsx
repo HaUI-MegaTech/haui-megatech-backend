@@ -3,7 +3,7 @@ import ReactPaginate from "react-paginate";
 import { Button } from "react-bootstrap";
 import UserInfoModal from "./UserInfoModal";
 import UpdateUserInfoModal from "./UpdateUserInfoModal";
-import ChangeUserPasswordModal from "./ChangeUserPasswordModal";
+import ChangeUserPasswordModal from "./ResetUserPasswordModal";
 import SoftDeleteUserModal from "./SoftDeleteUserModal";
 
 function TableActiveUsers(props) {

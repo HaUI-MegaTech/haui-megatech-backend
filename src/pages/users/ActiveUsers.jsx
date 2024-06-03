@@ -48,7 +48,7 @@ function ActiveUsers() {
                 <div className="col-2 d-flex align-items-center justify-content-end">
                     <Button variant="success me-2">
                         <CSVLink data={users} className="text-white">
-                            Export CSV
+                            Xuất CSV
                         </CSVLink>
                     </Button>
                     <Button

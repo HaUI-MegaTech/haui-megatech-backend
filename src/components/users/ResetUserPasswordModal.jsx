@@ -1,42 +1,38 @@
 import { useState } from "react";
 import { Button, Form, Modal } from "react-bootstrap";
-import { changeUserPassword } from "../../services/UserService";
+import { resetUserPassword } from "../../services/UserService";
 import { toast } from "react-toastify";
 
-function ChangeUserPasswordModal(props) {
+function ResetUserPasswordModal(props) {
     const { show, handleClose, targetUser } = props;
 
     const [oldPassword, setOldPassword] = useState("");
     const [newPassword, setNewPassword] = useState("");
     const [confirmNewPassword, setConfirmNewPassword] = useState("");
 
-    const handleChangeUserPassword = () => {
-        changeUserPassword(
-            targetUser,
-            oldPassword,
-            newPassword,
-            confirmNewPassword,
-        )
+    const handleResetUserPassword = () => {
+        resetUserPassword(targetUser)
             .then(response => {
-                console.log(response.data.data.message);
+                console.log(response);
                 if (response && response.status === 200) {
-                    toast.success(response.data.data.message);
+                    toast.success(response.data.meta.message);
                     handleClose();
                 }
             })
             .catch(error => {
-                toast.error(error.response.data.data.message);
+                toast.error(error.response.data.meta.message);
             });
     };
 
     return (
         <Modal show={show} onHide={handleClose}>
             <Modal.Header closeButton className="bg-success text-white">
-                <Modal.Title>Change user password</Modal.Title>
+                <Modal.Title>Khôi phục mật khẩu</Modal.Title>
             </Modal.Header>
             <Modal.Body>
+                <p>Bạn có chắc chắc muốn đặt lại mật khẩu cho tài khoản này?</p>
                 <Form>
-                    <Form.Group className="mb-3" controlId="oldPassword">
+                    {/* <Form.Group className="mb-3" controlId="oldPassword">
                         <Form.Label>Old password</Form.Label>
                         <Form.Control
                             type="password"
@@ -61,19 +57,19 @@ function ChangeUserPasswordModal(props) {
                                 setConfirmNewPassword(e.target.value)
                             }
                         />
-                    </Form.Group>
+                    </Form.Group> */}
                 </Form>
             </Modal.Body>
             <Modal.Footer>
                 <Button variant="secondary" onClick={handleClose}>
-                    Close
+                    Đóng
                 </Button>
-                <Button variant="success" onClick={handleChangeUserPassword}>
-                    Save Changes
+                <Button variant="success" onClick={handleResetUserPassword}>
+                    Xác nhận
                 </Button>
             </Modal.Footer>
         </Modal>
     );
 }
 
-export default ChangeUserPasswordModal;
+export default ResetUserPasswordModal;
