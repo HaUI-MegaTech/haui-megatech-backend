@@ -15,6 +15,8 @@ function BrandRevenuePieChart() {
             .catch(err => console.log(err));
     };
 
+    console.log(data);
+
     const state = {
         options: {
             series: data && data.map(item => item.value),
