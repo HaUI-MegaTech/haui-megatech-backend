@@ -58,10 +58,16 @@ const listItem = [
 ];
 
 function UserUpdateTab(props) {
-    const { show } = props;
+    const { show, data } = props;
     const [province, setProvince] = useState();
     const [district, setDistrict] = useState();
     const [conmmue, setCommune] = useState();
+
+    const [firstName, setFirstName] = useState(data.firstName);
+    const [lastName, setLastName] = useState(data.lastName);
+    const [email, setEmail] = useState(data.email);
+    const [phoneNumber, setPhoneNumber] = useState(data.phoneNumber);
+    const [avatarImageUrl, setAvatarImageUrl] = useState(data.avatarImageUrl);
 
     useEffect(() => {
         show && (document.title = "Cập nhật thông tin");
@@ -121,10 +127,10 @@ function UserUpdateTab(props) {
                         htmlFor="profileImage"
                         className="col-md-3 col-lg-3 col-form-label"
                     >
-                        Profile Image
+                        Ảnh đại diện
                     </label>
                     <div className="col-md-9 col-lg-9">
-                        <img src="assets/img/profile-img.jpg" alt="Profile" />
+                        <img src={avatarImageUrl} alt="Profile" />
                         <div className="pt-2">
                             <a
                                 href="#"
@@ -146,105 +152,78 @@ function UserUpdateTab(props) {
 
                 <div className="row mb-3">
                     <label
-                        htmlFor="fullName"
+                        htmlFor="firstName"
                         className="col-md-3 col-lg-3 col-form-label"
                     >
-                        Full Name
+                        Tên
                     </label>
-                    <div className="col-md-9 col-lg-9">
+                    <div className="col-md-3 col-lg-3">
                         <input
-                            name="fullName"
+                            name="firstName"
                             type="text"
                             className="form-control"
-                            id="fullName"
-                            value="Kevin Anderson"
+                            id="firstName"
+                            value={firstName}
+                        />
+                    </div>
+
+                    <label
+                        htmlFor="lastName"
+                        className="col-md-3 col-lg-3 col-form-label"
+                    >
+                        Họ đệm
+                    </label>
+                    <div className="col-md-3 col-lg-3">
+                        <input
+                            name="lastName"
+                            type="text"
+                            className="form-control"
+                            id="lastName"
+                            value={lastName}
                         />
                     </div>
                 </div>
 
                 <div className="row mb-3">
                     <label
-                        htmlFor="about"
+                        htmlFor="email"
                         className="col-md-3 col-lg-3 col-form-label"
                     >
-                        About
+                        Địa chỉ email
                     </label>
-                    <div className="col-md-9 col-lg-9">
-                        <textarea
-                            name="about"
-                            className="form-control"
-                            id="about"
-                            style={{ height: 100 }}
-                        >
-                            Sunt est soluta temporibus accusantium neque nam
-                            maiores cumque temporibus. Tempora libero non est
-                            unde veniam est qui dolor. Ut sunt iure rerum quae
-                            quisquam autem eveniet perspiciatis odit. Fuga sequi
-                            sed ea saepe at unde.
-                        </textarea>
-                    </div>
-                </div>
-
-                <div className="row mb-3">
-                    <label
-                        htmlFor="company"
-                        className="col-md-3 col-lg-3 col-form-label"
-                    >
-                        Company
-                    </label>
-                    <div className="col-md-9 col-lg-9">
+                    <div className="col-md-3 col-lg-3">
                         <input
-                            name="company"
+                            name="email"
                             type="text"
                             className="form-control"
-                            id="company"
-                            value="Lueilwitz, Wisoky and Leuschke"
+                            id="email"
+                            value={email}
+                        />
+                    </div>
+
+                    <label
+                        htmlFor="phoneNumber"
+                        className="col-md-3 col-lg-3 col-form-label"
+                    >
+                        Số điện thoại
+                    </label>
+                    <div className="col-md-3 col-lg-3">
+                        <input
+                            name="phoneNumber"
+                            type="text"
+                            className="form-control"
+                            id="phoneNumber"
+                            value={phoneNumber}
                         />
                     </div>
                 </div>
 
-                <div className="row mb-3">
-                    <label
-                        htmlFor="Job"
-                        className="col-md-3 col-lg-3 col-form-label"
-                    >
-                        Job
-                    </label>
-                    <div className="col-md-9 col-lg-9">
-                        <input
-                            name="job"
-                            type="text"
-                            className="form-control"
-                            id="Job"
-                            value="Web Designer"
-                        />
-                    </div>
-                </div>
-
-                <div className="row mb-3">
-                    <label
-                        htmlFor="Country"
-                        className="col-md-3 col-lg-3 col-form-label"
-                    >
-                        Country
-                    </label>
-                    <div className="col-md-9 col-lg-9">
-                        <input
-                            name="country"
-                            type="text"
-                            className="form-control"
-                            id="Country"
-                            value="USA"
-                        />
-                    </div>
-                </div>
-
-                <div className="row mb-3">
+                {/* <div className="row mb-3">
                     <label
                         htmlFor="Address"
                         className="col-md-3 col-lg-3 col-form-label"
                     >
-                        Address
+                        Địa chỉ
                     </label>
                     <div className="col-sm-4 col-md-3">
                         {renderProvinces(listItem)}
@@ -275,115 +254,7 @@ function UserUpdateTab(props) {
                             </select>
                         )}
                     </div>
-                </div>
-
-                <div className="row mb-3">
-                    <label
-                        htmlFor="Phone"
-                        className="col-md-3 col-lg-3 col-form-label"
-                    >
-                        Phone
-                    </label>
-                    <div className="col-md-9 col-lg-9">
-                        <input
-                            name="phone"
-                            type="text"
-                            className="form-control"
-                            id="Phone"
-                            value="(436) 486-3538 x29071"
-                        />
-                    </div>
-                </div>
-
-                <div className="row mb-3">
-                    <label
-                        htmlFor="Email"
-                        className="col-md-3 col-lg-3 col-form-label"
-                    >
-                        Email
-                    </label>
-                    <div className="col-md-9 col-lg-9">
-                        <input
-                            name="email"
-                            type="email"
-                            className="form-control"
-                            id="Email"
-                            value="k.anderson@example.com"
-                        />
-                    </div>
-                </div>
-
-                <div className="row mb-3">
-                    <label
-                        htmlFor="Twitter"
-                        className="col-md-3 col-lg-3 col-form-label"
-                    >
-                        Twitter Profile
-                    </label>
-                    <div className="col-md-9 col-lg-9">
-                        <input
-                            name="twitter"
-                            type="text"
-                            className="form-control"
-                            id="Twitter"
-                            value="https://twitter.com/#"
-                        />
-                    </div>
-                </div>
-
-                <div className="row mb-3">
-                    <label
-                        htmlFor="Facebook"
-                        className="col-md-3 col-lg-3 col-form-label"
-                    >
-                        Facebook Profile
-                    </label>
-                    <div className="col-md-9 col-lg-9">
-                        <input
-                            name="facebook"
-                            type="text"
-                            className="form-control"
-                            id="Facebook"
-                            value="https://facebook.com/#"
-                        />
-                    </div>
-                </div>
-
-                <div className="row mb-3">
-                    <label
-                        htmlFor="Instagram"
-                        className="col-md-3 col-lg-3 col-form-label"
-                    >
-                        Instagram Profile
-                    </label>
-                    <div className="col-md-9 col-lg-9">
-                        <input
-                            name="instagram"
-                            type="text"
-                            className="form-control"
-                            id="Instagram"
-                            value="https://instagram.com/#"
-                        />
-                    </div>
-                </div>
-
-                <div className="row mb-3">
-                    <label
-                        htmlFor="Linkedin"
-                        className="col-md-3 col-lg-3 col-form-label"
-                    >
-                        Linkedin Profile
-                    </label>
-                    <div className="col-md-9 col-lg-9">
-                        <input
-                            name="linkedin"
-                            type="text"
-                            className="form-control"
-                            id="Linkedin"
-                            value="https://linkedin.com/#"
-                        />
-                    </div>
-                </div>
+                </div> */}
 
                 <div className="text-center">
                     <button type="submit" className="btn btn-primary">

@@ -19,11 +19,11 @@ function ActiveUsers() {
     const handleCloseAddUserModal = () => setShowAddUserModal(false);
 
     const handleUpdateTable = () => {
-        getUsers(pageIndex);
+        getUsers(0);
     };
 
-    const getUsers = pageIndex => {
-        fetchAllActiveUsers(pageIndex)
+    const getUsers = data => {
+        fetchAllActiveUsers(data)
             .then(response => {
                 setPageIndex(response.data.meta.pagination.pageIndex);
                 setPageSize(response.data.meta.pagination.pageSize);
@@ -40,7 +40,11 @@ function ActiveUsers() {
                 <PageTitle />
                 <div className="col-2 d-flex align-items-center justify-content-end">
                     <Button variant="success me-2">
-                        <CSVLink data={users} className="text-white">
+                        <CSVLink
+                            data={users}
+                            className="text-white"
+                            filename="user-data"
+                        >
                             Xuất CSV
                         </CSVLink>
                     </Button>

@@ -11,9 +11,9 @@ const headers = {
     "Accept-Language": lang,
 };
 
-const fetchAllActiveUsers = pageIndex => {
+const fetchAllActiveUsers = data => {
     return axios.get(
-        `${BASE_URL}/api/v1/users/active?index=${pageIndex}&limit=10`,
+        `${BASE_URL}/api/v1/users/active?index=${data.index}&limit=${data.limit}&direction=${data.direction}&fields=${data.field}`,
         { headers },
     );
 };

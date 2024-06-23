@@ -7,8 +7,6 @@ function UserDetailTab(prop) {
         show && (document.title = "Thông tin chi tiết");
     }, [show]);
 
-    console.log(data);
-
     return (
         <div
             className={`tab-pane fade profile-overview ${

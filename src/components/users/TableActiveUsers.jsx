@@ -9,6 +9,11 @@ import SoftDeleteUserModal from "./SoftDeleteUserModal";
 function TableActiveUsers(props) {
     const { users, pageIndex, totalPages, handleUpdateTable, getUsers } = props;
 
+    const [index, setIndex] = useState(0);
+    const [field, setField] = useState("id");
+    const [direction, setDirection] = useState("desc");
+    const [limit, setLimit] = useState(10);
+
     const [targetUser, setTargetUser] = useState({});
 
     const [showSoftDeleteUserModal, setShowSoftDeleteUserModal] =
@@ -51,8 +56,8 @@ function TableActiveUsers(props) {
         setShowChangeUserPasswordModal(false);
 
     useEffect(() => {
-        getUsers(0);
-    }, []);
+        getUsers({ index, field, direction, limit });
+    }, [index, direction, field, limit]);
 
     const renderUsers = items => items.map(item => renderUser(item));
 
@@ -116,12 +121,108 @@ function TableActiveUsers(props) {
                 <table className="table table-hover">
                     <thead>
                         <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Tên đăng nhập</th>
-                            <th scope="col">Tên</th>
-                            <th scope="col">Họ đệm</th>
-                            <th scope="col">Hộp thư</th>
-                            <th scope="col">Số điện thoại</th>
+                            <th
+                                scope="col"
+                                onClick={() => {
+                                    direction === "desc"
+                                        ? setDirection("asc")
+                                        : setDirection("desc");
+                                    setField("id");
+                                }}
+                            >
+                                #&nbsp;
+                                {field === "id" &&
+                                    (direction == "desc" ? (
+                                        <i class="bi bi-caret-down-fill"></i>
+                                    ) : (
+                                        <i class="bi bi-caret-up-fill"></i>
+                                    ))}
+                            </th>
+                            <th
+                                scope="col"
+                                onClick={() => {
+                                    direction === "desc"
+                                        ? setDirection("asc")
+                                        : setDirection("desc");
+                                    setField("username");
+                                }}
+                            >
+                                Tên đăng nhập&nbsp;
+                                {field === "username" &&
+                                    (direction == "desc" ? (
+                                        <i class="bi bi-caret-down-fill"></i>
+                                    ) : (
+                                        <i class="bi bi-caret-up-fill"></i>
+                                    ))}
+                            </th>
+                            <th
+                                scope="col"
+                                onClick={() => {
+                                    direction === "desc"
+                                        ? setDirection("asc")
+                                        : setDirection("desc");
+                                    setField("firstName");
+                                }}
+                            >
+                                Tên&nbsp;
+                                {field === "firstName" &&
+                                    (direction == "desc" ? (
+                                        <i class="bi bi-caret-down-fill"></i>
+                                    ) : (
+                                        <i class="bi bi-caret-up-fill"></i>
+                                    ))}
+                            </th>
+                            <th
+                                scope="col"
+                                onClick={() => {
+                                    direction === "desc"
+                                        ? setDirection("asc")
+                                        : setDirection("desc");
+                                    setField("lastName");
+                                }}
+                            >
+                                Họ đệm&nbsp;
+                                {field === "lastName" &&
+                                    (direction == "desc" ? (
+                                        <i class="bi bi-caret-down-fill"></i>
+                                    ) : (
+                                        <i class="bi bi-caret-up-fill"></i>
+                                    ))}
+                            </th>
+                            <th
+                                scope="col"
+                                onClick={() => {
+                                    direction === "desc"
+                                        ? setDirection("asc")
+                                        : setDirection("desc");
+                                    setField("email");
+                                }}
+                            >
+                                Hộp thư&nbsp;
+                                {field === "email" &&
+                                    (direction == "desc" ? (
+                                        <i class="bi bi-caret-down-fill"></i>
+                                    ) : (
+                                        <i class="bi bi-caret-up-fill"></i>
+                                    ))}
+                            </th>
+                            <th
+                                scope="col"
+                                onClick={() => {
+                                    direction === "desc"
+                                        ? setDirection("asc")
+                                        : setDirection("desc");
+                                    setField("phoneNumber");
+                                }}
+                            >
+                                Số điện thoại&nbsp;
+                                {field === "phoneNumber" &&
+                                    (direction == "desc" ? (
+                                        <i class="bi bi-caret-down-fill"></i>
+                                    ) : (
+                                        <i class="bi bi-caret-up-fill"></i>
+                                    ))}
+                            </th>
                             <th scope="col" className="text-center">
                                 Hành động
                             </th>
