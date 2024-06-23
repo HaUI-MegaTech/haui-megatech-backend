@@ -14,6 +14,8 @@ function TableActiveUsers(props) {
     const [direction, setDirection] = useState("desc");
     const [limit, setLimit] = useState(10);
 
+    const limitList = [10, 25, 50, 100];
+
     const [targetUser, setTargetUser] = useState({});
 
     const [showSoftDeleteUserModal, setShowSoftDeleteUserModal] =
@@ -62,7 +64,7 @@ function TableActiveUsers(props) {
     const renderUsers = items => items.map(item => renderUser(item));
 
     const handlePageClick = e => {
-        getUsers(parseInt(e.selected));
+        setIndex(parseInt(e.selected));
     };
 
     const renderUser = item => (
@@ -231,7 +233,25 @@ function TableActiveUsers(props) {
                     <tbody>{renderUsers(users)}</tbody>
                 </table>
             </div>
-            <div>
+            <div className="d-flex justify-content-between align-items-center">
+                <div className="row">
+                    <div className="col-8 d-flex align-items-center">
+                        Số bản ghi trên 1 trang:
+                    </div>
+                    <div className="col-4">
+                        <select
+                            class="form-select w-100"
+                            aria-label="Small select example"
+                            onChange={e => setLimit(e.target.value)}
+                        >
+                            {limitList.map(item => (
+                                <option value={item} selected={limit == item}>
+                                    {item}
+                                </option>
+                            ))}
+                        </select>
+                    </div>
+                </div>
                 <ReactPaginate
                     breakLabel="..."
                     nextLabel=">"
@@ -247,7 +267,7 @@ function TableActiveUsers(props) {
                     nextLinkClassName="page-link"
                     breakClassName="page-item"
                     breakLinkClassName="page-link"
-                    containerClassName="pagination"
+                    containerClassName="pagination mb-0"
                     activeClassName="active"
                     renderOnZeroPageCount={null}
                 />
