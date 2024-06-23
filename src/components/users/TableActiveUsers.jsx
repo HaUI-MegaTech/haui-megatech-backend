@@ -131,6 +131,8 @@ function TableActiveUsers(props) {
                                         : setDirection("desc");
                                     setField("id");
                                 }}
+                                className="text-primary"
+                                style={{ cursor: "pointer" }}
                             >
                                 #&nbsp;
                                 {field === "id" &&
@@ -148,6 +150,8 @@ function TableActiveUsers(props) {
                                         : setDirection("desc");
                                     setField("username");
                                 }}
+                                className="text-primary"
+                                style={{ cursor: "pointer" }}
                             >
                                 Tên đăng nhập&nbsp;
                                 {field === "username" &&
@@ -165,6 +169,8 @@ function TableActiveUsers(props) {
                                         : setDirection("desc");
                                     setField("firstName");
                                 }}
+                                className="text-primary"
+                                style={{ cursor: "pointer" }}
                             >
                                 Tên&nbsp;
                                 {field === "firstName" &&
@@ -182,6 +188,8 @@ function TableActiveUsers(props) {
                                         : setDirection("desc");
                                     setField("lastName");
                                 }}
+                                className="text-primary"
+                                style={{ cursor: "pointer" }}
                             >
                                 Họ đệm&nbsp;
                                 {field === "lastName" &&
@@ -199,6 +207,8 @@ function TableActiveUsers(props) {
                                         : setDirection("desc");
                                     setField("email");
                                 }}
+                                className="text-primary"
+                                style={{ cursor: "pointer" }}
                             >
                                 Hộp thư&nbsp;
                                 {field === "email" &&
@@ -216,6 +226,8 @@ function TableActiveUsers(props) {
                                         : setDirection("desc");
                                     setField("phoneNumber");
                                 }}
+                                className="text-primary"
+                                style={{ cursor: "pointer" }}
                             >
                                 Số điện thoại&nbsp;
                                 {field === "phoneNumber" &&
