@@ -1,5 +1,8 @@
 import { useEffect, useState } from "react";
-import { getActiveProducts } from "../../services/ProductService";
+import {
+    getActiveProducts,
+    getProductDetail,
+} from "../../services/ProductService";
 import ReactPaginate from "react-paginate";
 import { Button } from "react-bootstrap";
 import ProductDetailModal from "./ProductDetailModal";
@@ -25,8 +28,8 @@ function TableProducts(props) {
     };
 
     const handleShowEditProductModal = item => {
-        setTargetItem(item);
         setShowEditProductModal(true);
+        getTargetItem(item.id);
     };
 
     const handleCloseEditProductModal = () => {
@@ -41,6 +44,16 @@ function TableProducts(props) {
 
     const handlePageClick = e => {
         getProducts(parseInt(e.selected));
+    };
+
+    const getTargetItem = id => {
+        getProductDetail(id)
+            .then(res => {
+                if (res && res.status === 200) {
+                    setTargetItem(res.data.data);
+                }
+            })
+            .catch(err => console.log(err));
     };
 
     const renderProduct = item => (
