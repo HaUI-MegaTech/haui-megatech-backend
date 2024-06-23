@@ -276,7 +276,9 @@ function TableDeletedUsers(props) {
                         </th>
                     </tr>
                 </thead>
-                <tbody>{renderUsers(users)}</tbody>
+                <tbody className="table-group-divider">
+                    {renderUsers(users)}
+                </tbody>
             </table>
             <div>
                 <ReactPaginate

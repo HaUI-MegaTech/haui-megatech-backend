@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import PageTitle from "../../components/shared/PageTitle";
 import TableDeletedUsers from "../../components/users/TableDeletedUsers";
 import { fetchAllDeletedUsers } from "../../services/UserService";
+import { keyboard } from "@testing-library/user-event/dist/keyboard";
 
 function DeletedUsers() {
     const [users, setUsers] = useState([]);
@@ -33,7 +34,13 @@ function DeletedUsers() {
     };
 
     const handleUpdateTable = () => {
-        getUsers({ index: 0, limit: 10, field: "id", direction: "desc" });
+        getUsers({
+            index: 0,
+            limit: 10,
+            field: "id",
+            direction: "desc",
+            keyword: "",
+        });
     };
 
     return (
