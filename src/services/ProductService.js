@@ -11,7 +11,7 @@ const headers = {
     "Accept-Language": lang,
 };
 
-const fetchAllProducts = pageIndex => {
+const getActiveProducts = pageIndex => {
     return axios.get(`${BASE_URL}/api/v1/products/active?index=${pageIndex}`, {
         headers,
     });
@@ -20,8 +20,13 @@ const fetchAllProducts = pageIndex => {
 const getProductDetail = id =>
     axios.get(`${BASE_URL}/api/v1/products/${id}`, { headers });
 
+const updateProduct = data =>
+    axios.put(`${BASE_URL}/api/v1/products/update/${data.id}`, data, {
+        headers,
+    });
+
 const addNewProduct = (name, price) => {
     return axios.post;
 };
 
-export { fetchAllProducts, getProductDetail };
+export { getActiveProducts, getProductDetail, updateProduct };

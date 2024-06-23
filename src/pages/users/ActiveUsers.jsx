@@ -10,7 +10,7 @@ import { CSVLink, CSVDownload } from "react-csv";
 function ActiveUsers() {
     const [users, setUsers] = useState([]);
     const [pageIndex, setPageIndex] = useState(0);
-    const [pageSize, setPageSize] = useState(15);
+    const [pageSize, setPageSize] = useState(10);
     const [totalItems, setTotalItems] = useState();
     const [totalPages, setTotalPages] = useState();
     const [showAddUserModal, setShowAddUserModal] = useState(false);

@@ -1,18 +1,19 @@
 import { useEffect, useState } from "react";
-import { fetchAllProducts } from "../../services/ProductService";
+import { getActiveProducts } from "../../services/ProductService";
 import ReactPaginate from "react-paginate";
 import { Button } from "react-bootstrap";
 import ProductDetailModal from "./ProductDetailModal";
+import UpdateUserInfoModal from "../users/UpdateUserInfoModal";
+import UpdateProductModal from "./UpdateProductModal";
 
-function TableProducts() {
-    const [products, setProducts] = useState([]);
-    const [pageIndex, setPageIndex] = useState(0);
-    const [pageSize, setPageSize] = useState(15);
-    const [totalItems, setTotalItems] = useState();
-    const [totalPages, setTotalPages] = useState();
+function TableProducts(props) {
+    const { products, pageIndex, totalPages, handleUpdateTable, getProducts } =
+        props;
+
     const [targetItem, setTargetItem] = useState({});
 
     const [showProductDetailModal, setShowProductDetailModal] = useState(false);
+    const [showEditProductModal, setShowEditProductModal] = useState(false);
 
     const handleShowProductDetailModal = item => {
         setTargetItem(item);
@@ -23,21 +24,18 @@ function TableProducts() {
         setShowProductDetailModal(false);
     };
 
+    const handleShowEditProductModal = item => {
+        setTargetItem(item);
+        setShowEditProductModal(true);
+    };
+
+    const handleCloseEditProductModal = () => {
+        setShowEditProductModal(false);
+    };
+
     useEffect(() => {
         getProducts(0);
     }, []);
-
-    const getProducts = pageIndex => {
-        fetchAllProducts(pageIndex)
-            .then(response => {
-                setPageIndex(response.data.meta.pagination.pageIndex);
-                setPageSize(response.data.meta.pagination.pageSize);
-                setTotalItems(response.data.meta.pagination.totalItems);
-                setTotalPages(response.data.meta.pagination.totalPages);
-                setProducts(response.data.data);
-            })
-            .catch(error => console.log(error));
-    };
 
     const renderProducts = items => items.map(item => renderProduct(item));
 
@@ -66,9 +64,13 @@ function TableProducts() {
                 >
                     <i className="bi bi-eye"></i>
                 </Button>
-                <button type="button" className="btn btn-warning btn-sm mx-2">
-                    <i className="bi bi-pencil-square"></i>
-                </button>
+                <Button
+                    variant="warning"
+                    size="sm"
+                    onClick={() => handleShowEditProductModal(item)}
+                >
+                    <i class="bi bi-pencil-square"></i>
+                </Button>
                 <button type="button" className="btn btn-danger btn-sm mx-2">
                     <i className="bi bi-trash"></i>
                 </button>
@@ -120,6 +122,12 @@ function TableProducts() {
                 show={showProductDetailModal}
                 handleClose={handleCloseProductDetailModal}
                 targetItem={targetItem}
+            />
+            <UpdateProductModal
+                show={showEditProductModal}
+                handleClose={handleCloseEditProductModal}
+                targetItem={targetItem}
+                handleUpdateTable={handleUpdateTable}
             />
         </>
     );

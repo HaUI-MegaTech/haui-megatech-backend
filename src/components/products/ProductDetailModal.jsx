@@ -19,8 +19,6 @@ function ProductDetailModal(props) {
             .catch(err => console.log(err));
     };
 
-    console.log(targetItem);
-
     return (
         <>
             {data && (
@@ -187,7 +185,9 @@ function ProductDetailModal(props) {
                             <div className="col-7">{data.webcam}</div>
                         </div>
                         <div className="row mb-2">
-                            <div className="col-5 label ">Quạt tản nhiệt: </div>
+                            <div className="col-5 label ">
+                                Hệ thống tản nhiệt:{" "}
+                            </div>
                             <div className="col-7">{data.coolingFan}</div>
                         </div>
                         <div className="row mb-2">
@@ -217,7 +217,7 @@ function ProductDetailModal(props) {
                             <div className="col-7">{data.batteryCapacity}</div>
                         </div>
                         <div className="row mb-2">
-                            <div className="col-5 label ">Bộ sạc: </div>
+                            <div className="col-5 label ">Công suất sạc: </div>
                             <div className="col-7">{data.chargerCapacity}</div>
                         </div>
 

@@ -1,6 +1,31 @@
+import { useState } from "react";
 import TableActiveProducts from "../../components/products/TableActiveProducts";
+import { getActiveProducts } from "../../services/ProductService";
 
 function ActiveProducts() {
+    const [products, setProducts] = useState([]);
+    const [pageIndex, setPageIndex] = useState(0);
+    const [pageSize, setPageSize] = useState(10);
+    const [totalItems, setTotalItems] = useState();
+    const [totalPages, setTotalPages] = useState();
+    const [showAddProductModal, setShowAddProductModal] = useState(false);
+
+    const handleUpdateTable = () => {
+        getProducts(0);
+    };
+
+    const getProducts = index => {
+        getActiveProducts(index)
+            .then(response => {
+                setPageIndex(response.data.meta.pagination.pageIndex);
+                setPageSize(response.data.meta.pagination.pageSize);
+                setTotalItems(response.data.meta.pagination.totalItems);
+                setTotalPages(response.data.meta.pagination.totalPages);
+                setProducts(response.data.data);
+            })
+            .catch(error => console.log(error));
+    };
+
     return (
         <main id="main" className="main">
             <div className="pagetitle">
@@ -23,7 +48,15 @@ function ActiveProducts() {
                     <div className="col-12">
                         <div className="card">
                             <div className="card-body pb-0">
-                                <TableActiveProducts />
+                                <TableActiveProducts
+                                    products={products}
+                                    pageIndex={pageIndex}
+                                    pageSize={pageSize}
+                                    totalItems={totalItems}
+                                    totalPages={totalPages}
+                                    handleUpdateTable={handleUpdateTable}
+                                    getProducts={getProducts}
+                                />
                             </div>
                         </div>
                     </div>
