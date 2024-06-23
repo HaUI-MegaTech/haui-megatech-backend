@@ -165,16 +165,18 @@ function UpdateProductModal(props) {
                     <Form.Label>Giá cũ</Form.Label>
                     <Form.Control
                         type="text"
-                        value={oldPrice}
+                        value={oldPrice && oldPrice.toLocaleString("en-US")}
                         onChange={e => setOldPrice(e.target.value)}
                     />
                 </Form.Group>
 
                 <Form.Group className="mb-3" controlId="formCurrentPrice">
-                    <Form.Label>Giá mới</Form.Label>
+                    <Form.Label>Giá hiện tại</Form.Label>
                     <Form.Control
                         type="text"
-                        value={currentPrice}
+                        value={
+                            currentPrice && currentPrice.toLocaleString("en-US")
+                        }
                         onChange={e => setCurrentPrice(e.target.value)}
                     />
                 </Form.Group>

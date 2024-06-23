@@ -188,7 +188,7 @@ function TableProducts(props) {
                     </tr>
                 </thead>
                 <tbody className="table-group-divider">
-                    {renderProducts(products)}
+                    {products && renderProducts(products)}
                 </tbody>
             </table>
             <div>

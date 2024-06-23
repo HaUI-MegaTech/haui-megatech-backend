@@ -51,7 +51,7 @@ function ProductDetailModal(props) {
                             </div>
                         </div>
                         <div className="row mb-2">
-                            <div className="col-5 label ">Giá mới: </div>
+                            <div className="col-5 label ">Giá hiện tại: </div>
                             <div className="col-7">
                                 {data.currentPrice.toLocaleString("en-US")}
                             </div>
