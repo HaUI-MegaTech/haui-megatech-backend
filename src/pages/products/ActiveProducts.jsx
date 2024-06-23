@@ -11,7 +11,13 @@ function ActiveProducts() {
     const [showAddProductModal, setShowAddProductModal] = useState(false);
 
     const handleUpdateTable = () => {
-        getProducts({ index: 0, limit: 10, direction: "desc", field: "id" });
+        getProducts({
+            index: 0,
+            limit: 10,
+            direction: "desc",
+            field: "id",
+            keyword: "",
+        });
     };
 
     const getProducts = data => {

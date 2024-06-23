@@ -18,6 +18,18 @@ function TableProducts(props) {
     const [limit, setLimit] = useState(10);
     const [keyword, setKeyword] = useState();
 
+    const limitList = [10, 25, 50, 100];
+
+    const handleSearch = () => {
+        getProducts({ index, field, direction, limit, keyword });
+        console.log(keyword);
+    };
+
+    const handleCancelSearch = () => {
+        setKeyword("");
+        getProducts({ index, field, direction, limit, keyword: "" });
+    };
+
     const [targetItem, setTargetItem] = useState({});
 
     const [showProductDetailModal, setShowProductDetailModal] = useState(false);
@@ -42,13 +54,13 @@ function TableProducts(props) {
     };
 
     useEffect(() => {
-        getProducts({ index, limit, direction, field });
+        getProducts({ index, limit, direction, field, keyword: "" });
     }, [index, direction, limit, field]);
 
     const renderProducts = items => items.map(item => renderProduct(item));
 
     const handlePageClick = e => {
-        getProducts(parseInt(e.selected));
+        setIndex(parseInt(e.selected));
     };
 
     const getTargetItem = id => {
@@ -102,6 +114,55 @@ function TableProducts(props) {
 
     return (
         <>
+            <div class="row mt-3 mb-3">
+                <div class="col-8">
+                    <div className="row d-flex align-items-center justify-content-start">
+                        <div className="col-3">Số bản ghi trên 1 trang: </div>
+                        <div className="col-2">
+                            <select
+                                class="form-select"
+                                aria-label="Small select example"
+                                onChange={e => setLimit(e.target.value)}
+                            >
+                                {limitList.map(item => (
+                                    <option
+                                        value={item}
+                                        selected={limit == item}
+                                    >
+                                        {item}
+                                    </option>
+                                ))}
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="input-group mb-3">
+                        <input
+                            type="text"
+                            class="form-control"
+                            placeholder="Nhập từ khoá cần tìm"
+                            onChange={e => setKeyword(e.target.value)}
+                            value={keyword}
+                        />
+                        <button
+                            class="btn btn-outline-primary"
+                            type="button"
+                            onClick={handleSearch}
+                        >
+                            Tìm kiếm
+                        </button>
+                        <button
+                            class="btn btn-outline-danger"
+                            type="button"
+                            onClick={handleCancelSearch}
+                        >
+                            Huỷ bỏ
+                        </button>
+                    </div>
+                </div>
+            </div>
+
             <table className="table table-hover">
                 <thead>
                     <tr>
