@@ -1,4 +1,4 @@
-import TableProducts from "../../components/products/TableProducts";
+import TableActiveProducts from "../../components/products/TableActiveProducts";
 
 function ActiveProducts() {
     return (
@@ -23,7 +23,7 @@ function ActiveProducts() {
                     <div className="col-12">
                         <div className="card">
                             <div className="card-body pb-0">
-                                <TableProducts />
+                                <TableActiveProducts />
                             </div>
                         </div>
                     </div>
