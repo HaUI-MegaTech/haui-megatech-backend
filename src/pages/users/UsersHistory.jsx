@@ -1,4 +1,26 @@
+import { useState } from "react";
+import UserHistoryTable from "../../components/users/UserHistoryTable";
+import { getActivityLogs } from "../../services/UserService";
+
 function UsersHistory() {
+    const [items, setItems] = useState([]);
+    const [pageIndex, setPageIndex] = useState(0);
+    const [pageSize, setPageSize] = useState(10);
+    const [totalItems, setTotalItems] = useState();
+    const [totalPages, setTotalPages] = useState();
+
+    const getItems = data => {
+        getActivityLogs(data)
+            .then(response => {
+                setPageIndex(response.data.meta.pagination.pageIndex);
+                setPageSize(response.data.meta.pagination.pageSize);
+                setTotalItems(response.data.meta.pagination.totalItems);
+                setTotalPages(response.data.meta.pagination.totalPages);
+                setItems(response.data.data);
+            })
+            .catch(error => console.log(error));
+    };
+
     return (
         <main id="main" className="main">
             <div className="pagetitle">
@@ -16,28 +38,17 @@ function UsersHistory() {
 
             <section className="section">
                 <div className="row">
-                    <div className="col-lg-6">
+                    <div className="col-12">
                         <div className="card">
                             <div className="card-body">
-                                <h5 className="card-title">Example Card</h5>
-                                <p>
-                                    This is an examle page with no contrnt. You
-                                    can use it as a starter for your custom
-                                    pages.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className="col-lg-6">
-                        <div className="card">
-                            <div className="card-body">
-                                <h5 className="card-title">Example Card</h5>
-                                <p>
-                                    This is an examle page with no contrnt. You
-                                    can use it as a starter for your custom
-                                    pages.
-                                </p>
+                                <UserHistoryTable
+                                    items={items}
+                                    pageIndex={pageIndex}
+                                    pageSize={pageSize}
+                                    totalItems={totalItems}
+                                    totalPages={totalPages}
+                                    getItems={getItems}
+                                />
                             </div>
                         </div>
                     </div>

@@ -16,7 +16,7 @@ const fetchAllActiveUsers = data => {
         `${BASE_URL}/api/v1/users/active?index=${data.index}&limit=${
             data.limit
         }&direction=${data.direction}&fields=${data.field}${
-            data.keyword && "&keyword=" + data.keyword
+            data.keyword ? "&keyword=" + data.keyword : ""
         }`,
         { headers },
     );
@@ -27,7 +27,7 @@ const fetchAllDeletedUsers = data =>
         `${BASE_URL}/api/v1/users/deleted?index=${data.index}&limit=${
             data.limit
         }&direction=${data.direction}&fields=${data.field}${
-            data.keyword && "&keyword=" + data.keyword
+            data.keyword ? "&keyword=" + data.keyword : ""
         }`,
         {
             headers,
@@ -92,6 +92,16 @@ const resetUserPassword = payload =>
 const getMyInfo = () =>
     axios.get(BASE_URL + "/api/v1/users/my-info", { headers });
 
+const getActivityLogs = data =>
+    axios.get(
+        `${BASE_URL}/api/v1/activity-logs?index=${data.index}&limit=${
+            data.limit
+        }&direction=${data.direction}&fields=${data.field}${
+            data.keyword ? "&keyword=" + data.keyword : ""
+        }`,
+        { headers },
+    );
+
 export {
     fetchAllActiveUsers,
     fetchAllDeletedUsers,
@@ -104,4 +114,5 @@ export {
     getOneUser,
     resetUserPassword,
     getMyInfo,
+    getActivityLogs,
 };
