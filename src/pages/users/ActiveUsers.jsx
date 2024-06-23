@@ -19,7 +19,7 @@ function ActiveUsers() {
     const handleCloseAddUserModal = () => setShowAddUserModal(false);
 
     const handleUpdateTable = () => {
-        getUsers({ index: 0 });
+        getUsers({ index: 0, limit: 10, field: "id", direction: "desc" });
     };
 
     const getUsers = data => {
