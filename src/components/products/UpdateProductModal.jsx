@@ -49,12 +49,6 @@ function UpdateProductModal(props) {
         initData();
     }, [targetItem]);
 
-    console.log(name);
-
-    // useEffect(() => {
-    //     initData();
-    // }, [show]);
-
     const initData = () => {
         setName(targetItem.name);
         setOldPrice(targetItem.oldPrice);

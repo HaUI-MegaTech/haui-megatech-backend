@@ -6,12 +6,17 @@ import {
 import ReactPaginate from "react-paginate";
 import { Button } from "react-bootstrap";
 import ProductDetailModal from "./ProductDetailModal";
-import UpdateUserInfoModal from "../users/UpdateUserInfoModal";
 import UpdateProductModal from "./UpdateProductModal";
 
 function TableProducts(props) {
     const { products, pageIndex, totalPages, handleUpdateTable, getProducts } =
         props;
+
+    const [index, setIndex] = useState(0);
+    const [field, setField] = useState("id");
+    const [direction, setDirection] = useState("desc");
+    const [limit, setLimit] = useState(10);
+    const [keyword, setKeyword] = useState();
 
     const [targetItem, setTargetItem] = useState({});
 
@@ -37,8 +42,8 @@ function TableProducts(props) {
     };
 
     useEffect(() => {
-        getProducts(0);
-    }, []);
+        getProducts({ index, limit, direction, field });
+    }, [index, direction, limit, field]);
 
     const renderProducts = items => items.map(item => renderProduct(item));
 
@@ -66,8 +71,12 @@ function TableProducts(props) {
                 <img src={item.mainImageUrl} alt="" style={{ maxWidth: 60 }} />
             </td>
             <td className="align-middle">{item.name}</td>
-            <td className="align-middle">{item.oldPrice}</td>
-            <td className="align-middle">{item.newPrice}</td>
+            <td className="align-middle">
+                {item.oldPrice.toLocaleString("en-US")}
+            </td>
+            <td className="align-middle">
+                {item.newPrice.toLocaleString("en-US")}
+            </td>
             <td className="align-middle text-center">
                 <Button
                     variant="info"
@@ -96,11 +105,83 @@ function TableProducts(props) {
             <table className="table table-hover">
                 <thead>
                     <tr>
-                        <th scope="col">#</th>
+                        <th
+                            scope="col"
+                            onClick={() => {
+                                direction === "desc"
+                                    ? setDirection("asc")
+                                    : setDirection("desc");
+                                setField("id");
+                            }}
+                            className="text-primary"
+                            style={{ cursor: "pointer" }}
+                        >
+                            #&nbsp;
+                            {field === "id" &&
+                                (direction == "desc" ? (
+                                    <i class="bi bi-caret-down-fill"></i>
+                                ) : (
+                                    <i class="bi bi-caret-up-fill"></i>
+                                ))}
+                        </th>
                         <th scope="col">Hình ảnh</th>
-                        <th scope="col">Tên sản phẩm</th>
-                        <th scope="col">Giá cũ</th>
-                        <th scope="col">Giá mới</th>
+                        <th
+                            scope="col"
+                            onClick={() => {
+                                direction === "desc"
+                                    ? setDirection("asc")
+                                    : setDirection("desc");
+                                setField("name");
+                            }}
+                            className="text-primary"
+                            style={{ cursor: "pointer" }}
+                        >
+                            Tên sản phẩm&nbsp;
+                            {field === "name" &&
+                                (direction == "desc" ? (
+                                    <i class="bi bi-caret-down-fill"></i>
+                                ) : (
+                                    <i class="bi bi-caret-up-fill"></i>
+                                ))}
+                        </th>
+                        <th
+                            scope="col"
+                            onClick={() => {
+                                direction === "desc"
+                                    ? setDirection("asc")
+                                    : setDirection("desc");
+                                setField("oldPrice");
+                            }}
+                            className="text-primary"
+                            style={{ cursor: "pointer" }}
+                        >
+                            Giá cũ&nbsp;
+                            {field === "oldPrice" &&
+                                (direction == "desc" ? (
+                                    <i class="bi bi-caret-down-fill"></i>
+                                ) : (
+                                    <i class="bi bi-caret-up-fill"></i>
+                                ))}
+                        </th>
+                        <th
+                            scope="col"
+                            onClick={() => {
+                                direction === "desc"
+                                    ? setDirection("asc")
+                                    : setDirection("desc");
+                                setField("currentPrice");
+                            }}
+                            className="text-primary"
+                            style={{ cursor: "pointer" }}
+                        >
+                            Giá hiện tại&nbsp;
+                            {field === "currentPrice" &&
+                                (direction == "desc" ? (
+                                    <i class="bi bi-caret-down-fill"></i>
+                                ) : (
+                                    <i class="bi bi-caret-up-fill"></i>
+                                ))}
+                        </th>
                         <th scope="col" className="text-center">
                             Hành động
                         </th>

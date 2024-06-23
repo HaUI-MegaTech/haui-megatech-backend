@@ -11,10 +11,13 @@ const headers = {
     "Accept-Language": lang,
 };
 
-const getActiveProducts = pageIndex => {
-    return axios.get(`${BASE_URL}/api/v1/products/active?index=${pageIndex}`, {
-        headers,
-    });
+const getActiveProducts = data => {
+    return axios.get(
+        `${BASE_URL}/api/v1/products/active?index=${data.index}&direction=${data.direction}&limit=${data.limit}&fields=${data.field}`,
+        {
+            headers,
+        },
+    );
 };
 
 const getProductDetail = id =>

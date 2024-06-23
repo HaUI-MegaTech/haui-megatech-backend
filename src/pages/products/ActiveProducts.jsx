@@ -11,11 +11,11 @@ function ActiveProducts() {
     const [showAddProductModal, setShowAddProductModal] = useState(false);
 
     const handleUpdateTable = () => {
-        getProducts(0);
+        getProducts({ index: 0, limit: 10, direction: "desc", field: "id" });
     };
 
-    const getProducts = index => {
-        getActiveProducts(index)
+    const getProducts = data => {
+        getActiveProducts(data)
             .then(response => {
                 setPageIndex(response.data.meta.pagination.pageIndex);
                 setPageSize(response.data.meta.pagination.pageSize);
