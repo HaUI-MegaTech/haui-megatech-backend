@@ -5,16 +5,30 @@ import UserSettingsTab from "../../components/profile/UserSettingsTab";
 import UserChangePasswordTab from "../../components/profile/UserChangePasswordTab";
 import { useEffect, useState } from "react";
 import { fetchAllProfileMenus } from "../../services/ProfileMenuService";
+import { getMyInfo } from "../../services/UserService";
 
 function UserProfile() {
     const location = useLocation();
     const navigate = useNavigate();
+    const [data, setData] = useState();
 
     const [menuItems, setMenuItems] = useState(
         fetchAllProfileMenus().filter(
             item => item.url != "/faq" && item.url != "/logout",
         ),
     );
+
+    useEffect(() => {
+        getData();
+    }, []);
+
+    const getData = () => {
+        getMyInfo()
+            .then(response => {
+                setData(response.data.data);
+            })
+            .catch(error => console.log(error));
+    };
 
     const renderProfileTabItem = item => (
         <li className="nav-item">
@@ -53,12 +67,14 @@ function UserProfile() {
                         <div className="card">
                             <div className="card-body profile-card pt-4 d-flex flex-column align-items-center">
                                 <img
-                                    src="assets/img/profile-img.jpg"
+                                    src={data.avatarImageUrl}
                                     alt="Profile"
                                     className="rounded-circle"
                                 />
-                                <h2>Kevin Anderson</h2>
-                                <h3>Web Designer</h3>
+                                <h2 className="mb-2">
+                                    {data.firstName + " " + data.lastName}
+                                </h2>
+                                <h3>{data.role}</h3>
                                 <div className="social-links mt-2">
                                     <a href="#" className="twitter">
                                         <i className="bi bi-twitter"></i>
@@ -91,6 +107,7 @@ function UserProfile() {
                                         show={
                                             location.pathname === "/user/detail"
                                         }
+                                        data={data}
                                     />
                                     <UserUpdateTab
                                         show={

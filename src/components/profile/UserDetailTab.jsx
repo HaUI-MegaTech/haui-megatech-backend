@@ -1,11 +1,13 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 function UserDetailTab(prop) {
-    const { show } = prop;
+    const { show, data } = prop;
 
     useEffect(() => {
         show && (document.title = "Thông tin chi tiết");
     }, [show]);
+
+    console.log(data);
 
     return (
         <div
@@ -14,53 +16,45 @@ function UserDetailTab(prop) {
             }`}
             id="/user/detail"
         >
-            <h5 className="card-title">About</h5>
-            <p className="small fst-italic">
-                Sunt est soluta temporibus accusantium neque nam maiores cumque
-                temporibus. Tempora libero non est unde veniam est qui dolor. Ut
-                sunt iure rerum quae quisquam autem eveniet perspiciatis odit.
-                Fuga sequi sed ea saepe at unde.
-            </p>
-
             <h5 className="card-title">Profile Details</h5>
 
             <div className="row">
-                <div className="col-lg-3 col-md-4 label ">Full Name</div>
-                <div className="col-lg-9 col-md-8">Kevin Anderson</div>
-            </div>
-
-            <div className="row">
-                <div className="col-lg-3 col-md-4 label">Company</div>
+                <div className="col-lg-3 col-md-4 label ">Họ và tên</div>
                 <div className="col-lg-9 col-md-8">
-                    Lueilwitz, Wisoky and Leuschke
+                    {data.firstName + " " + data.lastName}
                 </div>
             </div>
 
             <div className="row">
-                <div className="col-lg-3 col-md-4 label">Job</div>
-                <div className="col-lg-9 col-md-8">Web Designer</div>
+                <div className="col-lg-3 col-md-4 label">Địa chỉ email</div>
+                <div className="col-lg-9 col-md-8">{data.email}</div>
             </div>
 
             <div className="row">
-                <div className="col-lg-3 col-md-4 label">Country</div>
-                <div className="col-lg-9 col-md-8">USA</div>
+                <div className="col-lg-3 col-md-4 label">Số điện thoại</div>
+                <div className="col-lg-9 col-md-8">{data.phoneNumber}</div>
             </div>
 
             <div className="row">
-                <div className="col-lg-3 col-md-4 label">Address</div>
-                <div className="col-lg-9 col-md-8">
-                    A108 Adam Street, New York, NY 535022
+                <div className="col-lg-3 col-md-4 label">Cập nhật lần cuối</div>
+                <div className="col-lg-9 col-md-8">{data.lastUpdated}</div>
+            </div>
+
+            <div className="row">
+                <div className="col-lg-3 col-md-4 label">Ngày tạo</div>
+                <div className="col-lg-9 col-md-8">{data.whenCreated}</div>
+            </div>
+
+            <div className="row">
+                <div className="col-lg-3 col-md-4 label">
+                    Đăng nhập lần cuối
                 </div>
+                <div className="col-lg-9 col-md-8">{data.lastLoggedIn}</div>
             </div>
 
             <div className="row">
-                <div className="col-lg-3 col-md-4 label">Phone</div>
-                <div className="col-lg-9 col-md-8">(436) 486-3538 x29071</div>
-            </div>
-
-            <div className="row">
-                <div className="col-lg-3 col-md-4 label">Email</div>
-                <div className="col-lg-9 col-md-8">k.anderson@example.com</div>
+                <div className="col-lg-3 col-md-4 label">Số lần đăng nhập</div>
+                <div className="col-lg-9 col-md-8">{data.loggedIn}</div>
             </div>
         </div>
     );

@@ -22,13 +22,6 @@ function ActiveUsers() {
         getUsers(pageIndex);
     };
 
-    const csvData = [
-        ["firstname", "lastname", "email"],
-        ["Ahmed", "Tomi", "ah@smthing.co.com"],
-        ["Raed", "Labes", "rl@smthing.co.com"],
-        ["Yezzi", "Min l3b", "ymin@cocococo.com"],
-    ];
-
     const getUsers = pageIndex => {
         fetchAllActiveUsers(pageIndex)
             .then(response => {

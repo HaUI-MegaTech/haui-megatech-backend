@@ -3,7 +3,7 @@ import { fetchLoginStatistics } from "../../services/HomeService";
 import { useEffect, useState } from "react";
 
 function LoginStatisticChart() {
-    let [data, setData] = useState();
+    const [data, setData] = useState();
 
     useEffect(() => {
         getData();

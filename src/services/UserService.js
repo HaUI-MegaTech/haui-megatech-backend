@@ -78,6 +78,9 @@ const resetUserPassword = payload =>
         { headers },
     );
 
+const getMyInfo = () =>
+    axios.get(BASE_URL + "/api/v1/users/my-info", { headers });
+
 export {
     fetchAllActiveUsers,
     fetchAllDeletedUsers,
@@ -89,4 +92,5 @@ export {
     changeUserPassword,
     getOneUser,
     resetUserPassword,
+    getMyInfo,
 };

@@ -1,3 +1,4 @@
+import "../../assets/css/custom.css";
 import { useEffect, useState } from "react";
 import { useAuth } from "../../store/hooks";
 import { authenticate } from "../../services/AuthService";
@@ -5,20 +6,29 @@ import { toast } from "react-toastify";
 import { logIn, logOut } from "../../store/actions";
 
 function Login() {
+    const MIN_LENGTH = 8;
+    const SPACE_CHAR = " ";
+    const EMAIL_PATTERN =
+        /^(?=.{8,254}$)([a-zA-Z0-9])+@([a-zA-Z0-9-]+)(\.{1}([a-z]+))+$/;
+    const UPPER_CASE_PATTERN = /[A-Z]/;
+    const LOWER_CASE_PATTERN = /[a-z]/;
+    const NUMBER_PATTERN = /[0-9]/;
+    const SPECIAL_CHAR_PATTERN = /[!@#$%^&*]/;
+
+    const [usernameFeedbackMessage, setUsernameFeedbackMessage] = useState("");
+    const [passwordFeedbackMessage, setPasswordFeedbackMessage] = useState("");
+    const [isValidUsername, setIsValidUsername] = useState(false);
+    const [isValidPassword, setIsValidPassword] = useState(false);
+
     const [state, dispatch] = useAuth();
-    const [username, setUsername] = useState();
-    const [password, setPassword] = useState();
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
     const [loading, setLoading] = useState(false);
     const handleLogin = async () => {
         setLoading(true);
         console.log(loading);
         await authenticate({ username, password })
             .then(response => {
-                console.log(response);
-                // setInterval(() => {
-                //     console.log(Math.random());
-                //     localStorage.setItem("test", Math.random());
-                // }, 1000);
                 if (response && response.data.meta.status === "SUCCESS") {
                     localStorage.setItem(
                         "accessToken",
@@ -38,7 +48,109 @@ function Login() {
                     : toast.error(error.response.data.meta.message);
             });
         setLoading(false);
-        console.log(loading);
+    };
+
+    useEffect(() => {
+        setUsernameFeedbackMessage("");
+    }, []);
+
+    useEffect(() => {
+        validateUsername();
+    }, [username]);
+
+    useEffect(() => {
+        validatePassword();
+    }, [password]);
+
+    useEffect(() => {}, [isValidUsername]);
+    useEffect(() => {}, [isValidPassword]);
+
+    const validateUsername = () => {
+        if (username.trim().length === 0) {
+            setUsernameFeedbackMessage("Tên đăng nhập không được để trống.");
+            setIsValidUsername(false);
+            return;
+        }
+
+        if (username.length < MIN_LENGTH) {
+            setUsernameFeedbackMessage(
+                "Tên đăng nhập phải có tối thiểu 8 ký tự",
+            );
+            setIsValidUsername(false);
+            return;
+        }
+
+        if (username.includes(SPACE_CHAR)) {
+            setUsernameFeedbackMessage(
+                "Tên đăng nhập không được chứa dấu cách.",
+            );
+            setIsValidUsername(false);
+            return;
+        }
+
+        if (!username.match(EMAIL_PATTERN)) {
+            setUsernameFeedbackMessage("Định dạng tên đăng nhập không hợp lệ.");
+            setIsValidUsername(false);
+            return;
+        }
+
+        setUsernameFeedbackMessage("Tên đăng nhập hợp lệ.");
+        setIsValidUsername(true);
+    };
+
+    const validatePassword = () => {
+        if (password.trim().length === 0) {
+            setPasswordFeedbackMessage("Mật khẩu không được để trống.");
+            setIsValidPassword(false);
+            return;
+        }
+
+        if (password.length < MIN_LENGTH) {
+            setPasswordFeedbackMessage("Mật khẩu phải có tối thiểu 8 ký tự.");
+            setIsValidPassword(false);
+            return;
+        }
+
+        if (password.includes(SPACE_CHAR)) {
+            setPasswordFeedbackMessage("Mật khẩu không được chứa dấu cách.");
+            setIsValidPassword(false);
+            return;
+        }
+
+        if (!password.match(UPPER_CASE_PATTERN)) {
+            setPasswordFeedbackMessage(
+                "Mật khẩu phải chứa ít nhất một ký tự in hoa.",
+            );
+            setIsValidPassword(false);
+            return;
+        }
+
+        if (!password.match(LOWER_CASE_PATTERN)) {
+            setPasswordFeedbackMessage(
+                "Mật khẩu phải chứa ít nhất một ký tự in thường.",
+            );
+            setIsValidPassword(false);
+            return;
+        }
+
+        if (!password.match(NUMBER_PATTERN)) {
+            setPasswordFeedbackMessage(
+                "Mật khẩu phải chứa ít nhất một chữ số.",
+            );
+            setIsValidPassword(false);
+            return;
+        }
+
+        if (!password.match(SPECIAL_CHAR_PATTERN)) {
+            setPasswordFeedbackMessage(
+                "Mật khẩu phải chứa ít nhất một ký tự đặc biệt.",
+            );
+            setIsValidPassword(false);
+            return;
+        }
+
+        setPasswordFeedbackMessage("Mật khẩu hợp lệ.");
+        setIsValidPassword(true);
     };
 
     return (
@@ -54,9 +166,6 @@ function Login() {
                                         className="logo d-flex align-items-center w-auto"
                                     >
                                         <img src="assets/img/logo.png" alt="" />
-                                        <span className="d-none d-lg-block">
-                                            HaUI MegaTech
-                                        </span>
                                     </a>
                                 </div>
 
@@ -88,7 +197,7 @@ function Login() {
                                                         @
                                                     </span>
                                                     <input
-                                                        type="text"
+                                                        type="email"
                                                         name="username"
                                                         className="form-control"
                                                         id="yourUsername"
@@ -98,10 +207,18 @@ function Login() {
                                                                 e.target.value,
                                                             )
                                                         }
+                                                        placeholder="example@gmail.com"
                                                     />
-                                                    <div className="invalid-feedback">
-                                                        Please enter your
-                                                        username.
+                                                    <div
+                                                        className={`invalid-feedback show ${
+                                                            isValidUsername
+                                                                ? "text-success"
+                                                                : "text-danger"
+                                                        }`}
+                                                    >
+                                                        {
+                                                            usernameFeedbackMessage
+                                                        }
                                                     </div>
                                                 </div>
                                             </div>
@@ -125,8 +242,14 @@ function Login() {
                                                         )
                                                     }
                                                 />
-                                                <div className="invalid-feedback">
-                                                    Please enter your password!
+                                                <div
+                                                    className={`invalid-feedback show ${
+                                                        isValidPassword
+                                                            ? "text-success"
+                                                            : "text-danger"
+                                                    }`}
+                                                >
+                                                    {passwordFeedbackMessage}
                                                 </div>
                                             </div>
 
@@ -167,14 +290,6 @@ function Login() {
                                                     )}
                                                     &nbsp;Login
                                                 </button>
-                                            </div>
-                                            <div className="col-12">
-                                                <p className="small mb-0">
-                                                    Don't have account?{" "}
-                                                    <a href="pages-register.html">
-                                                        Create an account
-                                                    </a>
-                                                </p>
                                             </div>
                                         </form>
                                     </div>
