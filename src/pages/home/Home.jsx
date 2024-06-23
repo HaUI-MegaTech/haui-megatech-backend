@@ -57,9 +57,9 @@ function Home() {
 
                         <ProductByBrandStatisticChart />
 
-                        <WebsiteTrafficChart />
+                        {/* <WebsiteTrafficChart /> */}
 
-                        <NewsAndUpdatesCard />
+                        {/* <NewsAndUpdatesCard /> */}
                     </div>
                 </div>
             </section>

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import ReactPaginate from "react-paginate";
 
-function UserHistoryTable(props) {
+function ActiveBrandsTable(props) {
     const { pageIndex, totalPages, items, getItems } = props;
 
     const [index, setIndex] = useState(0);
@@ -21,9 +21,11 @@ function UserHistoryTable(props) {
             <th scope="row" className="align-middle">
                 {item.id}
             </th>
-            <td className="align-middle">{item.operation}</td>
-            <td className="align-middle">{item.whenCreated}</td>
-            <td className="align-middle">{item.subject}</td>
+            <td className="align-middle">
+                {" "}
+                <img src={item.image} alt="" style={{ maxWidth: 60 }} />
+            </td>
+            <td className="align-middle">{item.name}</td>
         </tr>
     );
 
@@ -127,7 +129,7 @@ function UserHistoryTable(props) {
                                 className="text-primary"
                                 style={{ cursor: "pointer" }}
                             >
-                                Thao tác&nbsp;
+                                Hình ảnh&nbsp;
                                 {field === "operation" &&
                                     (direction == "desc" ? (
                                         <i class="bi bi-caret-down-fill"></i>
@@ -146,27 +148,8 @@ function UserHistoryTable(props) {
                                 className="text-primary"
                                 style={{ cursor: "pointer" }}
                             >
-                                Thời gian&nbsp;
+                                Tên thương hiệu&nbsp;
                                 {field === "whenCreated" &&
-                                    (direction == "desc" ? (
-                                        <i class="bi bi-caret-down-fill"></i>
-                                    ) : (
-                                        <i class="bi bi-caret-up-fill"></i>
-                                    ))}
-                            </th>
-                            <th
-                                scope="col"
-                                onClick={() => {
-                                    direction === "desc"
-                                        ? setDirection("asc")
-                                        : setDirection("desc");
-                                    setField("subject");
-                                }}
-                                className="text-primary"
-                                style={{ cursor: "pointer" }}
-                            >
-                                Người thực hiện&nbsp;
-                                {field === "subject" &&
                                     (direction == "desc" ? (
                                         <i class="bi bi-caret-down-fill"></i>
                                     ) : (
@@ -196,7 +179,7 @@ function UserHistoryTable(props) {
                 nextLinkClassName="page-link"
                 breakClassName="page-item"
                 breakLinkClassName="page-link"
-                containerClassName="pagination mb-0"
+                containerClassName="pagination mb-3"
                 activeClassName="active"
                 renderOnZeroPageCount={null}
             />
@@ -204,4 +187,4 @@ function UserHistoryTable(props) {
     );
 }
 
-export default UserHistoryTable;
+export default ActiveBrandsTable;

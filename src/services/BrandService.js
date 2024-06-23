@@ -20,4 +20,21 @@ const fetchTotalSoldByBrand = () =>
 const fetchTotalViewByBrand = () =>
     axios.get(BASE_URL + "/api/v1/brands/total-view", { headers });
 
-export { fetchTotalBrandRevenue, fetchTotalSoldByBrand, fetchTotalViewByBrand };
+const getActiveBrands = data =>
+    axios.get(
+        `${BASE_URL}/api/v1/brands/active?index=${data.index}&limit=${
+            data.limit
+        }&direction=${data.direction}&fields=${data.field}${
+            data.keyword ? "&keyword=" + data.keyword : ""
+        }`,
+        {
+            headers,
+        },
+    );
+
+export {
+    fetchTotalBrandRevenue,
+    fetchTotalSoldByBrand,
+    fetchTotalViewByBrand,
+    getActiveBrands,
+};

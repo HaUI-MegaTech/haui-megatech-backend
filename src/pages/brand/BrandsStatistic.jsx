@@ -55,7 +55,7 @@ function BrandsStatistic() {
                         <BrandViewPieChart />
                     </div>
                 </div>
-                <div className="row">
+                {/* <div className="row">
                     <div className="col-lg-6">
                         <OrderByMonthAreaChart />
                     </div>
@@ -63,7 +63,7 @@ function BrandsStatistic() {
                     <div className="col-lg-6">
                         <OrderByAdminRegionBarChart />
                     </div>
-                </div>
+                </div> */}
             </section>
         </main>
     );

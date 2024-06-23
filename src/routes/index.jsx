@@ -12,6 +12,7 @@ import UsersHistory from "../pages/users/UsersHistory";
 import UsersStatistic from "../pages/users/UsersStatistic";
 import Login from "../pages/auth/Login";
 import BrandsStatistic from "../pages/brand/BrandsStatistic";
+import ActiveBrands from "../pages/brand/ActiveBrands";
 
 const publicRoutes = [
     { path: "/login", page: Login },
@@ -35,6 +36,7 @@ const privateRoutes = [
     { path: "/products/history", page: ProductsHistory },
 
     // brands
+    { path: "/brands/active", page: ActiveBrands },
     { path: "/brands/statistic", page: BrandsStatistic },
 
     // profile
