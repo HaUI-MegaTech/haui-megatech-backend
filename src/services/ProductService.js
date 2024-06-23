@@ -17,8 +17,11 @@ const fetchAllProducts = pageIndex => {
     });
 };
 
+const getProductDetail = id =>
+    axios.get(`${BASE_URL}/api/v1/products/${id}`, { headers });
+
 const addNewProduct = (name, price) => {
     return axios.post;
 };
 
-export { fetchAllProducts };
+export { fetchAllProducts, getProductDetail };

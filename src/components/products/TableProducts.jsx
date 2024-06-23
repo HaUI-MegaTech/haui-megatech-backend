@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { fetchAllProducts } from "../../services/ProductService";
 import ReactPaginate from "react-paginate";
+import { Button } from "react-bootstrap";
+import ProductDetailModal from "./ProductDetailModal";
 
 function TableProducts() {
     const [products, setProducts] = useState([]);
@@ -8,6 +10,18 @@ function TableProducts() {
     const [pageSize, setPageSize] = useState(15);
     const [totalItems, setTotalItems] = useState();
     const [totalPages, setTotalPages] = useState();
+    const [targetItem, setTargetItem] = useState({});
+
+    const [showProductDetailModal, setShowProductDetailModal] = useState(false);
+
+    const handleShowProductDetailModal = item => {
+        setTargetItem(item);
+        setShowProductDetailModal(true);
+    };
+
+    const handleCloseProductDetailModal = () => {
+        setShowProductDetailModal(false);
+    };
 
     useEffect(() => {
         getProducts(0);
@@ -40,13 +54,14 @@ function TableProducts() {
             <td className="align-middle">{item.oldPrice}</td>
             <td className="align-middle">{item.newPrice}</td>
             <td className="d-flex justify-content-center">
-                <a
-                    className="btn btn-secondary btn-sm mx-2"
-                    href="#"
-                    role="button"
+                <Button
+                    variant="info"
+                    size="sm"
+                    onClick={() => handleShowProductDetailModal(item)}
+                    className="mx-2"
                 >
                     <i className="bi bi-eye"></i>
-                </a>
+                </Button>
                 <button type="button" className="btn btn-warning btn-sm mx-2">
                     <i className="bi bi-pencil-square"></i>
                 </button>
@@ -71,7 +86,9 @@ function TableProducts() {
                         </th>
                     </tr>
                 </thead>
-                <tbody>{renderProducts(products)}</tbody>
+                <tbody className="table-group-divider">
+                    {renderProducts(products)}
+                </tbody>
             </table>
             <div>
                 <ReactPaginate
@@ -94,6 +111,11 @@ function TableProducts() {
                     renderOnZeroPageCount={null}
                 />
             </div>
+            <ProductDetailModal
+                show={showProductDetailModal}
+                handleClose={handleCloseProductDetailModal}
+                targetItem={targetItem}
+            />
         </>
     );
 }
