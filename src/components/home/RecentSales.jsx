@@ -67,7 +67,30 @@ function RecentSales() {
 
             <div className="card-body">
                 <h5 className="card-title">Đơn hàng gần đây</h5>
-
+                <div class="datatable-top">
+                    <div class="datatable-dropdown">
+                        <label>
+                            <select class="datatable-selector" name="per-page">
+                                <option value="5">5</option>
+                                <option value="10" selected="">
+                                    10
+                                </option>
+                                <option value="15">15</option>
+                                <option value="-1">All</option>
+                            </select>{" "}
+                            entries per page
+                        </label>
+                    </div>
+                    <div class="datatable-search">
+                        <input
+                            class="datatable-input"
+                            placeholder="Search..."
+                            type="search"
+                            name="search"
+                            title="Search within table"
+                        />
+                    </div>
+                </div>
                 <table className="table table-borderless datatable">
                     <thead>
                         <tr>

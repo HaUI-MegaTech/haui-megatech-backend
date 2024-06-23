@@ -13,6 +13,7 @@ function TableActiveUsers(props) {
     const [field, setField] = useState("id");
     const [direction, setDirection] = useState("desc");
     const [limit, setLimit] = useState(10);
+    const [keyword, setKeyword] = useState();
 
     const limitList = [10, 25, 50, 100];
 
@@ -58,13 +59,22 @@ function TableActiveUsers(props) {
         setShowChangeUserPasswordModal(false);
 
     useEffect(() => {
-        getUsers({ index, field, direction, limit });
+        getUsers({ index, field, direction, limit, keyword });
     }, [index, direction, field, limit]);
 
     const renderUsers = items => items.map(item => renderUser(item));
 
     const handlePageClick = e => {
         setIndex(parseInt(e.selected));
+    };
+
+    const handleSearch = () => {
+        getUsers({ index, field, direction, limit, keyword });
+    };
+
+    const handleCancelSearch = () => {
+        setKeyword("");
+        getUsers({ index, field, direction, limit, keyword: "" });
     };
 
     const renderUser = item => (
@@ -119,6 +129,55 @@ function TableActiveUsers(props) {
 
     return (
         <>
+            <div class="row mt-3 mb-3">
+                <div class="col-8">
+                    <div className="row d-flex align-items-center justify-content-start">
+                        <div className="col-3">Số bản ghi trên 1 trang: </div>
+                        <div className="col-2">
+                            <select
+                                class="form-select"
+                                aria-label="Small select example"
+                                onChange={e => setLimit(e.target.value)}
+                            >
+                                {limitList.map(item => (
+                                    <option
+                                        value={item}
+                                        selected={limit == item}
+                                    >
+                                        {item}
+                                    </option>
+                                ))}
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="input-group mb-3">
+                        <input
+                            type="text"
+                            class="form-control"
+                            placeholder="Nhập từ khoá cần tìm"
+                            onChange={e => setKeyword(e.target.value)}
+                            value={keyword}
+                        />
+                        <button
+                            class="btn btn-outline-primary"
+                            type="button"
+                            onClick={handleSearch}
+                        >
+                            Tìm kiếm
+                        </button>
+                        <button
+                            class="btn btn-outline-danger"
+                            type="button"
+                            onClick={handleCancelSearch}
+                        >
+                            Huỷ bỏ
+                        </button>
+                    </div>
+                </div>
+            </div>
+
             <div className="table-responsive">
                 <table className="table table-hover">
                     <thead>
@@ -242,48 +301,31 @@ function TableActiveUsers(props) {
                             </th>
                         </tr>
                     </thead>
-                    <tbody>{renderUsers(users)}</tbody>
+                    <tbody className="table-group-divider">
+                        {renderUsers(users)}
+                    </tbody>
                 </table>
             </div>
-            <div className="d-flex justify-content-between align-items-center">
-                <div className="row">
-                    <div className="col-8 d-flex align-items-center">
-                        Số bản ghi trên 1 trang:
-                    </div>
-                    <div className="col-4">
-                        <select
-                            class="form-select w-100"
-                            aria-label="Small select example"
-                            onChange={e => setLimit(e.target.value)}
-                        >
-                            {limitList.map(item => (
-                                <option value={item} selected={limit == item}>
-                                    {item}
-                                </option>
-                            ))}
-                        </select>
-                    </div>
-                </div>
-                <ReactPaginate
-                    breakLabel="..."
-                    nextLabel=">"
-                    onPageChange={handlePageClick}
-                    pageRangeDisplayed={3}
-                    pageCount={totalPages}
-                    previousLabel="<"
-                    pageClassName="page-item"
-                    pageLinkClassName="page-link"
-                    previousClassName="page-item"
-                    previousLinkClassName="page-link"
-                    nextClassName="page-item"
-                    nextLinkClassName="page-link"
-                    breakClassName="page-item"
-                    breakLinkClassName="page-link"
-                    containerClassName="pagination mb-0"
-                    activeClassName="active"
-                    renderOnZeroPageCount={null}
-                />
-            </div>
+
+            <ReactPaginate
+                breakLabel="..."
+                nextLabel=">"
+                onPageChange={handlePageClick}
+                pageRangeDisplayed={3}
+                pageCount={totalPages}
+                previousLabel="<"
+                pageClassName="page-item"
+                pageLinkClassName="page-link"
+                previousClassName="page-item"
+                previousLinkClassName="page-link"
+                nextClassName="page-item"
+                nextLinkClassName="page-link"
+                breakClassName="page-item"
+                breakLinkClassName="page-link"
+                containerClassName="pagination mb-0"
+                activeClassName="active"
+                renderOnZeroPageCount={null}
+            />
 
             <UserInfoModal
                 show={showUserInfoModal}

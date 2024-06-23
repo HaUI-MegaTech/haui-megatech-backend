@@ -13,7 +13,11 @@ const headers = {
 
 const fetchAllActiveUsers = data => {
     return axios.get(
-        `${BASE_URL}/api/v1/users/active?index=${data.index}&limit=${data.limit}&direction=${data.direction}&fields=${data.field}`,
+        `${BASE_URL}/api/v1/users/active?index=${data.index}&limit=${
+            data.limit
+        }&direction=${data.direction}&fields=${data.field}${
+            data.keyword && "&keyword=" + data.keyword
+        }`,
         { headers },
     );
 };

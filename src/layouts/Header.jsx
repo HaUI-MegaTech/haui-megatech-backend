@@ -92,7 +92,7 @@ function Header() {
 
             {location.pathname !== "/home" && (
                 <div
-                    className={`search-bar ${
+                    className={`d-none search-bar ${
                         showSearchBar && "search-bar-show"
                     }`}
                 >
@@ -104,7 +104,7 @@ function Header() {
                         <input
                             type="text"
                             name="query"
-                            placeholder="Search"
+                            placeholder="Nhập vào từ khoá cần tìm kiếm"
                             title="Enter search keyword"
                         />
                         <button type="submit" title="Search">
