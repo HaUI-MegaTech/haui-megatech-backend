@@ -50,10 +50,14 @@ function TableProducts() {
             <th scope="row" className="align-middle">
                 {item.id}
             </th>
+            <td className="align-middle">
+                {" "}
+                <img src={item.mainImageUrl} alt="" style={{ maxWidth: 60 }} />
+            </td>
             <td className="align-middle">{item.name}</td>
             <td className="align-middle">{item.oldPrice}</td>
             <td className="align-middle">{item.newPrice}</td>
-            <td className="d-flex justify-content-center">
+            <td className="align-middle text-center">
                 <Button
                     variant="info"
                     size="sm"
@@ -78,6 +82,7 @@ function TableProducts() {
                 <thead>
                     <tr>
                         <th scope="col">#</th>
+                        <th scope="col">Hình ảnh</th>
                         <th scope="col">Tên sản phẩm</th>
                         <th scope="col">Giá cũ</th>
                         <th scope="col">Giá mới</th>
