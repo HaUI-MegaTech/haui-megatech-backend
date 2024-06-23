@@ -11,11 +11,17 @@ function DeletedUsers() {
     const [totalPages, setTotalPages] = useState();
 
     useEffect(() => {
-        getUsers(0);
+        getUsers({
+            index: 0,
+            limit: 10,
+            field: "id",
+            direction: "desc",
+            keyword: "",
+        });
     }, []);
 
-    const getUsers = pageIndex => {
-        fetchAllDeletedUsers(pageIndex)
+    const getUsers = data => {
+        fetchAllDeletedUsers(data)
             .then(response => {
                 setPageIndex(response.data.meta.pagination.pageIndex);
                 setPageSize(response.data.meta.pagination.pageSize);
@@ -27,7 +33,7 @@ function DeletedUsers() {
     };
 
     const handleUpdateTable = () => {
-        getUsers(pageIndex);
+        getUsers({ index: 0, limit: 10, field: "id", direction: "desc" });
     };
 
     return (

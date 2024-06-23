@@ -22,10 +22,17 @@ const fetchAllActiveUsers = data => {
     );
 };
 
-const fetchAllDeletedUsers = pageIndex =>
-    axios.get(`${BASE_URL}/api/v1/users/deleted?index=${pageIndex}&limit=10`, {
-        headers,
-    });
+const fetchAllDeletedUsers = data =>
+    axios.get(
+        `${BASE_URL}/api/v1/users/deleted?index=${data.index}&limit=${
+            data.limit
+        }&direction=${data.direction}&fields=${data.field}${
+            data.keyword && "&keyword=" + data.keyword
+        }`,
+        {
+            headers,
+        },
+    );
 
 const addNewUser = payload => {
     return axios.post(BASE_URL + "/api/v1/users", payload, { headers });

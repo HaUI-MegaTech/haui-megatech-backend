@@ -59,7 +59,7 @@ function TableActiveUsers(props) {
         setShowChangeUserPasswordModal(false);
 
     useEffect(() => {
-        getUsers({ index, field, direction, limit, keyword });
+        getUsers({ index, field, direction, limit, keyword: "" });
     }, [index, direction, field, limit]);
 
     const renderUsers = items => items.map(item => renderUser(item));
