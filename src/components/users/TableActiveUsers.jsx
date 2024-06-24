@@ -7,7 +7,14 @@ import ChangeUserPasswordModal from "./ResetUserPasswordModal";
 import SoftDeleteUserModal from "./SoftDeleteUserModal";
 
 function TableActiveUsers(props) {
-    const { users, pageIndex, totalPages, handleUpdateTable, getUsers } = props;
+    const {
+        users,
+        pageIndex,
+        totalItems,
+        totalPages,
+        handleUpdateTable,
+        getUsers,
+    } = props;
 
     const [index, setIndex] = useState(0);
     const [field, setField] = useState("id");
@@ -131,9 +138,9 @@ function TableActiveUsers(props) {
         <>
             <div class="row mt-3 mb-3">
                 <div class="col-8">
-                    <div className="row d-flex align-items-center justify-content-start">
-                        <div className="col-3">Số bản ghi trên 1 trang: </div>
-                        <div className="col-2">
+                    <div className="d-flex align-items-center justify-content-start">
+                        Số bản ghi trên 1 trang:&nbsp;&nbsp;
+                        <div className="">
                             <select
                                 class="form-select"
                                 aria-label="Small select example"
@@ -149,6 +156,8 @@ function TableActiveUsers(props) {
                                 ))}
                             </select>
                         </div>
+                        &nbsp;&nbsp;trong tổng số&nbsp;<b>{totalItems}</b>
+                        &nbsp;bản ghi
                     </div>
                 </div>
                 <div class="col-4">
