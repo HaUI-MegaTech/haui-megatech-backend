@@ -68,6 +68,46 @@ function UserHistoryTable(props) {
                 </div>
                 <div class="col-4">
                     <div class="input-group mb-3">
+                        <button
+                            class="btn btn-outline-secondary dropdown-toggle"
+                            type="button"
+                            data-bs-toggle="dropdown"
+                            aria-expanded="false"
+                        >
+                            Hành động
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a class="dropdown-item" href="#">
+                                    Thêm mới
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="#">
+                                    Cập nhật thông tin
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="#">
+                                    Khôi phục mật khẩu
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="#">
+                                    Xoá tạm thời
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="#">
+                                    Khôi phục
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="#">
+                                    Xoá vĩnh viễn
+                                </a>
+                            </li>
+                        </ul>
                         <input
                             type="text"
                             class="form-control"
