@@ -1,6 +1,8 @@
 import { useState } from "react";
 import TableActiveProducts from "../../components/products/TableActiveProducts";
 import { getActiveProducts } from "../../services/ProductService";
+import { Button } from "react-bootstrap";
+import PageTitle from "../../components/shared/PageTitle";
 
 function ActiveProducts() {
     const [products, setProducts] = useState([]);
@@ -34,19 +36,13 @@ function ActiveProducts() {
 
     return (
         <main id="main" className="main">
-            <div className="pagetitle">
-                <h1>ActiveProducts Page</h1>
-                <nav>
-                    <ol className="breadcrumb">
-                        <li className="breadcrumb-item">
-                            <a href="index.html">Home</a>
-                        </li>
-                        <li className="breadcrumb-item">Pages</li>
-                        <li className="breadcrumb-item active">
-                            ActiveProducts
-                        </li>
-                    </ol>
-                </nav>
+            <div className="row d-flex justify-content-between mb-3">
+                <PageTitle />
+                <div className="col-2 d-flex align-items-center justify-content-end">
+                    <Button variant="primary" size="md">
+                        Thêm mới
+                    </Button>
+                </div>
             </div>
 
             <section className="section">

@@ -16,7 +16,7 @@ function TableProducts(props) {
     const [field, setField] = useState("id");
     const [direction, setDirection] = useState("desc");
     const [limit, setLimit] = useState(10);
-    const [keyword, setKeyword] = useState();
+    const [keyword, setKeyword] = useState("");
 
     const limitList = [10, 25, 50, 100];
 
@@ -54,7 +54,7 @@ function TableProducts(props) {
     };
 
     useEffect(() => {
-        getProducts({ index, limit, direction, field, keyword: "" });
+        getProducts({ index, limit, direction, field, keyword });
     }, [index, direction, limit, field]);
 
     const renderProducts = items => items.map(item => renderProduct(item));
