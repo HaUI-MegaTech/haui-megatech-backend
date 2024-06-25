@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import ReactPaginate from "react-paginate";
 import UserInfoModal from "./UserInfoModal";
-import { Button } from "react-bootstrap";
+import { Button, Form } from "react-bootstrap";
 import RestoreUserModal from "./RestoreUserModal";
 import HardDeleteUserModal from "./HardDeleteUserModal";
 
@@ -13,6 +13,8 @@ function TableDeletedUsers(props) {
         totalPages,
         handleUpdateTable,
         getUsers,
+        selectedList,
+        setSelectedList,
     } = props;
 
     const [index, setIndex] = useState(0);
@@ -71,8 +73,23 @@ function TableDeletedUsers(props) {
         getUsers({ index, field, direction, limit, keyword: "" });
     };
 
+    const handleClickCheckbox = (e, id) => {
+        setSelectedList(
+            e.target.checked
+                ? [...selectedList, id]
+                : selectedList.filter(item => item !== id),
+        );
+    };
+
     const renderUser = item => (
         <tr>
+            <th className="align-middle">
+                <Form.Check
+                    type="checkbox"
+                    onChange={e => handleClickCheckbox(e, item.id)}
+                    checked={selectedList.includes(item.id)}
+                />
+            </th>
             <th scope="row" className="align-middle">
                 {item.id}
             </th>
@@ -167,6 +184,7 @@ function TableDeletedUsers(props) {
             <table className="table table-hover">
                 <thead>
                     <tr>
+                        <th></th>
                         <th
                             scope="col"
                             onClick={() => {

@@ -215,7 +215,7 @@ function TableActiveUsers(props) {
                 <table className="table table-hover">
                     <thead>
                         <tr>
-                            <td></td>
+                            <th></th>
                             <th
                                 scope="col"
                                 onClick={() => {

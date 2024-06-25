@@ -11,6 +11,8 @@ function DeletedUsers() {
     const [totalItems, setTotalItems] = useState();
     const [totalPages, setTotalPages] = useState();
 
+    const [selectedList, setSelectedList] = useState([]);
+
     useEffect(() => {
         getUsers({
             index: 0,
@@ -62,6 +64,8 @@ function DeletedUsers() {
                                     totalPages={totalPages}
                                     handleUpdateTable={handleUpdateTable}
                                     getUsers={getUsers}
+                                    selectedList={selectedList}
+                                    setSelectedList={setSelectedList}
                                 />
                             </div>
                         </div>
