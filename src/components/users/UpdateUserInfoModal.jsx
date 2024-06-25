@@ -50,6 +50,7 @@ function UpdateUserInfoModal(props) {
         setLastName(targetUser.lastName);
         setEmail(targetUser.email);
         setPhoneNumber(targetUser.phoneNumber);
+        setRole(targetUser.role);
     }, [targetUser]);
 
     return (

@@ -13,6 +13,7 @@ import { CSVLink, CSVDownload } from "react-csv";
 import ImportUserModal from "../../components/users/ImportUserModal";
 import { toast } from "react-toastify";
 import SoftDeleteListUsersModal from "../../components/users/SoftDeleteListUsersModal";
+import ResetPasswordListUsersModal from "../../components/users/ResetPasswordListUsersModal";
 
 function ActiveUsers() {
     const [index, setIndex] = useState(0);
@@ -30,6 +31,8 @@ function ActiveUsers() {
     const [showImportUserModal, setShowImportUserModal] = useState(false);
     const [showSoftDeleteListUsersModal, setShowSoftDeleteListUserModal] =
         useState(false);
+    const [showResetPasswordListUsersModal, setShowRestPasswordListUsersModal] =
+        useState(false);
 
     const [selectedList, setSelectedList] = useState([]);
 
@@ -41,9 +44,16 @@ function ActiveUsers() {
         setShowSoftDeleteListUserModal(true);
     const handleCloseSoftDeleteListUsersModal = () =>
         setShowSoftDeleteListUserModal(false);
+    const handleShowResetPasswordListUsersModal = () => {
+        setShowRestPasswordListUsersModal(true);
+    };
+
+    const handleCloseResetPasswordListUsersModal = () => {
+        setShowRestPasswordListUsersModal(false);
+    };
 
     const handleUpdateTable = () => {
-        getUsers({ index: 0, limit: 10, field: "id", direction: "desc" });
+        getUsers({ index, limit, field, direction, keyword });
     };
 
     const getUsers = data => {
@@ -66,7 +76,7 @@ function ActiveUsers() {
                     <Button
                         variant="success me-2"
                         size="md"
-                        onClick={handleShowSoftDeleteListUsersModal}
+                        onClick={handleShowResetPasswordListUsersModal}
                     >
                         <i class="bi bi-key"></i>&nbsp;Cấp lại mật khẩu
                     </Button>
@@ -157,6 +167,12 @@ function ActiveUsers() {
                 direction={direction}
                 limit={limit}
                 keyword={keyword}
+            />
+            <ResetPasswordListUsersModal
+                show={showResetPasswordListUsersModal}
+                handleClose={handleCloseResetPasswordListUsersModal}
+                selectedList={selectedList}
+                setSelectedList={setSelectedList}
             />
         </main>
     );

@@ -140,9 +140,18 @@ const importUserExcel = data => {
 };
 
 const softDeleteUserList = data => {
-    console.log(typeof data);
     return axios.patch(
         `${BASE_URL}/api/v1/users/soft-delete/${data}`,
+        {},
+        {
+            headers,
+        },
+    );
+};
+
+const resetPasswordUsersList = data => {
+    return axios.patch(
+        `${BASE_URL}/api/v1/users/reset-password/${data}`,
         {},
         {
             headers,
@@ -166,4 +175,5 @@ export {
     updateMyInfo,
     importUserExcel,
     softDeleteUserList,
+    resetPasswordUsersList,
 };

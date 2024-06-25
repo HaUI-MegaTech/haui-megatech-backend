@@ -44,9 +44,7 @@ function SoftDeleteListUsersModal(props) {
                 <Modal.Title>Xoá tạm thời nhiều người dùng</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                {selectedList.length === 0
-                    ? "Danh sách lựa chọn hiện đang trống"
-                    : `Bạn có chắc chắn xoá ${selectedList.length} người dùng này?`}
+                {`Bạn có chắc chắn xoá ${selectedList.length} người dùng này?`}
             </Modal.Body>
             <Modal.Footer>
                 <Button variant="secondary" onClick={handleClose}>
