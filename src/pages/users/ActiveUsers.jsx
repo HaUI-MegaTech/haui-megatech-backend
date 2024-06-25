@@ -6,6 +6,7 @@ import AddUserModal from "../../components/users/AddUserModal";
 import PageTitle from "../../components/shared/PageTitle";
 
 import { CSVLink, CSVDownload } from "react-csv";
+import ImportUserModal from "../../components/users/ImportUserModal";
 
 function ActiveUsers() {
     const [users, setUsers] = useState([]);
@@ -14,9 +15,12 @@ function ActiveUsers() {
     const [totalItems, setTotalItems] = useState();
     const [totalPages, setTotalPages] = useState();
     const [showAddUserModal, setShowAddUserModal] = useState(false);
+    const [showImportUserModal, setShowImportUserModal] = useState(false);
 
     const handleShowAddUserModal = () => setShowAddUserModal(true);
     const handleCloseAddUserModal = () => setShowAddUserModal(false);
+    const handleShowImportUserModal = () => setShowImportUserModal(true);
+    const handleCloseImportUserModal = () => setShowImportUserModal(false);
 
     const handleUpdateTable = () => {
         getUsers({ index: 0, limit: 10, field: "id", direction: "desc" });
@@ -38,7 +42,15 @@ function ActiveUsers() {
         <main id="main" className="main">
             <div className="row d-flex justify-content-between mb-3">
                 <PageTitle />
-                <div className="col-2 d-flex align-items-center justify-content-end">
+                <div className="col-3 d-flex align-items-center justify-content-end">
+                    <Button
+                        variant="warning me-2"
+                        size="md"
+                        onClick={handleShowImportUserModal}
+                    >
+                        Nhập
+                    </Button>
+
                     <Button variant="success me-2">
                         <CSVLink
                             data={users}
@@ -48,6 +60,7 @@ function ActiveUsers() {
                             Xuất CSV
                         </CSVLink>
                     </Button>
+
                     <Button
                         variant="primary"
                         size="md"
@@ -81,6 +94,11 @@ function ActiveUsers() {
                 show={showAddUserModal}
                 handleClose={handleCloseAddUserModal}
                 handleUpdateTable={handleUpdateTable}
+            />
+            <ImportUserModal
+                show={showImportUserModal}
+                handleClose={handleCloseImportUserModal}
+                getUsers={getUsers}
             />
         </main>
     );

@@ -126,6 +126,19 @@ const getActivityLogs = data =>
         { headers },
     );
 
+const importUserExcel = data => {
+    let formData = new FormData();
+
+    formData.append("file", data.file);
+
+    return axios.post(`${BASE_URL}/api/v1/users/import/excel`, formData, {
+        headers: {
+            Authorization: "Bearer " + accessToken,
+            "Content-Type": "multipart/form-data",
+        },
+    });
+};
+
 export {
     fetchAllActiveUsers,
     fetchAllDeletedUsers,
@@ -140,4 +153,5 @@ export {
     getMyInfo,
     getActivityLogs,
     updateMyInfo,
+    importUserExcel,
 };
