@@ -5,6 +5,7 @@ import { fetchAllDeletedUsers } from "../../services/UserService";
 import { keyboard } from "@testing-library/user-event/dist/keyboard";
 import { Button } from "react-bootstrap";
 import HardDeleteListUsersModal from "../../components/users/HardDeleteListUsersModal";
+import RestoreListUsersModal from "../../components/users/RestoreListUsersModal";
 
 function DeletedUsers() {
     const [index, setIndex] = useState(0);
@@ -23,11 +24,15 @@ function DeletedUsers() {
 
     const [showHardDeleteListUsers, setShowHardDeleteListUsers] =
         useState(false);
+    const [showRestoreListUsers, setShowRestoreListUsers] = useState(false);
 
     const handleShowHardDeleteListUsers = () =>
         setShowHardDeleteListUsers(true);
     const handleCloseHardDeleteListUsers = () =>
         setShowHardDeleteListUsers(false);
+
+    const handleShowRestoreListUsers = () => setShowRestoreListUsers(true);
+    const handleCloseRestoreListUsers = () => setShowRestoreListUsers(false);
 
     useEffect(() => {
         getUsers({
@@ -66,6 +71,15 @@ function DeletedUsers() {
             <div className="row d-flex justify-content-between mb-3">
                 <PageTitle />
                 <div className="col-6 d-flex align-items-center justify-content-end">
+                    {selectedList.length > 1 && (
+                        <Button
+                            variant="success me-2"
+                            onClick={handleShowRestoreListUsers}
+                        >
+                            <i className="bi bi-arrow-counterclockwise"></i>
+                            &nbsp;Khôi phục
+                        </Button>
+                    )}
                     {selectedList.length > 1 && (
                         <Button
                             variant="danger"
@@ -112,6 +126,19 @@ function DeletedUsers() {
             <HardDeleteListUsersModal
                 show={showHardDeleteListUsers}
                 handleClose={handleCloseHardDeleteListUsers}
+                selectedList={selectedList}
+                setSelectedList={setSelectedList}
+                getUsers={getUsers}
+                index={index}
+                field={field}
+                direction={direction}
+                limit={limit}
+                keyword={keyword}
+            />
+
+            <RestoreListUsersModal
+                show={showRestoreListUsers}
+                handleClose={handleCloseRestoreListUsers}
                 selectedList={selectedList}
                 setSelectedList={setSelectedList}
                 getUsers={getUsers}

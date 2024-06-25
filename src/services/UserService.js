@@ -165,6 +165,16 @@ const hardDeleteUsersList = data => {
     });
 };
 
+const restoreUsersList = data => {
+    return axios.patch(
+        `${BASE_URL}/api/v1/users/restore/${data}`,
+        {},
+        {
+            headers,
+        },
+    );
+};
+
 export {
     fetchAllActiveUsers,
     fetchAllDeletedUsers,
@@ -183,4 +193,5 @@ export {
     softDeleteUserList,
     resetPasswordUsersList,
     hardDeleteUsersList,
+    restoreUsersList,
 };
