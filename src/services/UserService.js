@@ -47,17 +47,25 @@ const softDeleteUser = user =>
         },
     );
 
-const updateUserInfo = (user, firstName, lastName, email, phoneNumber) =>
-    axios.put(
-        BASE_URL + `/api/v1/users/update-info/${user.id}`,
+const updateUserInfo = data => {
+    let formData = new FormData();
+
+    formData.append("firstName", data.firstName);
+    formData.append("lastName", data.lastName);
+    formData.append("email", data.email);
+    formData.append("phoneNumber", data.phoneNumber);
+
+    return axios.put(
+        BASE_URL + `/api/v1/users/update-info/${data.id}`,
+        formData,
         {
-            firstName,
-            lastName,
-            email,
-            phoneNumber,
+            headers: {
+                Authorization: "Bearer " + accessToken,
+                "Content-Type": "multipart/form-data",
+            },
         },
-        { headers },
     );
+};
 
 const restoreUser = user =>
     axios.patch(BASE_URL + `/api/v1/users/restore/${user.id}`, {}, { headers });

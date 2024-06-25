@@ -12,13 +12,21 @@ function UpdateUserInfoModal(props) {
         currentPageIndex,
     } = props;
 
-    const [firstName, setFirstName] = useState("");
-    const [lastName, setLastName] = useState("");
-    const [email, setEmail] = useState("");
-    const [phoneNumber, setPhoneNumber] = useState("");
+    const [firstName, setFirstName] = useState(targetUser.firstName);
+    const [lastName, setLastName] = useState(targetUser.lastName);
+    const [email, setEmail] = useState(targetUser.email);
+    const [phoneNumber, setPhoneNumber] = useState(targetUser.phoneNumber);
 
-    const handleUpdateUserInfo = () => {
-        updateUserInfo(targetUser, firstName, lastName, email, phoneNumber)
+    const handleUpdateUserInfo = async e => {
+        e.preventDefault();
+
+        await updateUserInfo({
+            id: targetUser.id,
+            firstName: firstName,
+            lastName: lastName,
+            email: email,
+            phoneNumber: phoneNumber,
+        })
             .then(response => {
                 if (response && response.status === 200) {
                     toast.success(response.data.meta.message);
@@ -36,15 +44,15 @@ function UpdateUserInfoModal(props) {
         setLastName(targetUser.lastName);
         setEmail(targetUser.email);
         setPhoneNumber(targetUser.phoneNumber);
-    }, [show]);
+    }, [targetUser]);
 
     return (
         <Modal show={show} onHide={handleClose}>
-            <Modal.Header closeButton className="bg-warning">
-                <Modal.Title>Update user info</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-                <Form>
+            <Form method="post" onSubmit={e => handleUpdateUserInfo(e)}>
+                <Modal.Header closeButton className="bg-warning">
+                    <Modal.Title>Update user info</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
                     <Form.Group
                         className="mb-3"
                         controlId="exampleForm.ControlInput1"
@@ -66,7 +74,9 @@ function UpdateUserInfoModal(props) {
                         <Form.Control
                             type="text"
                             value={firstName}
-                            onChange={e => setFirstName(e.target.value)}
+                            onChange={e => {
+                                setFirstName(e.target.value);
+                            }}
                         />
                     </Form.Group>
 
@@ -90,7 +100,7 @@ function UpdateUserInfoModal(props) {
                         <Form.Control
                             type="text"
                             value={email}
-                            onChange={e => setEmail(e.target.value)}
+                            onChange={e => setPhoneNumber(e.target.value)}
                         />
                     </Form.Group>
 
@@ -105,16 +115,17 @@ function UpdateUserInfoModal(props) {
                             onChange={e => setPhoneNumber(e.target.value)}
                         />
                     </Form.Group>
-                </Form>
-            </Modal.Body>
-            <Modal.Footer>
-                <Button variant="secondary" onClick={handleClose}>
-                    Đóng
-                </Button>
-                <Button variant="warning" onClick={handleUpdateUserInfo}>
-                    Lưu thay đổi
-                </Button>
-            </Modal.Footer>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={handleClose}>
+                        Đóng
+                    </Button>
+                    <button type="submit">Submitt</button>
+                    <Button variant="warning" type="submit">
+                        Lưu thay đổi
+                    </Button>
+                </Modal.Footer>
+            </Form>
         </Modal>
     );
 }

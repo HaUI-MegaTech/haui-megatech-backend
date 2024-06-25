@@ -13,7 +13,7 @@ function UserHistoryTable(props) {
     const limitList = [10, 25, 50, 100];
 
     useEffect(() => {
-        getItems({ index, field, direction, limit });
+        getItems({ index, field, direction, limit, keyword: "" });
     }, [index, field, direction, limit]);
 
     const renderUser = item => (
