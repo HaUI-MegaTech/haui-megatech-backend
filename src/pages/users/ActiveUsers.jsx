@@ -68,11 +68,25 @@ function ActiveUsers() {
             .catch(error => console.log(error));
     };
 
+    const handleClearSelectedList = () => {
+        setSelectedList([]);
+    };
+
     return (
         <main id="main" className="main">
             <div className="row d-flex justify-content-between mb-3">
                 <PageTitle />
-                <div className="col-6 d-flex align-items-center justify-content-end">
+                <div className="col-8 d-flex align-items-center justify-content-end">
+                    {selectedList.length > 1 && (
+                        <Button
+                            variant="secondary me-2"
+                            size="md"
+                            onClick={handleClearSelectedList}
+                        >
+                            <i class="bi bi-x-circle"></i>&nbsp;Bỏ chọn (
+                            {selectedList.length})
+                        </Button>
+                    )}
                     {selectedList.length > 1 && (
                         <Button
                             variant="success me-2"

@@ -54,14 +54,14 @@ function ImportUserModal(props) {
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleClose}>
-                        Huỷ bỏ
+                        <i class="bi bi-x-circle"></i>&nbsp;Đóng
                     </Button>
                     <Button
                         variant="warning"
                         onClick={handleClose}
                         type="submit"
                     >
-                        Nhập
+                        <i class="bi bi-download"></i>&nbsp;Nhập
                     </Button>
                 </Modal.Footer>
             </Form>
