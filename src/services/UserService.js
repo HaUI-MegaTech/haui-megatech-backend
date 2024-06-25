@@ -139,6 +139,17 @@ const importUserExcel = data => {
     });
 };
 
+const softDeleteUserList = data => {
+    console.log(typeof data);
+    return axios.patch(
+        `${BASE_URL}/api/v1/users/soft-delete/${data}`,
+        {},
+        {
+            headers,
+        },
+    );
+};
+
 export {
     fetchAllActiveUsers,
     fetchAllDeletedUsers,
@@ -154,4 +165,5 @@ export {
     getActivityLogs,
     updateMyInfo,
     importUserExcel,
+    softDeleteUserList,
 };

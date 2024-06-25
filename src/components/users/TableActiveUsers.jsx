@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import ReactPaginate from "react-paginate";
-import { Button } from "react-bootstrap";
+import { Button, Form } from "react-bootstrap";
 import UserInfoModal from "./UserInfoModal";
 import UpdateUserInfoModal from "./UpdateUserInfoModal";
 import ChangeUserPasswordModal from "./ResetUserPasswordModal";
@@ -14,6 +14,8 @@ function TableActiveUsers(props) {
         totalPages,
         handleUpdateTable,
         getUsers,
+        selectedList,
+        setSelectedList,
     } = props;
 
     const [index, setIndex] = useState(0);
@@ -84,8 +86,25 @@ function TableActiveUsers(props) {
         getUsers({ index, field, direction, limit, keyword: "" });
     };
 
+    const handleClickCheckbox = (e, id) => {
+        setSelectedList(
+            e.target.checked
+                ? [...selectedList, id]
+                : selectedList.filter(item => item !== id),
+        );
+    };
+
+    console.log(selectedList);
+
     const renderUser = item => (
         <tr key={item.id}>
+            <th className="align-middle">
+                <Form.Check
+                    type="checkbox"
+                    onChange={e => handleClickCheckbox(e, item.id)}
+                    checked={selectedList.includes(item.id)}
+                />
+            </th>
             <th scope="row" className="align-middle">
                 {item.id}
             </th>
@@ -192,6 +211,7 @@ function TableActiveUsers(props) {
                 <table className="table table-hover">
                     <thead>
                         <tr>
+                            <td></td>
                             <th
                                 scope="col"
                                 onClick={() => {

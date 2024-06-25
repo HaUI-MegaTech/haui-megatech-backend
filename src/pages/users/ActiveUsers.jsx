@@ -1,5 +1,9 @@
-import { useState } from "react";
-import { fetchAllActiveUsers } from "../../services/UserService";
+import { useEffect, useState } from "react";
+import {
+    fetchAllActiveUsers,
+    softDeleteUser,
+    softDeleteUserList,
+} from "../../services/UserService";
 import { Button } from "react-bootstrap";
 import TableActiveUsers from "../../components/users/TableActiveUsers";
 import AddUserModal from "../../components/users/AddUserModal";
@@ -7,6 +11,7 @@ import PageTitle from "../../components/shared/PageTitle";
 
 import { CSVLink, CSVDownload } from "react-csv";
 import ImportUserModal from "../../components/users/ImportUserModal";
+import { toast } from "react-toastify";
 
 function ActiveUsers() {
     const [users, setUsers] = useState([]);
@@ -16,6 +21,7 @@ function ActiveUsers() {
     const [totalPages, setTotalPages] = useState();
     const [showAddUserModal, setShowAddUserModal] = useState(false);
     const [showImportUserModal, setShowImportUserModal] = useState(false);
+    const [selectedList, setSelectedList] = useState([]);
 
     const handleShowAddUserModal = () => setShowAddUserModal(true);
     const handleCloseAddUserModal = () => setShowAddUserModal(false);
@@ -38,11 +44,45 @@ function ActiveUsers() {
             .catch(error => console.log(error));
     };
 
+    const handleClickSoftDeleteUserList = async e => {
+        const data = selectedList.join(",");
+        await softDeleteUserList(data)
+            .then(response => {
+                if (response && response.status === 200) {
+                    toast.success(response.data.meta.message);
+                    getUsers({
+                        index: 0,
+                        limit: 10,
+                        field: "id",
+                        direction: "desc",
+                    });
+                }
+            })
+            .catch(error => {
+                // toast.error(error.response.data.meta.message);
+            });
+    };
+
     return (
         <main id="main" className="main">
             <div className="row d-flex justify-content-between mb-3">
                 <PageTitle />
-                <div className="col-3 d-flex align-items-center justify-content-end">
+                <div className="col-5 d-flex align-items-center justify-content-end">
+                    <Button
+                        variant="success me-2"
+                        size="md"
+                        onClick={handleShowImportUserModal}
+                    >
+                        Cấp lại mật khẩu
+                    </Button>
+
+                    <Button
+                        variant="danger me-2"
+                        size="md"
+                        onClick={handleClickSoftDeleteUserList}
+                    >
+                        Xoá tạm thời
+                    </Button>
                     <Button
                         variant="warning me-2"
                         size="md"
@@ -50,17 +90,15 @@ function ActiveUsers() {
                     >
                         Nhập
                     </Button>
-
                     <Button variant="success me-2">
                         <CSVLink
                             data={users}
                             className="text-white"
                             filename="user-data"
                         >
-                            Xuất CSV
+                            Xuất
                         </CSVLink>
                     </Button>
-
                     <Button
                         variant="primary"
                         size="md"
@@ -84,6 +122,8 @@ function ActiveUsers() {
                                     totalPages={totalPages}
                                     handleUpdateTable={handleUpdateTable}
                                     getUsers={getUsers}
+                                    selectedList={selectedList}
+                                    setSelectedList={setSelectedList}
                                 />
                             </div>
                         </div>
