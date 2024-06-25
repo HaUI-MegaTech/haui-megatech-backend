@@ -75,7 +75,12 @@ function ActiveUsers() {
     return (
         <main id="main" className="main">
             <div className="row d-flex justify-content-between mb-3">
-                <PageTitle />
+                <PageTitle
+                    title="Danh sách"
+                    level1="Trang chủ"
+                    level2="Người dùng"
+                    level3="Danh sách"
+                />
                 <div className="col-8 d-flex align-items-center justify-content-end">
                     <Button
                         variant="secondary me-2"

@@ -73,7 +73,12 @@ function DeletedUsers() {
     return (
         <main id="main" className="main">
             <div className="row d-flex justify-content-between mb-3">
-                <PageTitle />
+                <PageTitle
+                    title="Thùng rác"
+                    level1="Trang chủ"
+                    level2="Người dùng"
+                    level3="Thùng rác"
+                />
 
                 <div className="col-6 d-flex align-items-center justify-content-end">
                     <Button
