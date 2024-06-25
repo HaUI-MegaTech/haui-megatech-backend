@@ -49,7 +49,6 @@ const softDeleteUser = user =>
 
 const updateUserInfo = data => {
     let formData = new FormData();
-    console.log(data);
     formData.append("firstName", data.firstName);
     formData.append("lastName", data.lastName);
     formData.append("email", data.email);
@@ -66,6 +65,22 @@ const updateUserInfo = data => {
             },
         },
     );
+};
+
+const updateMyInfo = data => {
+    let formData = new FormData();
+    data.firstName ?? formData.append("firstName", data.firstName);
+    data.lastName ?? formData.append("lastName", data.lastName);
+    data.email ?? formData.append("email", data.email);
+    data.phoneNumber ?? formData.append("phoneNumber", data.phoneNumber);
+    data.avatar != undefined ?? formData.append("avatar", data.avatar);
+
+    return axios.put(BASE_URL + `/api/v1/users/update-info`, formData, {
+        headers: {
+            Authorization: "Bearer " + accessToken,
+            "Content-Type": "multipart/form-data",
+        },
+    });
 };
 
 const restoreUser = user =>
@@ -124,4 +139,5 @@ export {
     resetUserPassword,
     getMyInfo,
     getActivityLogs,
+    updateMyInfo,
 };

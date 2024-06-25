@@ -54,7 +54,7 @@ function UpdateUserInfoModal(props) {
 
     return (
         <Modal show={show} onHide={handleClose}>
-            <Form method="post" onSubmit={handleUpdateUserInfo}>
+            <Form onSubmit={handleUpdateUserInfo}>
                 <Modal.Header closeButton className="bg-warning">
                     <Modal.Title>Update user info</Modal.Title>
                 </Modal.Header>

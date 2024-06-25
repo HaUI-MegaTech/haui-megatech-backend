@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import { updateMyInfo } from "../../services/UserService";
+import { toast } from "react-toastify";
 
 const listItem = [
     {
@@ -58,7 +60,7 @@ const listItem = [
 ];
 
 function UserUpdateTab(props) {
-    const { show, data } = props;
+    const { show, data, getData } = props;
     const [province, setProvince] = useState();
     const [district, setDistrict] = useState();
     const [conmmue, setCommune] = useState();
@@ -68,6 +70,8 @@ function UserUpdateTab(props) {
     const [email, setEmail] = useState(data.email);
     const [phoneNumber, setPhoneNumber] = useState(data.phoneNumber);
     const [avatarImageUrl, setAvatarImageUrl] = useState(data.avatarImageUrl);
+    const [avatar, setAvatar] = useState();
+    const [previewAvatar, setPreviewAvatar] = useState();
 
     useEffect(() => {
         show && (document.title = "Cập nhật thông tin");
@@ -114,6 +118,27 @@ function UserUpdateTab(props) {
         </select>
     );
 
+    const handleFileChange = e => {
+        setAvatar(e.target.files[0]);
+        const fileUrl = URL.createObjectURL(e.target.files[0]);
+        setPreviewAvatar(fileUrl);
+    };
+
+    const handleSubmit = async e => {
+        e.preventDefault();
+
+        await updateMyInfo({ firstName, lastName, email, phoneNumber, avatar })
+            .then(response => {
+                if (response && response.status === 200) {
+                    toast.success(response.data.meta.message);
+                    getData();
+                }
+            })
+            .catch(error => {
+                toast.error(error.response.data.meta.message);
+            });
+    };
+
     return (
         <div
             className={`tab-pane fade profile-edit pt-3 ${
@@ -121,7 +146,7 @@ function UserUpdateTab(props) {
             }`}
             id="/user/update"
         >
-            <form>
+            <form onSubmit={handleSubmit} encType="multipart/form-data">
                 <div className="row mb-3">
                     <label
                         htmlFor="profileImage"
@@ -130,22 +155,26 @@ function UserUpdateTab(props) {
                         Ảnh đại diện
                     </label>
                     <div className="col-md-9 col-lg-9">
-                        <img src={avatarImageUrl} alt="Profile" />
+                        <img
+                            src={previewAvatar ? previewAvatar : avatarImageUrl}
+                            className="mw-50"
+                        />
                         <div className="pt-2">
-                            <a
+                            <label
                                 href="#"
-                                className="btn btn-primary btn-sm"
+                                className="btn btn-primary btn-sm text-white"
                                 title="Upload new profile image"
+                                for="avatar"
                             >
+                                Tải ảnh đại diện&nbsp;
                                 <i className="bi bi-upload"></i>
-                            </a>
-                            <a
-                                href="#"
-                                className="btn btn-danger btn-sm"
-                                title="Remove my profile image"
-                            >
-                                <i className="bi bi-trash"></i>
-                            </a>
+                            </label>
+                            <input
+                                type="file"
+                                id="avatar"
+                                className="d-none"
+                                onChange={handleFileChange}
+                            />
                         </div>
                     </div>
                 </div>
@@ -164,6 +193,7 @@ function UserUpdateTab(props) {
                             className="form-control"
                             id="firstName"
                             value={firstName}
+                            onChange={e => setFirstName(e.target.value)}
                         />
                     </div>
 
@@ -180,6 +210,7 @@ function UserUpdateTab(props) {
                             className="form-control"
                             id="lastName"
                             value={lastName}
+                            onChange={e => setLastName(e.target.value)}
                         />
                     </div>
                 </div>
@@ -198,6 +229,7 @@ function UserUpdateTab(props) {
                             className="form-control"
                             id="email"
                             value={email}
+                            onChange={e => setEmail(e.target.value)}
                         />
                     </div>
 
@@ -214,6 +246,7 @@ function UserUpdateTab(props) {
                             className="form-control"
                             id="phoneNumber"
                             value={phoneNumber}
+                            onChange={e => setPhoneNumber(e.target.value)}
                         />
                     </div>
                 </div>
@@ -258,7 +291,7 @@ function UserUpdateTab(props) {
 
                 <div className="text-center">
                     <button type="submit" className="btn btn-primary">
-                        Save Changes
+                        Lưu thay đổi
                     </button>
                 </div>
             </form>
