@@ -73,13 +73,15 @@ function ActiveUsers() {
             <div className="row d-flex justify-content-between mb-3">
                 <PageTitle />
                 <div className="col-6 d-flex align-items-center justify-content-end">
-                    <Button
-                        variant="success me-2"
-                        size="md"
-                        onClick={handleShowResetPasswordListUsersModal}
-                    >
-                        <i class="bi bi-key"></i>&nbsp;Cấp lại mật khẩu
-                    </Button>
+                    {selectedList.length > 0 && (
+                        <Button
+                            variant="success me-2"
+                            size="md"
+                            onClick={handleShowResetPasswordListUsersModal}
+                        >
+                            <i class="bi bi-key"></i>&nbsp;Cấp lại mật khẩu
+                        </Button>
+                    )}
                     {selectedList.length > 0 && (
                         <Button
                             variant="danger me-2"
