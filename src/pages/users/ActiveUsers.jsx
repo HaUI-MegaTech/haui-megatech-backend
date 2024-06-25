@@ -12,8 +12,15 @@ import PageTitle from "../../components/shared/PageTitle";
 import { CSVLink, CSVDownload } from "react-csv";
 import ImportUserModal from "../../components/users/ImportUserModal";
 import { toast } from "react-toastify";
+import SoftDeleteListUsersModal from "../../components/users/SoftDeleteListUsersModal";
 
 function ActiveUsers() {
+    const [index, setIndex] = useState(0);
+    const [field, setField] = useState("id");
+    const [direction, setDirection] = useState("desc");
+    const [limit, setLimit] = useState(10);
+    const [keyword, setKeyword] = useState("");
+
     const [users, setUsers] = useState([]);
     const [pageIndex, setPageIndex] = useState(0);
     const [pageSize, setPageSize] = useState(10);
@@ -21,12 +28,19 @@ function ActiveUsers() {
     const [totalPages, setTotalPages] = useState();
     const [showAddUserModal, setShowAddUserModal] = useState(false);
     const [showImportUserModal, setShowImportUserModal] = useState(false);
+    const [showSoftDeleteListUsersModal, setShowSoftDeleteListUserModal] =
+        useState(false);
+
     const [selectedList, setSelectedList] = useState([]);
 
     const handleShowAddUserModal = () => setShowAddUserModal(true);
     const handleCloseAddUserModal = () => setShowAddUserModal(false);
     const handleShowImportUserModal = () => setShowImportUserModal(true);
     const handleCloseImportUserModal = () => setShowImportUserModal(false);
+    const handleShowSoftDeleteListUsersModal = () =>
+        setShowSoftDeleteListUserModal(true);
+    const handleCloseSoftDeleteListUsersModal = () =>
+        setShowSoftDeleteListUserModal(false);
 
     const handleUpdateTable = () => {
         getUsers({ index: 0, limit: 10, field: "id", direction: "desc" });
@@ -44,25 +58,6 @@ function ActiveUsers() {
             .catch(error => console.log(error));
     };
 
-    const handleClickSoftDeleteUserList = async e => {
-        const data = selectedList.join(",");
-        await softDeleteUserList(data)
-            .then(response => {
-                if (response && response.status === 200) {
-                    toast.success(response.data.meta.message);
-                    getUsers({
-                        index: 0,
-                        limit: 10,
-                        field: "id",
-                        direction: "desc",
-                    });
-                }
-            })
-            .catch(error => {
-                // toast.error(error.response.data.meta.message);
-            });
-    };
-
     return (
         <main id="main" className="main">
             <div className="row d-flex justify-content-between mb-3">
@@ -71,7 +66,7 @@ function ActiveUsers() {
                     <Button
                         variant="success me-2"
                         size="md"
-                        onClick={handleShowImportUserModal}
+                        onClick={handleShowSoftDeleteListUsersModal}
                     >
                         <i class="bi bi-key"></i>&nbsp;Cấp lại mật khẩu
                     </Button>
@@ -79,7 +74,7 @@ function ActiveUsers() {
                     <Button
                         variant="danger me-2"
                         size="md"
-                        onClick={handleClickSoftDeleteUserList}
+                        onClick={handleShowSoftDeleteListUsersModal}
                     >
                         <i class="bi bi-trash"></i>&nbsp;Xoá tạm thời
                     </Button>
@@ -124,6 +119,16 @@ function ActiveUsers() {
                                     getUsers={getUsers}
                                     selectedList={selectedList}
                                     setSelectedList={setSelectedList}
+                                    index={index}
+                                    setIndex={setIndex}
+                                    field={field}
+                                    setField={setField}
+                                    direction={direction}
+                                    setDirection={setDirection}
+                                    limit={limit}
+                                    setLimit={setLimit}
+                                    keyword={keyword}
+                                    setKeyword={setKeyword}
                                 />
                             </div>
                         </div>
@@ -139,6 +144,18 @@ function ActiveUsers() {
                 show={showImportUserModal}
                 handleClose={handleCloseImportUserModal}
                 getUsers={getUsers}
+            />
+            <SoftDeleteListUsersModal
+                show={showSoftDeleteListUsersModal}
+                handleClose={handleCloseSoftDeleteListUsersModal}
+                selectedList={selectedList}
+                getUsers={getUsers}
+                setSelectedList={setSelectedList}
+                index={index}
+                field={field}
+                direction={direction}
+                limit={limit}
+                keyword={keyword}
             />
         </main>
     );
