@@ -81,6 +81,7 @@ function TableDeletedUsers(props) {
             <td className="align-middle">{item.lastName}</td>
             <td className="align-middle">{item.email}</td>
             <td className="align-middle">{item.phoneNumber}</td>
+            <td className="align-middle">{item.role}</td>
             <td className="d-flex justify-content-center">
                 <Button
                     className="mx-2"
@@ -150,14 +151,14 @@ function TableDeletedUsers(props) {
                             type="button"
                             onClick={handleSearch}
                         >
-                            Tìm kiếm
+                            <i class="bi bi-search"></i>
                         </button>
                         <button
                             class="btn btn-outline-danger"
                             type="button"
                             onClick={handleCancelSearch}
                         >
-                            Huỷ bỏ
+                            <i class="bi bi-x-circle"></i>
                         </button>
                     </div>
                 </div>
@@ -280,6 +281,7 @@ function TableDeletedUsers(props) {
                                     <i class="bi bi-caret-up-fill"></i>
                                 ))}
                         </th>
+                        <th>Quyền thực thi</th>
                         <th scope="col" className="text-center">
                             Hành động
                         </th>

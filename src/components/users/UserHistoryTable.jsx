@@ -122,14 +122,14 @@ function UserHistoryTable(props) {
                             type="button"
                             onClick={handleSearch}
                         >
-                            Tìm kiếm
+                            <i class="bi bi-search"></i>
                         </button>
                         <button
                             class="btn btn-outline-danger"
                             type="button"
                             onClick={handleCancelSearch}
                         >
-                            Huỷ bỏ
+                            <i class="bi bi-x-circle"></i>
                         </button>
                     </div>
                 </div>

@@ -49,11 +49,12 @@ const softDeleteUser = user =>
 
 const updateUserInfo = data => {
     let formData = new FormData();
-
+    console.log(data);
     formData.append("firstName", data.firstName);
     formData.append("lastName", data.lastName);
     formData.append("email", data.email);
     formData.append("phoneNumber", data.phoneNumber);
+    formData.append("role", data.role);
 
     return axios.put(
         BASE_URL + `/api/v1/users/update-info/${data.id}`,

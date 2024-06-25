@@ -12,10 +12,15 @@ function UpdateUserInfoModal(props) {
         currentPageIndex,
     } = props;
 
-    const [firstName, setFirstName] = useState(targetUser.firstName);
-    const [lastName, setLastName] = useState(targetUser.lastName);
-    const [email, setEmail] = useState(targetUser.email);
-    const [phoneNumber, setPhoneNumber] = useState(targetUser.phoneNumber);
+    const [firstName, setFirstName] = useState(targetUser.firstName ?? "");
+    const [lastName, setLastName] = useState(targetUser.lastName ?? "");
+    const [email, setEmail] = useState(targetUser.email ?? "");
+    const [phoneNumber, setPhoneNumber] = useState(
+        targetUser.phoneNumber ?? "'",
+    );
+    const [role, setRole] = useState(targetUser.role);
+
+    console.log(targetUser);
 
     const handleUpdateUserInfo = async e => {
         e.preventDefault();
@@ -26,6 +31,7 @@ function UpdateUserInfoModal(props) {
             lastName: lastName,
             email: email,
             phoneNumber: phoneNumber,
+            role: role,
         })
             .then(response => {
                 if (response && response.status === 200) {
@@ -100,7 +106,7 @@ function UpdateUserInfoModal(props) {
                         <Form.Control
                             type="text"
                             value={email}
-                            onChange={e => setPhoneNumber(e.target.value)}
+                            onChange={e => setEmail(e.target.value)}
                         />
                     </Form.Group>
 
@@ -114,6 +120,36 @@ function UpdateUserInfoModal(props) {
                             value={phoneNumber}
                             onChange={e => setPhoneNumber(e.target.value)}
                         />
+                    </Form.Group>
+
+                    <Form.Group
+                        className="mb-3"
+                        controlId="exampleForm.ControlInput5"
+                    >
+                        <Form.Label>Quyền thực thi</Form.Label>
+                        <Form.Select
+                            aria-label="Default select example"
+                            onChange={e => setRole(e.target.value)}
+                        >
+                            <option
+                                value="CUSTOMER"
+                                selected={targetUser.role === "CUSTOMER"}
+                            >
+                                Khách hàng
+                            </option>
+                            <option
+                                value="STAFF"
+                                selected={targetUser.role === "STAFF"}
+                            >
+                                Nhân viên
+                            </option>
+                            <option
+                                value="MANAGER"
+                                selected={targetUser.role === "MANAGER"}
+                            >
+                                Quản lý
+                            </option>
+                        </Form.Select>
                     </Form.Group>
                 </Modal.Body>
                 <Modal.Footer>
