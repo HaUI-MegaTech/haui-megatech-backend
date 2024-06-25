@@ -23,7 +23,7 @@ function UserInfoModal(props) {
     return (
         <Modal show={show} onHide={handleClose}>
             <Modal.Header closeButton className="bg-info">
-                <Modal.Title>User info</Modal.Title>
+                <Modal.Title>Thông tin người dùng</Modal.Title>
             </Modal.Header>
             <Modal.Body>
                 <div className="d-flex justify-content-center">
@@ -93,7 +93,7 @@ function UserInfoModal(props) {
             </Modal.Body>
             <Modal.Footer>
                 <Button variant="secondary" onClick={handleClose}>
-                    Đóng
+                    <i class="bi bi-x-circle"></i>&nbsp;Đóng
                 </Button>
             </Modal.Footer>
         </Modal>

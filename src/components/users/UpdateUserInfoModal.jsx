@@ -56,7 +56,7 @@ function UpdateUserInfoModal(props) {
         <Modal show={show} onHide={handleClose}>
             <Form onSubmit={handleUpdateUserInfo}>
                 <Modal.Header closeButton className="bg-warning">
-                    <Modal.Title>Update user info</Modal.Title>
+                    <Modal.Title>Cập nhật thông tin người dùng</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <Form.Group
@@ -154,10 +154,10 @@ function UpdateUserInfoModal(props) {
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleClose}>
-                        Đóng
+                        <i class="bi bi-x-circle"></i>&nbsp;Đóng
                     </Button>
                     <Button variant="warning" type="submit">
-                        Lưu thay đổi
+                        <i class="bi bi-floppy"></i>&nbsp;Lưu thay đổi
                     </Button>
                 </Modal.Footer>
             </Form>

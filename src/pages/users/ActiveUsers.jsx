@@ -67,13 +67,13 @@ function ActiveUsers() {
         <main id="main" className="main">
             <div className="row d-flex justify-content-between mb-3">
                 <PageTitle />
-                <div className="col-5 d-flex align-items-center justify-content-end">
+                <div className="col-6 d-flex align-items-center justify-content-end">
                     <Button
                         variant="success me-2"
                         size="md"
                         onClick={handleShowImportUserModal}
                     >
-                        Cấp lại mật khẩu
+                        <i class="bi bi-key"></i>&nbsp;Cấp lại mật khẩu
                     </Button>
 
                     <Button
@@ -81,14 +81,14 @@ function ActiveUsers() {
                         size="md"
                         onClick={handleClickSoftDeleteUserList}
                     >
-                        Xoá tạm thời
+                        <i class="bi bi-trash"></i>&nbsp;Xoá tạm thời
                     </Button>
                     <Button
                         variant="warning me-2"
                         size="md"
                         onClick={handleShowImportUserModal}
                     >
-                        Nhập
+                        <i class="bi bi-upload"></i>&nbsp;Nhập
                     </Button>
                     <Button variant="success me-2">
                         <CSVLink
@@ -96,7 +96,7 @@ function ActiveUsers() {
                             className="text-white"
                             filename="user-data"
                         >
-                            Xuất
+                            <i class="bi bi-download"></i>&nbsp;Xuất
                         </CSVLink>
                     </Button>
                     <Button
@@ -104,7 +104,7 @@ function ActiveUsers() {
                         size="md"
                         onClick={handleShowAddUserModal}
                     >
-                        Thêm mới
+                        <i class="bi bi-person-plus"></i>&nbsp;Thêm mới
                     </Button>
                 </div>
             </div>

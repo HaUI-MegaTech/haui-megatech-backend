@@ -62,10 +62,10 @@ function ResetUserPasswordModal(props) {
             </Modal.Body>
             <Modal.Footer>
                 <Button variant="secondary" onClick={handleClose}>
-                    Đóng
+                    <i class="bi bi-x-circle"></i>&nbsp;Đóng
                 </Button>
                 <Button variant="success" onClick={handleResetUserPassword}>
-                    Xác nhận
+                    <i class="bi bi-check-circle"></i>&nbsp;Xác nhận
                 </Button>
             </Modal.Footer>
         </Modal>
