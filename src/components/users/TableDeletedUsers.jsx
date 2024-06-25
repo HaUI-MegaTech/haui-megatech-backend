@@ -15,13 +15,17 @@ function TableDeletedUsers(props) {
         getUsers,
         selectedList,
         setSelectedList,
+        index,
+        setIndex,
+        field,
+        setField,
+        direction,
+        setDirection,
+        limit,
+        setLimit,
+        keyword,
+        setKeyword,
     } = props;
-
-    const [index, setIndex] = useState(0);
-    const [field, setField] = useState("id");
-    const [direction, setDirection] = useState("desc");
-    const [limit, setLimit] = useState(10);
-    const [keyword, setKeyword] = useState("");
 
     const renderUsers = items => items.map(item => renderUser(item));
 

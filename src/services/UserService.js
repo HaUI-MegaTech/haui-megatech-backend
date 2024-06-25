@@ -159,6 +159,12 @@ const resetPasswordUsersList = data => {
     );
 };
 
+const hardDeleteUsersList = data => {
+    return axios.delete(`${BASE_URL}/api/v1/users/hard-delete/${data}`, {
+        headers,
+    });
+};
+
 export {
     fetchAllActiveUsers,
     fetchAllDeletedUsers,
@@ -176,4 +182,5 @@ export {
     importUserExcel,
     softDeleteUserList,
     resetPasswordUsersList,
+    hardDeleteUsersList,
 };

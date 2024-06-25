@@ -3,8 +3,16 @@ import PageTitle from "../../components/shared/PageTitle";
 import TableDeletedUsers from "../../components/users/TableDeletedUsers";
 import { fetchAllDeletedUsers } from "../../services/UserService";
 import { keyboard } from "@testing-library/user-event/dist/keyboard";
+import { Button } from "react-bootstrap";
+import HardDeleteListUsersModal from "../../components/users/HardDeleteListUsersModal";
 
 function DeletedUsers() {
+    const [index, setIndex] = useState(0);
+    const [field, setField] = useState("id");
+    const [direction, setDirection] = useState("desc");
+    const [limit, setLimit] = useState(10);
+    const [keyword, setKeyword] = useState("");
+
     const [users, setUsers] = useState([]);
     const [pageIndex, setPageIndex] = useState(0);
     const [pageSize, setPageSize] = useState(15);
@@ -12,6 +20,14 @@ function DeletedUsers() {
     const [totalPages, setTotalPages] = useState();
 
     const [selectedList, setSelectedList] = useState([]);
+
+    const [showHardDeleteListUsers, setShowHardDeleteListUsers] =
+        useState(false);
+
+    const handleShowHardDeleteListUsers = () =>
+        setShowHardDeleteListUsers(true);
+    const handleCloseHardDeleteListUsers = () =>
+        setShowHardDeleteListUsers(false);
 
     useEffect(() => {
         getUsers({
@@ -49,6 +65,16 @@ function DeletedUsers() {
         <main id="main" className="main">
             <div className="row d-flex justify-content-between mb-3">
                 <PageTitle />
+                <div className="col-6 d-flex align-items-center justify-content-end">
+                    {selectedList.length > 1 && (
+                        <Button
+                            variant="danger"
+                            onClick={handleShowHardDeleteListUsers}
+                        >
+                            <i class="bi bi-trash"></i>&nbsp;Xoá vĩnh viễn
+                        </Button>
+                    )}
+                </div>
             </div>
 
             <section className="section">
@@ -66,12 +92,35 @@ function DeletedUsers() {
                                     getUsers={getUsers}
                                     selectedList={selectedList}
                                     setSelectedList={setSelectedList}
+                                    index={index}
+                                    setIndex={setIndex}
+                                    field={field}
+                                    setField={setField}
+                                    direction={direction}
+                                    setDirection={setDirection}
+                                    limit={limit}
+                                    setLimit={setLimit}
+                                    keyword={keyword}
+                                    setKeyword={setKeyword}
                                 />
                             </div>
                         </div>
                     </div>
                 </div>
             </section>
+
+            <HardDeleteListUsersModal
+                show={showHardDeleteListUsers}
+                handleClose={handleCloseHardDeleteListUsers}
+                selectedList={selectedList}
+                setSelectedList={setSelectedList}
+                getUsers={getUsers}
+                index={index}
+                field={field}
+                direction={direction}
+                limit={limit}
+                keyword={keyword}
+            />
         </main>
     );
 }
