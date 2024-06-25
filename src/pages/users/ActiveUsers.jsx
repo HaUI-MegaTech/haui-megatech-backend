@@ -70,20 +70,21 @@ function ActiveUsers() {
                     >
                         <i class="bi bi-key"></i>&nbsp;Cấp lại mật khẩu
                     </Button>
-
-                    <Button
-                        variant="danger me-2"
-                        size="md"
-                        onClick={handleShowSoftDeleteListUsersModal}
-                    >
-                        <i class="bi bi-trash"></i>&nbsp;Xoá tạm thời
-                    </Button>
+                    {selectedList.length > 0 && (
+                        <Button
+                            variant="danger me-2"
+                            size="md"
+                            onClick={handleShowSoftDeleteListUsersModal}
+                        >
+                            <i class="bi bi-trash"></i>&nbsp;Xoá tạm thời
+                        </Button>
+                    )}
                     <Button
                         variant="warning me-2"
                         size="md"
                         onClick={handleShowImportUserModal}
                     >
-                        <i class="bi bi-upload"></i>&nbsp;Nhập
+                        <i class="bi bi-download"></i>&nbsp;Nhập
                     </Button>
                     <Button variant="success me-2">
                         <CSVLink
@@ -91,7 +92,7 @@ function ActiveUsers() {
                             className="text-white"
                             filename="user-data"
                         >
-                            <i class="bi bi-download"></i>&nbsp;Xuất
+                            <i class="bi bi-upload"></i>&nbsp;Xuất
                         </CSVLink>
                     </Button>
                     <Button
