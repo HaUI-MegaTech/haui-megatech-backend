@@ -77,34 +77,31 @@ function ActiveUsers() {
             <div className="row d-flex justify-content-between mb-3">
                 <PageTitle />
                 <div className="col-8 d-flex align-items-center justify-content-end">
-                    {selectedList.length > 1 && (
-                        <Button
-                            variant="secondary me-2"
-                            size="md"
-                            onClick={handleClearSelectedList}
-                        >
-                            <i class="bi bi-x-circle"></i>&nbsp;Bỏ chọn (
-                            {selectedList.length})
-                        </Button>
-                    )}
-                    {selectedList.length > 1 && (
-                        <Button
-                            variant="success me-2"
-                            size="md"
-                            onClick={handleShowResetPasswordListUsersModal}
-                        >
-                            <i class="bi bi-key"></i>&nbsp;Cấp lại mật khẩu
-                        </Button>
-                    )}
-                    {selectedList.length > 1 && (
-                        <Button
-                            variant="danger me-2"
-                            size="md"
-                            onClick={handleShowSoftDeleteListUsersModal}
-                        >
-                            <i class="bi bi-trash"></i>&nbsp;Xoá tạm thời
-                        </Button>
-                    )}
+                    <Button
+                        variant="secondary me-2"
+                        size="md"
+                        disabled={selectedList.length <= 1}
+                        onClick={handleClearSelectedList}
+                    >
+                        <i class="bi bi-x-circle"></i>&nbsp;Bỏ chọn (
+                        {selectedList.length})
+                    </Button>
+                    <Button
+                        variant="success me-2"
+                        size="md"
+                        disabled={selectedList.length <= 1}
+                        onClick={handleShowResetPasswordListUsersModal}
+                    >
+                        <i class="bi bi-key"></i>&nbsp;Cấp lại mật khẩu
+                    </Button>
+                    <Button
+                        variant="danger me-2"
+                        size="md"
+                        disabled={selectedList.length <= 1}
+                        onClick={handleShowSoftDeleteListUsersModal}
+                    >
+                        <i class="bi bi-trash"></i>&nbsp;Xoá tạm thời
+                    </Button>
                     <Button
                         variant="warning me-2"
                         size="md"

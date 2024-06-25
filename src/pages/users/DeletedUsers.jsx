@@ -76,33 +76,30 @@ function DeletedUsers() {
                 <PageTitle />
 
                 <div className="col-6 d-flex align-items-center justify-content-end">
-                    {selectedList.length > 1 && (
-                        <Button
-                            variant="secondary me-2"
-                            size="md"
-                            onClick={handleClearSelectedList}
-                        >
-                            <i class="bi bi-x-circle"></i>&nbsp;Bỏ chọn (
-                            {selectedList.length})
-                        </Button>
-                    )}
-                    {selectedList.length > 1 && (
-                        <Button
-                            variant="success me-2"
-                            onClick={handleShowRestoreListUsers}
-                        >
-                            <i className="bi bi-arrow-counterclockwise"></i>
-                            &nbsp;Khôi phục
-                        </Button>
-                    )}
-                    {selectedList.length > 1 && (
-                        <Button
-                            variant="danger"
-                            onClick={handleShowHardDeleteListUsers}
-                        >
-                            <i class="bi bi-trash"></i>&nbsp;Xoá vĩnh viễn
-                        </Button>
-                    )}
+                    <Button
+                        variant="secondary me-2"
+                        size="md"
+                        disabled={selectedList.length <= 1}
+                        onClick={handleClearSelectedList}
+                    >
+                        <i class="bi bi-x-circle"></i>&nbsp;Bỏ chọn (
+                        {selectedList.length})
+                    </Button>
+                    <Button
+                        variant="success me-2"
+                        disabled={selectedList.length <= 1}
+                        onClick={handleShowRestoreListUsers}
+                    >
+                        <i className="bi bi-arrow-counterclockwise"></i>
+                        &nbsp;Khôi phục
+                    </Button>
+                    <Button
+                        variant="danger"
+                        disabled={selectedList.length <= 1}
+                        onClick={handleShowHardDeleteListUsers}
+                    >
+                        <i class="bi bi-trash"></i>&nbsp;Xoá vĩnh viễn
+                    </Button>
                 </div>
             </div>
 
