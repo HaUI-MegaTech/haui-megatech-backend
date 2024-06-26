@@ -3,13 +3,36 @@ import PageTitle from "../../components/shared/PageTitle";
 import TableDeletedUsers from "../../components/users/TableDeletedUsers";
 import { fetchAllDeletedUsers } from "../../services/UserService";
 import { keyboard } from "@testing-library/user-event/dist/keyboard";
+import { Button } from "react-bootstrap";
+import HardDeleteListUsersModal from "../../components/users/HardDeleteListUsersModal";
+import RestoreListUsersModal from "../../components/users/RestoreListUsersModal";
 
 function DeletedUsers() {
+    const [index, setIndex] = useState(0);
+    const [field, setField] = useState("id");
+    const [direction, setDirection] = useState("desc");
+    const [limit, setLimit] = useState(10);
+    const [keyword, setKeyword] = useState("");
+
     const [users, setUsers] = useState([]);
     const [pageIndex, setPageIndex] = useState(0);
     const [pageSize, setPageSize] = useState(15);
     const [totalItems, setTotalItems] = useState();
     const [totalPages, setTotalPages] = useState();
+
+    const [selectedList, setSelectedList] = useState([]);
+
+    const [showHardDeleteListUsers, setShowHardDeleteListUsers] =
+        useState(false);
+    const [showRestoreListUsers, setShowRestoreListUsers] = useState(false);
+
+    const handleShowHardDeleteListUsers = () =>
+        setShowHardDeleteListUsers(true);
+    const handleCloseHardDeleteListUsers = () =>
+        setShowHardDeleteListUsers(false);
+
+    const handleShowRestoreListUsers = () => setShowRestoreListUsers(true);
+    const handleCloseRestoreListUsers = () => setShowRestoreListUsers(false);
 
     useEffect(() => {
         getUsers({
@@ -43,10 +66,46 @@ function DeletedUsers() {
         });
     };
 
+    const handleClearSelectedList = () => {
+        setSelectedList([]);
+    };
+
     return (
         <main id="main" className="main">
             <div className="row d-flex justify-content-between mb-3">
-                <PageTitle />
+                <PageTitle
+                    title="Thùng rác"
+                    level1="Trang chủ"
+                    level2="Người dùng"
+                    level3="Thùng rác"
+                />
+
+                <div className="col-6 d-flex align-items-center justify-content-end">
+                    <Button
+                        variant="secondary me-2"
+                        size="md"
+                        disabled={selectedList.length <= 1}
+                        onClick={handleClearSelectedList}
+                    >
+                        <i class="bi bi-x-circle"></i>&nbsp;Bỏ chọn (
+                        {selectedList.length})
+                    </Button>
+                    <Button
+                        variant="success me-2"
+                        disabled={selectedList.length <= 1}
+                        onClick={handleShowRestoreListUsers}
+                    >
+                        <i className="bi bi-arrow-counterclockwise"></i>
+                        &nbsp;Khôi phục
+                    </Button>
+                    <Button
+                        variant="danger"
+                        disabled={selectedList.length <= 1}
+                        onClick={handleShowHardDeleteListUsers}
+                    >
+                        <i class="bi bi-trash"></i>&nbsp;Xoá vĩnh viễn
+                    </Button>
+                </div>
             </div>
 
             <section className="section">
@@ -62,12 +121,50 @@ function DeletedUsers() {
                                     totalPages={totalPages}
                                     handleUpdateTable={handleUpdateTable}
                                     getUsers={getUsers}
+                                    selectedList={selectedList}
+                                    setSelectedList={setSelectedList}
+                                    index={index}
+                                    setIndex={setIndex}
+                                    field={field}
+                                    setField={setField}
+                                    direction={direction}
+                                    setDirection={setDirection}
+                                    limit={limit}
+                                    setLimit={setLimit}
+                                    keyword={keyword}
+                                    setKeyword={setKeyword}
                                 />
                             </div>
                         </div>
                     </div>
                 </div>
             </section>
+
+            <HardDeleteListUsersModal
+                show={showHardDeleteListUsers}
+                handleClose={handleCloseHardDeleteListUsers}
+                selectedList={selectedList}
+                setSelectedList={setSelectedList}
+                getUsers={getUsers}
+                index={index}
+                field={field}
+                direction={direction}
+                limit={limit}
+                keyword={keyword}
+            />
+
+            <RestoreListUsersModal
+                show={showRestoreListUsers}
+                handleClose={handleCloseRestoreListUsers}
+                selectedList={selectedList}
+                setSelectedList={setSelectedList}
+                getUsers={getUsers}
+                index={index}
+                field={field}
+                direction={direction}
+                limit={limit}
+                keyword={keyword}
+            />
         </main>
     );
 }

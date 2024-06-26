@@ -1,25 +1,59 @@
-import { useState } from "react";
-import { fetchAllActiveUsers } from "../../services/UserService";
+import { useEffect, useState } from "react";
+import {
+    fetchAllActiveUsers,
+    softDeleteUser,
+    softDeleteUserList,
+} from "../../services/UserService";
 import { Button } from "react-bootstrap";
 import TableActiveUsers from "../../components/users/TableActiveUsers";
 import AddUserModal from "../../components/users/AddUserModal";
 import PageTitle from "../../components/shared/PageTitle";
 
 import { CSVLink, CSVDownload } from "react-csv";
+import ImportUserModal from "../../components/users/ImportUserModal";
+import { toast } from "react-toastify";
+import SoftDeleteListUsersModal from "../../components/users/SoftDeleteListUsersModal";
+import ResetPasswordListUsersModal from "../../components/users/ResetPasswordListUsersModal";
 
 function ActiveUsers() {
+    const [index, setIndex] = useState(0);
+    const [field, setField] = useState("id");
+    const [direction, setDirection] = useState("desc");
+    const [limit, setLimit] = useState(10);
+    const [keyword, setKeyword] = useState("");
+
     const [users, setUsers] = useState([]);
     const [pageIndex, setPageIndex] = useState(0);
     const [pageSize, setPageSize] = useState(10);
     const [totalItems, setTotalItems] = useState();
     const [totalPages, setTotalPages] = useState();
     const [showAddUserModal, setShowAddUserModal] = useState(false);
+    const [showImportUserModal, setShowImportUserModal] = useState(false);
+    const [showSoftDeleteListUsersModal, setShowSoftDeleteListUserModal] =
+        useState(false);
+    const [showResetPasswordListUsersModal, setShowRestPasswordListUsersModal] =
+        useState(false);
+
+    const [selectedList, setSelectedList] = useState([]);
 
     const handleShowAddUserModal = () => setShowAddUserModal(true);
     const handleCloseAddUserModal = () => setShowAddUserModal(false);
+    const handleShowImportUserModal = () => setShowImportUserModal(true);
+    const handleCloseImportUserModal = () => setShowImportUserModal(false);
+    const handleShowSoftDeleteListUsersModal = () =>
+        setShowSoftDeleteListUserModal(true);
+    const handleCloseSoftDeleteListUsersModal = () =>
+        setShowSoftDeleteListUserModal(false);
+    const handleShowResetPasswordListUsersModal = () => {
+        setShowRestPasswordListUsersModal(true);
+    };
+
+    const handleCloseResetPasswordListUsersModal = () => {
+        setShowRestPasswordListUsersModal(false);
+    };
 
     const handleUpdateTable = () => {
-        getUsers({ index: 0, limit: 10, field: "id", direction: "desc" });
+        getUsers({ index, limit, field, direction, keyword });
     };
 
     const getUsers = data => {
@@ -34,18 +68,59 @@ function ActiveUsers() {
             .catch(error => console.log(error));
     };
 
+    const handleClearSelectedList = () => {
+        setSelectedList([]);
+    };
+
     return (
         <main id="main" className="main">
             <div className="row d-flex justify-content-between mb-3">
-                <PageTitle />
-                <div className="col-2 d-flex align-items-center justify-content-end">
+                <PageTitle
+                    title="Danh sách"
+                    level1="Trang chủ"
+                    level2="Người dùng"
+                    level3="Danh sách"
+                />
+                <div className="col-8 d-flex align-items-center justify-content-end">
+                    <Button
+                        variant="secondary me-2"
+                        size="md"
+                        disabled={selectedList.length <= 1}
+                        onClick={handleClearSelectedList}
+                    >
+                        <i class="bi bi-x-circle"></i>&nbsp;Bỏ chọn (
+                        {selectedList.length})
+                    </Button>
+                    <Button
+                        variant="success me-2"
+                        size="md"
+                        disabled={selectedList.length <= 1}
+                        onClick={handleShowResetPasswordListUsersModal}
+                    >
+                        <i class="bi bi-key"></i>&nbsp;Cấp lại mật khẩu
+                    </Button>
+                    <Button
+                        variant="danger me-2"
+                        size="md"
+                        disabled={selectedList.length <= 1}
+                        onClick={handleShowSoftDeleteListUsersModal}
+                    >
+                        <i class="bi bi-trash"></i>&nbsp;Xoá tạm thời
+                    </Button>
+                    <Button
+                        variant="warning me-2"
+                        size="md"
+                        onClick={handleShowImportUserModal}
+                    >
+                        <i class="bi bi-download"></i>&nbsp;Nhập
+                    </Button>
                     <Button variant="success me-2">
                         <CSVLink
                             data={users}
                             className="text-white"
                             filename="user-data"
                         >
-                            Xuất CSV
+                            <i class="bi bi-upload"></i>&nbsp;Xuất
                         </CSVLink>
                     </Button>
                     <Button
@@ -53,7 +128,7 @@ function ActiveUsers() {
                         size="md"
                         onClick={handleShowAddUserModal}
                     >
-                        Thêm mới
+                        <i class="bi bi-person-plus"></i>&nbsp;Thêm mới
                     </Button>
                 </div>
             </div>
@@ -71,6 +146,18 @@ function ActiveUsers() {
                                     totalPages={totalPages}
                                     handleUpdateTable={handleUpdateTable}
                                     getUsers={getUsers}
+                                    selectedList={selectedList}
+                                    setSelectedList={setSelectedList}
+                                    index={index}
+                                    setIndex={setIndex}
+                                    field={field}
+                                    setField={setField}
+                                    direction={direction}
+                                    setDirection={setDirection}
+                                    limit={limit}
+                                    setLimit={setLimit}
+                                    keyword={keyword}
+                                    setKeyword={setKeyword}
                                 />
                             </div>
                         </div>
@@ -81,6 +168,29 @@ function ActiveUsers() {
                 show={showAddUserModal}
                 handleClose={handleCloseAddUserModal}
                 handleUpdateTable={handleUpdateTable}
+            />
+            <ImportUserModal
+                show={showImportUserModal}
+                handleClose={handleCloseImportUserModal}
+                getUsers={getUsers}
+            />
+            <SoftDeleteListUsersModal
+                show={showSoftDeleteListUsersModal}
+                handleClose={handleCloseSoftDeleteListUsersModal}
+                selectedList={selectedList}
+                getUsers={getUsers}
+                setSelectedList={setSelectedList}
+                index={index}
+                field={field}
+                direction={direction}
+                limit={limit}
+                keyword={keyword}
+            />
+            <ResetPasswordListUsersModal
+                show={showResetPasswordListUsersModal}
+                handleClose={handleCloseResetPasswordListUsersModal}
+                selectedList={selectedList}
+                setSelectedList={setSelectedList}
             />
         </main>
     );

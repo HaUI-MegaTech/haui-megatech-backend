@@ -41,10 +41,10 @@ function SoftDeleteUserModal(props) {
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleClose}>
-                        Huỷ
+                        <i class="bi bi-x-circle"></i>&nbsp;Huỷ
                     </Button>
                     <Button variant="danger" onClick={handleSoftDeleteUser}>
-                        Xác nhận xoá
+                        <i class="bi bi-check-circle"></i>&nbsp;Xác nhận xoá
                     </Button>
                 </Modal.Footer>
             </Modal>

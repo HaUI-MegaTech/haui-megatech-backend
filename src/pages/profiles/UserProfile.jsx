@@ -117,6 +117,7 @@ function UserProfile() {
                                                 "/user/update"
                                             }
                                             data={data}
+                                            getData={getData}
                                         />
                                         <UserSettingsTab
                                             show={

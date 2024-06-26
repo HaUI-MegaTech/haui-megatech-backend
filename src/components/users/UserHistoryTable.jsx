@@ -13,7 +13,7 @@ function UserHistoryTable(props) {
     const limitList = [10, 25, 50, 100];
 
     useEffect(() => {
-        getItems({ index, field, direction, limit });
+        getItems({ index, field, direction, limit, keyword: "" });
     }, [index, field, direction, limit]);
 
     const renderUser = item => (
@@ -122,14 +122,14 @@ function UserHistoryTable(props) {
                             type="button"
                             onClick={handleSearch}
                         >
-                            Tìm kiếm
+                            <i class="bi bi-search"></i>
                         </button>
                         <button
                             class="btn btn-outline-danger"
                             type="button"
                             onClick={handleCancelSearch}
                         >
-                            Huỷ bỏ
+                            <i class="bi bi-x-circle"></i>
                         </button>
                     </div>
                 </div>

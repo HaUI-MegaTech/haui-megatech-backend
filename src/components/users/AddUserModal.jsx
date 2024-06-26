@@ -119,10 +119,10 @@ function AddUserModal(props) {
             </Modal.Body>
             <Modal.Footer>
                 <Button variant="secondary" onClick={handleClose}>
-                    Huỷ
+                    <i class="bi bi-x-circle"></i>&nbsp;Đóng
                 </Button>
                 <Button variant="primary" onClick={handleAddUser}>
-                    Thêm mới
+                    <i class="bi bi-person-plus"></i>&nbsp;Thêm
                 </Button>
             </Modal.Footer>
         </Modal>

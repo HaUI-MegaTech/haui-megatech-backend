@@ -30,6 +30,7 @@ function Login() {
         await authenticate({ username, password })
             .then(response => {
                 if (response && response.data.meta.status === "SUCCESS") {
+                    console.log("logged in!");
                     localStorage.setItem(
                         "accessToken",
                         response.data.data.accessToken,

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import UserHistoryTable from "../../components/users/UserHistoryTable";
 import { getActivityLogs } from "../../services/UserService";
+import PageTitle from "../../components/shared/PageTitle";
 
 function UsersHistory() {
     const [items, setItems] = useState([]);
@@ -23,20 +24,14 @@ function UsersHistory() {
 
     return (
         <main id="main" className="main">
-            <div className="pagetitle">
-                <h1>UsersHistory Page</h1>
-                <nav>
-                    <ol className="breadcrumb">
-                        <li className="breadcrumb-item">
-                            <a href="index.html">Home</a>
-                        </li>
-                        <li className="breadcrumb-item">Pages</li>
-                        <li className="breadcrumb-item active">UsersHistory</li>
-                    </ol>
-                </nav>
-            </div>
+            <PageTitle
+                title="Lịch sử"
+                level1="Trang chủ"
+                level2="Người dùng"
+                level3="Lịch sử"
+            />
 
-            <section className="section">
+            <section className="section mt-3">
                 <div className="row">
                     <div className="col-12">
                         <div className="card">

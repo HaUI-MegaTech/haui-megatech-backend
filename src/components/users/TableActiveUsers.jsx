@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import ReactPaginate from "react-paginate";
-import { Button } from "react-bootstrap";
+import { Button, Form } from "react-bootstrap";
 import UserInfoModal from "./UserInfoModal";
 import UpdateUserInfoModal from "./UpdateUserInfoModal";
 import ChangeUserPasswordModal from "./ResetUserPasswordModal";
@@ -14,13 +14,19 @@ function TableActiveUsers(props) {
         totalPages,
         handleUpdateTable,
         getUsers,
+        selectedList,
+        setSelectedList,
+        index,
+        setIndex,
+        field,
+        setField,
+        direction,
+        setDirection,
+        limit,
+        setLimit,
+        keyword,
+        setKeyword,
     } = props;
-
-    const [index, setIndex] = useState(0);
-    const [field, setField] = useState("id");
-    const [direction, setDirection] = useState("desc");
-    const [limit, setLimit] = useState(10);
-    const [keyword, setKeyword] = useState("");
 
     const limitList = [10, 25, 50, 100];
 
@@ -84,8 +90,25 @@ function TableActiveUsers(props) {
         getUsers({ index, field, direction, limit, keyword: "" });
     };
 
+    const handleClickCheckbox = (e, id) => {
+        setSelectedList(
+            e.target.checked
+                ? [...selectedList, id]
+                : selectedList.filter(item => item !== id),
+        );
+    };
+
+    console.log(selectedList);
+
     const renderUser = item => (
         <tr key={item.id}>
+            <th className="align-middle">
+                <Form.Check
+                    type="checkbox"
+                    onChange={e => handleClickCheckbox(e, item.id)}
+                    checked={selectedList.includes(item.id)}
+                />
+            </th>
             <th scope="row" className="align-middle">
                 {item.id}
             </th>
@@ -94,6 +117,7 @@ function TableActiveUsers(props) {
             <td className="align-middle">{item.lastName}</td>
             <td className="align-middle">{item.email}</td>
             <td className="align-middle">{item.phoneNumber}</td>
+            <td className="align-middle">{item.role}</td>
             <td className="d-flex justify-content-center">
                 <Button
                     variant="info"
@@ -174,14 +198,14 @@ function TableActiveUsers(props) {
                             type="button"
                             onClick={handleSearch}
                         >
-                            Tìm kiếm
+                            <i class="bi bi-search"></i>
                         </button>
                         <button
                             class="btn btn-outline-danger"
                             type="button"
                             onClick={handleCancelSearch}
                         >
-                            Huỷ bỏ
+                            <i class="bi bi-x-circle"></i>
                         </button>
                     </div>
                 </div>
@@ -191,6 +215,7 @@ function TableActiveUsers(props) {
                 <table className="table table-hover">
                     <thead>
                         <tr>
+                            <th></th>
                             <th
                                 scope="col"
                                 onClick={() => {
@@ -305,6 +330,7 @@ function TableActiveUsers(props) {
                                         <i class="bi bi-caret-up-fill"></i>
                                     ))}
                             </th>
+                            <th>Quyền thực thi</th>
                             <th scope="col" className="text-center">
                                 Hành động
                             </th>

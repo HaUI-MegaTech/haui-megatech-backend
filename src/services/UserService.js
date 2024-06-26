@@ -47,17 +47,41 @@ const softDeleteUser = user =>
         },
     );
 
-const updateUserInfo = (user, firstName, lastName, email, phoneNumber) =>
-    axios.put(
-        BASE_URL + `/api/v1/users/update-info/${user.id}`,
+const updateUserInfo = data => {
+    let formData = new FormData();
+    formData.append("firstName", data.firstName);
+    formData.append("lastName", data.lastName);
+    formData.append("email", data.email);
+    formData.append("phoneNumber", data.phoneNumber);
+    formData.append("role", data.role);
+
+    return axios.put(
+        BASE_URL + `/api/v1/users/update-info/${data.id}`,
+        formData,
         {
-            firstName,
-            lastName,
-            email,
-            phoneNumber,
+            headers: {
+                Authorization: "Bearer " + accessToken,
+                "Content-Type": "multipart/form-data",
+            },
         },
-        { headers },
     );
+};
+
+const updateMyInfo = data => {
+    let formData = new FormData();
+    data.firstName ?? formData.append("firstName", data.firstName);
+    data.lastName ?? formData.append("lastName", data.lastName);
+    data.email ?? formData.append("email", data.email);
+    data.phoneNumber ?? formData.append("phoneNumber", data.phoneNumber);
+    data.avatar != undefined ?? formData.append("avatar", data.avatar);
+
+    return axios.put(BASE_URL + `/api/v1/users/update-info`, formData, {
+        headers: {
+            Authorization: "Bearer " + accessToken,
+            "Content-Type": "multipart/form-data",
+        },
+    });
+};
 
 const restoreUser = user =>
     axios.patch(BASE_URL + `/api/v1/users/restore/${user.id}`, {}, { headers });
@@ -102,6 +126,55 @@ const getActivityLogs = data =>
         { headers },
     );
 
+const importUserExcel = data => {
+    let formData = new FormData();
+
+    formData.append("file", data.file);
+
+    return axios.post(`${BASE_URL}/api/v1/users/import/excel`, formData, {
+        headers: {
+            Authorization: "Bearer " + accessToken,
+            "Content-Type": "multipart/form-data",
+        },
+    });
+};
+
+const softDeleteUserList = data => {
+    return axios.patch(
+        `${BASE_URL}/api/v1/users/soft-delete/${data}`,
+        {},
+        {
+            headers,
+        },
+    );
+};
+
+const resetPasswordUsersList = data => {
+    return axios.patch(
+        `${BASE_URL}/api/v1/users/reset-password/${data}`,
+        {},
+        {
+            headers,
+        },
+    );
+};
+
+const hardDeleteUsersList = data => {
+    return axios.delete(`${BASE_URL}/api/v1/users/hard-delete/${data}`, {
+        headers,
+    });
+};
+
+const restoreUsersList = data => {
+    return axios.patch(
+        `${BASE_URL}/api/v1/users/restore/${data}`,
+        {},
+        {
+            headers,
+        },
+    );
+};
+
 export {
     fetchAllActiveUsers,
     fetchAllDeletedUsers,
@@ -115,4 +188,10 @@ export {
     resetUserPassword,
     getMyInfo,
     getActivityLogs,
+    updateMyInfo,
+    importUserExcel,
+    softDeleteUserList,
+    resetPasswordUsersList,
+    hardDeleteUsersList,
+    restoreUsersList,
 };
